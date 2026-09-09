@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FTL Calculator — Part-NCC OMA 7.5</title>
+<link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjogIkZUTCBDYWxjdWxhdG9yIFx1MjAxNCBQYXJ0LU5DQyBPTUEgNy41IiwgInNob3J0X25hbWUiOiAiRlRMIENhbGMiLCAiZGVzY3JpcHRpb24iOiAiRmxpZ2h0IHRpbWUgbGltaXRhdGlvbiBkdXR5L3Jlc3QgY2FsY3VsYXRvciBmb3IgUGFydC1OQ0MgdHdvLXBpbG90IG9wZXJhdGlvbnMsIE9NQSBTZWN0aW9uIDcuNS4iLCAic3RhcnRfdXJsIjogIi4iLCAic2NvcGUiOiAiLiIsICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLCAiYmFja2dyb3VuZF9jb2xvciI6ICIjMEUxMTE2IiwgInRoZW1lX2NvbG9yIjogIiMwRTExMTYiLCAib3JpZW50YXRpb24iOiAicG9ydHJhaXQtcHJpbWFyeSIsICJpY29ucyI6IFt7InNyYyI6ICJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQU1BQUFBREFDQUlBQUFEZHZ2dFFBQUFIbVVsRVFWUjRuTzJkdjRza1JSVEhhNWN6OVZlZ2dnWmlzTXY5QldKZ3NHQXNKaGVJcVp4b2NJbVJpWjZDNFNVbWNzZWxnbUoybVNBY0tQNERKc3N1SW9kb2NJTXd4K0JGSWhpVTl2YldkRmRYOTZ2cStyNVgzMDkyeTl4TTlYdWYrcjdxbWJuYkE3Y2lUejd6M0pvdjF5eTc3V2ExMXpvbyt1dzBCb0dpUGhVUmlONWdVc0trekFKUkhYenlhcFJOSUtxamkxd2FaUkNJNnVoRnJwRklJS3BqQTRsR2g0di9KdTB4ZzZTVlN4S0k2bGhsUVJUTlRpRGFZNWdGelowbkVPMHh6OXdXenhDSTlqVENyRWFuQ2tSN21pSzkzVWtDMFo0R1NXejZ0RUMwcDFsU1dqOGhFTzFwbkVrQllnTFJIdUttTkJnVmlQYVFqb2dNeXovS0lNU05DY1Q0SVFGalNnd0lSSHZJSUlOaWNJUVJFYUZBakI4U1lWOFBKaEFSY1VrZ3hnK1pKSkNFQ1VSRVhId2pzZkg0T2YvaWVOYmpqMjZjRlZxSkNycnZMcllyMEZ4ajRyVG1VeWhRSS9ia2xXYU1SbVR5RGpVaDBEcmU3R1BicENZRXFxVk9INnNhWFFoazBoNEVkZnFZMUdpMzNSZ1VDRTJkUHNZMHNpWVFzanA5ekdoa1I2QXM2cVQzZGVXWGc4V0NRSkplNW1vaHdocXFzTnR1RGxxenAzVERBSmRVRk1VQ0lYLzRnTHkydktnVWFGWjc2dlpHMFZLWG9VK2c5SmJnOUVQam1oTlJKbEJpSnpEYm9IcnhZMmo2UHBEMkJpUXVUTXU3V1I0MUNaUlNWbGgxQWl4ZGk0NEVzbFJ4bDdaVUxUbWtJSUVtUzZsSW5RQURsNGFlUUFaS0hHRnk4Zmc1QkMyUWJYczgyaDNDRmFnRmV6eXFIUUlWcUIxN1BIb2RBaFVvampGN1BFb3ZDbEdnK0c1VFd1Z1U0cGVHR1VKd0FqVnJqMGVkUTNBQ1JUQnZqMGZYWldJSkZObGh1c29xSkhLeGFDRUVKQkJhYVdDQktoU1FRQkhzeGMvSnZUdnhCMmk1WkJTQm1ocGUzaDZKUXpnaGhDSlFPMHg2b3dzSWdkcUpuOEFlQXlFRUlkQVlsdXc1dVhkblVCZnRoNkg2QW9Ic3BLSkVMTG4vNXZYRlQ0dFF1dm9DalFHKzg5S1IyNE5jaXNvQ0lleWhvaFRLbm83cUJieFM5K1hIUU41ejZZelpzMENkb3h0bjFWMFpCSGVFYVNlalBjalVGQWh6UzJWaFRYdnFsaEZ4aEttZVgrVU9QWmhUek93SU96ODdYZjlGU3grWkFha20wQXFiNmZ6c2RFMk5LdHBUTVpuZ0VpakwvT3A3czQ1RzY5Z0RPTndSejBBbE9EODdQVHErV3VqSkc3bmhHcVJPQWhXTjNMRzhLUlJGSVBiVW1tSllDYlJDUkh1SHNxUlJsVU1QMnIwWTNCbEl6dEh4MVVrLzVHblU0QTNYSUFZRjhpUnF0T3pKYVUrSFdZRThKYUtJOXZUQk9nT1Z3RHNVdHlUOVlBUnlaTWFod244d05YWUdYTzBFSFNlaUVZNDlGV3NZWUQrQitzeEtvNkJKNzczODRlRGptODBlai9FejBDQko1K3U5TFg3N3dhMzloelZ1ajJ0VElFL01vZS9lR3Z4eDRCRHRjUzBMNU1haWFNUWVUK2NRN2ZHMGRRWWE1TkxCS0dxUDUvYURXNEFmYXRhaTZRVHFrM0l3SXZ0UUlDS0NBaEVSRklpSW9FQ1hTRGtkOHdUZGh3S0Z4UDJnUFFFVWFJQXhTMmpQUGhSb21IMVhhTThnZkNOeEZCcVRRb1VFR21zTTFGZDlrY0g1TG9makNDTkNLQkFSUVlHSUNBcEVSR0FKeEhQMEpHZ2xxaU1RNzVDelU2dWtXQWxFMUFFbkVGcEVRd0ZZbkdvQ2NZcGxwR0l4NFJLSTZBSlJJTUNnUmdDekxEVUY0aFRMUXQweUlpWVFVUVNvUUpoeFhSSFlnbFFXaUZOTVNQVUNnaWFRQTk1ejY0TmNpdm9DVmQ5RGVrRW9YWDJCSWlEdnZOVUFMd0tFUVBpL1dyWVcrTCtPR0VJZ29oY1VnUmhDKytESGo4TVJLRTZERG1tNVpDQ0JjSFlWT0ZDRkFoTEljWkQ5ajRyaDVjRVNLRTRqRHVtNlREaUI0anRNVjNFWEVMOUF0UGh4Z0FLNWhoMVNaNC9ERkdnU2t3NHB2U2hRZ1NaM205SnlqekY1T1pqeDQyQUZjaTA1cE5jZWh5eVFhOE1oMWZZNGNJR2NkWWUwMitPcS9MNndCYVJZZ2wvclBtYXVDRDJCUENtbFZCUkZadXh4V2hMSWs2Z0ljdWtOWEVLQWpnVHlKSllWTm9yczJlTjBKWkFuM1ErY1RtaGNjeUw2QkhJek02WnVTeFF0ZFJrcUJmTE1IVlZydGdkNWJYbFJMSkJiZE53cDNTckFKUlZGdDBCT2RtVE8xVG1FTmRSQ3ZVQ2VMSGRlNmIxYytlV1FNU0tRQi9ZR1BzQ0dPaDVUQW5tUU5iS2tqc2VnUUI0MGpleXA0ekVya0FkQkk2dnFlSXdMNUttbGtXMTFQRTBJMUxHT1NTMTQwOUdXUUgzeXl0U1VOSDNhRlNpZ25ROGY4a0tCaUFoTjN3Y2lnRkFnSW9JQ0VSRVVpSWlnUUVRRUJTSWlLQkFSUVlHSUNBcEVSRkFnSW9JQ0VSRVVpSWc0M0cwM3RkZEF0TExiYnBoQVJBUUZJaUt1MUY1QUtUNS8rNFZycnowMStiQ3ZmbnowNmJjUG5YUDNiNzd5NHJOUHpIcUpyMzk2OVBFM0QvZGY2OTB2Zi8vaDlQSE05V3FGQ1VSRUhEcm5lSTRtQy9EYW1CMWhBWk5qNWVUbXI4RlBQcm4yL0R1dlA5Mzk4WU83ZjN6LzgxOGwxcVlhampBaTRqK0JPTVhJTERwaG1FQkV4TVVaYUxmZEdQNG5QbmZmZjJudzU2OSs5TXYyOFQ4ckwwWTcvWG5GQkNJaUxnbkVreENaSkpDRXQvRkVSRGpDR0VJa3dyNGVQQU1SRVFNQ01ZVElJSU5pRENjUUhTSUJZMHB3aEJFUm8zZGh0dDlYTE1yWW01YS8vZm4zRzUrRkg5bXFJREtSWWduRVFVYmNsQVlUSTR3T05jNmtBQWNwejhKWjFpWXA4WkYwaUdZT05VaGkwMVB2d3VoUVU2UzNlOFp0UEIxcWhGbU5udmMrRUIweXo5d1d6MzRqa1E0WlprRnprKzdDQnVHdG1TVVc1OEx5anpJWVJXYVF0SEo1QW5Vd2l2UWlUNEVNQW5tb2tTNXlEWkJzQW5tb0VUNTV6eDZaQmZKUUkweEtIRnVMQ05SQmt4QW9lcnRUVnFBQStyUU9hOTRnL3d0Vi94U203TVBZUndBQUFBQkpSVTVFcmtKZ2dnPT0iLCAic2l6ZXMiOiAiMTkyeDE5MiIsICJ0eXBlIjogImltYWdlL3BuZyIsICJwdXJwb3NlIjogImFueSBtYXNrYWJsZSJ9LCB7InNyYyI6ICJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQWdBQUFBSUFDQUlBQUFCN0drT3RBQUFVazBsRVFWUjRuTzNkUDR0dDEza0g0TG5DQkZKRW9FYUYzYVNKaElwQVNKUGFWU0NGOFVjSXdTaVF3amk0eW5lSUlDaGdrRW1oejJCSVlRZzRueUNRUUJDNnBIQVJ1N2pOaFp1NENNRkppdTBjamViT25ObG43L1huZmRmN1BJV0tpKzdvYU8rMWZyKzExajdueklzN2J2VHVlKy9QZmduQUk5Njhmalg3SlNUell2WUxpRXZRd3hvVXcxTVV3RmNrUGxTZ0R5NnFGNERRaDhxS2wwSEZBaEQ2d05zS2xrR2hBcEQ3d0I1MW1tRDlBcEQ3d0RITE44R3lCU0QzZ1ZaV2JZSUZDMEQwQXoyc1Z3UHJGSURjQjhaWXBnbFdLQURSRDR5M1FBM2tMZ0RSRDh5VnVnYXlGb0RvQitKSVdnUDVDa0QwQXpHbHE0Rk1CU0Q2Z2ZnUzFjQTdzMS9BWHRJZlNDRlJXQ1hZQVNTNm1nQVg4YmNDb1F0QTlBUFpSYTZCdUVkQTBoOVlRT1FvaTdnRGlIeTlBSTRKdUJVSXR3T1Evc0NTQW9aYnJBSUllSUVBV29rV2NWR09nS0pkRjRCK2dod0hoZGdCU0grZ2xDQ2hONzhBZ2x3SWdKRWlSTi9NSTZBSS8vOEFjMDA4RHBxMkE1RCtBSGRUdzNCT0FVaC9nSXRaa1RpaEFLUS93QU5UZ25GMEFVaC9nRWVOajhlaEJTRDlBYTRZSEpMakNrRDZBenhyWkZRT0tnRHBEN0RUc01BY1VRRFNIK0FtWTJLemV3RklmNEFEQm9SbjN3S1EvZ0NIOVk3UWpnVWcvUUZPNmhxa3ZRcEErZ00wMFM5T3V4U0E5QWRvcUZPb3RpOEE2US9RWEk5b2JWd0EwaCtnaytZQjI3SUFwRDlBVjIxamR2NXZCQU5naW1ZRllQa1BNRUREc0cxVEFOSWZZSmhXa2R1Z0FLUS93R0JOZ3RjekFJQ2l6aGFBNVQvQUZPZmo5MVFCU0grQWlVNkc4UEVDa1A0QTA1MkpZczhBQUlvNldBQ1cvd0JCSEE3a0l3VWcvUUZDT1JiTGpvQUFpcnE1QUN6L0FRSTZFTTUyQUFCRjNWWUFsdjhBWWQwYTBUY1VnUFFIQ082bW9IWUVCRkRVM2dLdy9BZElZWDljMndFQUZMV3JBQ3ovQVJMWkdkcDJBQUJGUFY4QWx2OEE2ZXlKYmpzQWdLS2VLUURMZjRDa25nMXdPd0NBb3E0VmdPVS9RR3JYWTl3T0FLQW9CUUJRMUpNRjRQd0hZQUZYd3Z3YkkxOEhqUFR5MHcrYi9Kd1B2djlsazU4RDBieDQ5RTh0LzhtaVZjb2ZveHZJNHMzclYyLy9vUUlnamJsWnY1OVdJQ0FGUURKWkV2ODZmVUFFZXd0QStqUFJHcUgvRkdYQVJHOTNnQUpndnJWRC95bktnTUVVQUlIVXpQMjNhUUxHZUw0QXBEKzl5ZjJuYUFKNmU5QUJDb0JCNVA1K21vQk9GQUJEeWYwek5BRnRYU3NBNlU4cmNyOHRUVUFyOXp0QUFkQ1k2TzlIRFhDZUFxQTl1VCtTSnVBd0JVQkxvbjhXTmNBQmp4ZUE5T2RXb2o4Q05jQ3RMaDJnQURoQzlFZWpCdGhQQVhDUTZJOU1EYkNIQXVCbW9qOExOY0IxRHd0QStuT0Y2TTlJRFhERjFnRUtnR3RFZjNacWdFY3BBSzRSL1N0UkF6eXdGY0E3czE4R0VVbi94YmloUE1vT2dLK1JGR3V6RldEejFSR1E5T2R1MGVnL24zY3VDNnQ2OC9xVkF1RHVMbm5NellvekY0M1VGQUQ1VWl4eWNybVlKS0lBcXNzU1dCbHp5clVsT0FWUVYveDRXaW1ZWEcwQ1VnQkZoYzJqQ2pIazRoT0VBcWdvWUFEVmpCNDNncmtVUUMzUkVrZmNiTndYcG5qeit0VUw2VjlFbkpTUkwwOXhqeGhNQVpRUUpGbkV5aDV1RnNNb2dNVkprNlRjT0FaUUFDdWJIaUxpNHp3M2tYNFV3TExtQm9mVWFNdmRwQWNGc0thSmVTRXMrbkZiYVVzQnJFWkdMTTh0cGhVRnNKUlowU0FYeG5Pdk9VOEJyR05LSW9pRHVkeDB6bEFBaXhnZkJGSWdEbmVmWS94TzRCV1kvOFdOdngzVDM1eEtFM1lBNlEyZWlxSS9Nb09CbXlpQTNFWk9lTE05QzZPQ25Sd0JKV2FlODZpUk44dFpVR3AyQUZrTm0zaWlQeStEaE92c0FGSXlzZGxqMk8yekQwaEtBZVFqL2RsUEIzQ0ZJNkJreGt3ejBiOGVJNGUzMlFGa1lnNXoySmpiYWgrUWl3SklRL3B6a2c3Z0FVZEFPUXlZVktLL0RzT0pqUjFBQXFZcmJRMjQzZllCS1NpQTZLUS9QZWdBN2hRQTByOHN0eDdQQUVMcnVvWXkvOWtZWm1YWkFjUmxXakpHMThIZ0lDZ3lCUkNVOUdja0hWQ1RBb2hJK2pPZURpaElBZFFpL2JuQzhLaEdBWVRUYjYxa2V2T3Nmb1BFSmlBZ0JSQ0w5R2M2SFZDSEFnaEUraE9FRGloQ0FheFArbk9BWVZPQkFvaWkwOHJJTk9hd1RvUEhKaUFPQlJDQzlDY21IYkEyQlRDZjlDY3lIYkF3QmJBbTZVOURodE9xRk1CazFrR1VaZkJQcHdCbWN2aERGZzZDbHFRQVZpUDk2Y1RRV284Q21LYkgyc2NVcGFzZUE4d21ZQ0lGTUlmMEp5a2RzQklGQUZDVUFwakE4cC9VYkFLV29RQldJUDBaekpCYmd3SVlyZmxLeDFSa2l1WUR6eVpnUEFVd2xDSE9STi8reVk5bnY0Um5tQ0NES1lEY0xQL1phVXYvdGgxZytHV25BTVp4K01NczkzTS9lQWZZQkl6MGpka3ZnSU9rUDNzTU9QYjU0UHRmU3UyazdBQUdNVU1ZNzZuMEQvNHd3R1FaUmdHa1pQblBzNjZuZlBDRElNWlFBQ08wWGRHWWJEeHJUNzVIN2dDYmdERVVBS3htZjdJSFB3dWlOd1hRbmVVL0k5MmE2UTA3d0NZZ0hlOENna1ZZem5Nck80QytMUDhaNDB6NjJ3U1VwUURTa1A0ODVYeUNoKzBBdWxJQUhWbS9NRUNyN0k1NWdtUVNkYVVBY3JDcTRsRU5VL3RuMy9tNDFZOHlYTFB3RUxnWEt4ZTZhcnRnYjVqK3piMzg5RU9OMG9rQ1NNRG81NEdZQy8vN2ZFRlFDbzZBdWpEMDZTZCsramRuUW5XaUFLS3ovT2UrUk9sdjZNYW5BQ0NOUk9sUENncWd2WWJiVldzb0xqS21mOE1CN0JTb0J3K0JJYm82Yi9oaHNCZnZ2dmYrN05ld0ZNdC8yc3E0OEgvQXBBakxFUkRFdFVENkU1a0NDTXBLaDJYUzMyQU9Td0cwNURrVnJTeVQvbTJaWW0xNUNBeXhlT1RMTUFvZ0lsdm1zbFpkK1B0bWlKZ2NBVFZqZkhQU3F1bmZsb25Xa0FJSXgvSy9wdVhUMzhBT1NBSEFmTXVuUHpFcGdEWmFiVXV0a2dxcWsvNnRocmRUb0ZZOEJPYXNsMTkrOGNHSEg4MStGU2w1d3c5ektRQk9lZm5sRjVkL3FvR2IxRm40RTVZam9BYWMvMnkyR21DUHN1bnZGQ2dVQmNCeGJ5Zit5eSsvVUFQUEtwditSS01BYUU4TlhDSDlpY1BYUVo5Vjl2eG5aOFI3TUhEaGtlOUYyVmtUallmQTlPVTlRaHNMZndKeUJNUVJONTN3T0JHUy9zU2tBRUxJdFpNOWx1WmxhMEQ2dnkzWGdGK1lBampGZTlGdVZhMERwSDlYSnVCSm5nRndtL01KWHVSVFl4NzVFcDhkQUhPc2ZTSWsvVW5CRG1DK1JPZWh6U043eWQyQVk1ODkvSXFZQ093QWpqTjhXMWxwS3lEOUJ6TU56MUFBN05VMXB0YzRFWkwrNUtJQTJPdUREei9xZlZhVHVnYWtQK2tvZ01rU1BRRFlERGl2VDljQjMvN0pqNlgvQWVrRy8zbzhCT1ptV3dmMFBoRzZTL0p3V1BTVGx4M0FRUjQ5T1JHNmsvNHhtSXlIS1FCT3FWd0QwcC9zRk1CTXk1eUJGbnd3SVAyYldHWUtKT1VaQUczVWVURGdVNzRzUXdIUTB2STFZT0hQU2h3QjBkNllFNkh4aDBMU244VW9BTG9ZOEhENGJ1eURBZW5QZWhUQUVkNTJ0dE15N3hHUy9zR1prc2NvZ0ducXZQOGhldzFJLzY3cVRJU0FQQVJta0E4Ky9LajNVcjM1TDZEM2hoL1dwZ0FZSjlkN2hDejhXWjRDWUxUcE5YRGx2UGh5SENIOXFVQUJNTWVZRTZHN3I5ZkFzNDhLdDMvaHozLzNoNjFlZy9Rbk1nWEFOQU8yQW5mLy8yRGdwbmVKZlBielQrNWExSUQwSnpqdkFtS3k3dThSK3VsM2o3MUg4TE9mZjdJMXdUSFNuL2dVQUNIMHFvR2ZmdmZrRHpqUUFULzd6c2ZTbnhRVXdNMTg1S1NmeGgxd092MDNOM1dBNkovRnhEeEFBY3pod3k5UGFiWVZhSlQrbTUwZElQMlBNUjFtVVFCRWRMWUdtcWIvNXRrT2tQNmtvd0NJYTh3M3lqVWgvY2xJQVJEZHpSM1FZZm0vZVdvVElQMUp5dWNBU0dETUp3WU9FUDJrWmdkQUdydE9oTG90L3pmM053SFNuK3dVQU1rRWVTb2cvVm1BSXlEeWVmSkVxUFB5Zi9QWnp6L3h0a1hXWUFkQVZvbmVJd1F4S1FCeVV3TndtQUpnQlRvQURsQUFMRUlId0swVUFFQlJDZ0NnS0FVQVVKUUNBQ2hLQWJDT01aL1A4aWt3bHFFQUFJcFNBQ3lsOS9MYzhwK1ZLQUNBb2hRQXErbTNTTGY4WnpFS0FLQW9CVERIeTA4L25QMFNWdFpqcVc3NTM0L3BNSXNDdUprZ1NLSHRiWExUNDNPUERsQUFMS3RWSWtnV1ZxVUFXTm41N0piK0xNeXZoR1J4VzRJZk9HVVcvU3hQQVZEQ1RUVWcraWxDQVZESXN6VWcraWxGQVZDT2xJZU5oOEFBUlNtQWFYejRCZTVNaEtrVXdCSE9FQ0FVVS9JWUJRQlFsQUlBS0VvQkFCU2xBQUNLVWdBemVmOER4WmtDY3lrQWdLSVV3RUhlZGdaQm1JeUhLUUNBb2hUQVpNNUFLY3ZnbjA0QkFCU2xBQUNLVWdESGVmUUUwNW1HWnlpQStaeUVVcEJoSDRFQ0FDaEtBUUFVcFFCT2NmNElFNW1BSnltQUVKeUhVb29CSDRRQ0FDaEtBUUFVcFFET2FuVUthVk5NRWEyR3VnY0E1eWtBZ0tJVUFFQlJDcUFCcDBDd2svT2ZVQlFBUUZFS0FLQW9CZENHVXlCNGx2T2ZhQlFBUUZFS0lCeWJBSlprWUFla0FKcXhMWVVCVExTR0ZFQkUxa29zeHBDT1NRRUFGS1VBV3JJNWhhNU1zYllVUUZDMnpDekRZQTVMQVFBVXBRQWFhN2hGdFc1aUFRMkhzZk9mNWhRQVFGRUtvRDJiQU5oWS9nZW5BQUNLVWdEUjJRU1FsS0VibndMb3duWVZHaktoT2xFQUNWaEprWTVCbTRJQzZNV2FCWm93bGZwUkFEbFlUNUdJNFpxRkF1akl5Z1ZPTW9tNlVnQnBXRldSZ29HYWlBTG9xKzM2eGRRaXVMWkQxUEsvTndVQVVKUUM2TTRtZ0NJcy85TlJBQUJGS1lBUmJBSlludVYvUmdvZ0pSMUFLQVprVWdwZ0VDc2EyTWxrR1VZQlpHWE5SUkNHWWw0S1lKem02eG9UaittYUQwTEwvNUVVUUc0NmdJa012K3dVd0ZCV04zQ0ZDVEtZQWhqTlFSQnJjUGl6QUFXd0FoM0FZSWJjR2hUQUJEMVdPaVlrdy9RWWJKYi9VeWdBZ0tJVXdCdzJBU1JsK2I4U0JUQ05EaUFkNmI4WUJiQWFIVUFuaHRaNkZNQk1uZFkrSmlyTmRScFVsdjl6S1lESlRBREtNdmluVXdCcnNnbWdJY05wVlFwZ1BnZEJST2J3WjJFS0lBUWRRRXpTZjIwS0lBb2RRRFRTZjNrS1lIMDZnQU1NbXdvVVFDRDlWa1ltTXpmcE4yQXMvME5SQUxIb0FLYVQvblVvZ0hCMEFCTkovMUlVUUMwNmdDc01qMm9VUUVSZDEwb21PWS9xT2pBcy8yTlNBRUhwQUVhUy9qVXBnTGgwQUdOSS83SmV2UHZlKzdOZkE5ZjBUbXJ6c3pLanF6ZzdnT3BzQmNweTYxRUEwUTFZUXdtQ2dnYmNkTXYvK0JSQUFqcUF0cVEvRzg4QTBoaVQwZWJ0Mm93aTdyTURTR1BNcExJVldKajA1d0VGa0lrTzRERHB6OXNjQWVVekxLQk41alVZTUR6RkRpQ2ZZZFBNVm1BQjBwOHJGRUJLT29BOXBEL1hPUUpLYkdRNm0rRzVHQnZzWVFlUTJNaUpaeXVRaVBSbkp6dUE5QVpIc3drZm1jSEFUUlRBQ3NZdno4MzhhSXdCRG5BRXRJTHhVOUdKVUNqU24yUHNBTll4SlpRRndWeHVPbWNvZ0tYTVdwaExoUEhjYTg1VEFLdVplRGdqR3Nad2kybEZBYXhKUml6SmJhVXRCYkNzdWM5cDVVVmI3aVk5S0lDVlRYK3ZqdUE0ejAya0h3V3d1T254c1JFaXQzTGpHRUFCbENCTkVuR3pHRVlCVkJFa1Z1NGt5OVBjSXdaVEFJWEV5WmVObE5tNEw4eWlBTXFKRmpkM1ZSUEhqV0E2QlZCUndPalpWQWdnRjU4NEZFQlJZV1BvWXFVOGNyV0pTUUdVRmorWU5obmp5YlVsUGdWUVhaYWN1b2djV0M0bXVTZ0E3dTRTSnRkOXMxTE1SU003QmNCdnBJNnpwNXlQT1plRmhTa0F2bWJKdk9OQzlIT2ZBdUFSYW1BOW9wKzMrWjNBUEVKWUxNWU41VkYyQUZ4aks1Q2Q2T2NLQmNEejFFQkdvcDluS1FEMlVnTlppSDUyVWdEY1JnMUVKdnE1aVFMZ0NEVVFqZWpuQUFYQWNXb2dBdEhQWVFxQXM5VEFMS0tma3hRQWJhaUJrVVEvVFNnQUd0TUUvY2g5MmxJQWRLRUcyaEw5OUtBQTZFc1RuQ0gzNlVvQk1JZ20yRS91TTRZQ1lEUk44QlM1ejJBS2dHazB3VWJ1TTRzQ1lMNmFUU0QzbVU0QkVNdmFaU0QwQ1VVQkVOY2FaU0QwQ1VzQmtFYVdQcEQ0WktFQXlHMXVLOGg2VWxNQUxLdFZOMGg1VnFVQUFJcDZaL1lMQUdBT0JRQlFsQUlBS0VvQkFCU2xBQUNLVWdBQVJTa0FnS0lVQUVCUkNnQ2dLQVVBVUpRQ0FDaEtBUUFVcFFBQWlsSUFBRVVwQUlDaUZBQkFVUW9Bb0NnRkFGQ1VBZ0FvU2dFQUZLVUFBSXBTQUFCRktRQ0FvaFFBUUZFS0FLQW9CUUJRbEFJQUtFb0JBQlNsQUFDS1VnQUFSYjN6NXZXcjJhOEJnTkhldkg1bEJ3QlFsQUlBS0VvQkFCU2xBQUNLVWdBQVJTa0FnS0lVQUVCUjc5emQzZmtvQUVBcFcremJBUUFVcFFBQWlsSUFBRVVwQUlDaWZsTUFuZ01ERkhFSmZEc0FnS0lVQUVCUjM1ajlBa2p2Yi8vc20zLzhCNzh6NEQvMGw1Ly84dS8vNlQvdS84bmYvT2szLytRUFIveW5uL1dQLy9xcmp6Lzc5d2QvdVBQSy9NWGYvZUlmL3VVLys3d3V1T2FySFlESEFBREx1eC8xam9BQWlsSUFBRVVwQUlDaXZsWUFIZ01BTE94QnlOc0JBQlNsQUFDS2VsZ0FUb0VBbHZSMnZOc0JBQlRsazhBTTB1UHpyai80L0pjLytQeTJ2L0xQZi8xN3YvMWJ6Njk3UHZyQnkxLy96LzhlZTFXUXhTTXp3U2tRd0dJZURYWkhRQUJGS1FDQW9oNHZBS2RBQU10NEt0THRBQUNLZXJJQWJBSUFGbkFsek8wQUFJcFNBQUJGWGZzZzJKdlhyOTU5Ny8xaEw0VzEvZWg3M3pyejEzLy9oeS8vNjc5OU1ndHVjLzB3M3c0QW9LaG5Dc0NqWUlDa25nMXdPd0NBb3A0dkFKc0FnSFQyUkxjZEFFQlJ1d3JBSmdBZ2taMmhiUWNBVU5UZUFyQUpBRWhoZjF6YkFRQVVkY092aFBUQllNN284U3NoZ1FkdU9xMjViUWZnSUFnZ3JGc2oyaEVRUUZFM0Y0Qk5BRUJBQjhMWkRnQ2dxQ01GWUJNQUVNcXhXRDY0QTlBQkFFRWNEbVJIUUFCRkhTOEFtd0NBNmM1RThha2RnQTRBbU9oa0NKODlBdElCQUZPY2o5OGJ2Z29DNk9GSDMvdlcrUi95UjMvMWI2OS85ZXZ6UDRkU0dqd0V0Z2tBR0t4SjhMWjVGNUFPQUJpbVZlUTJleHVvRGdBWW9HSFkraHdBUUZFdEM4QW1BS0NydGpIYmVBZWdBd0E2YVI2dzdZK0FkQUJBY3oyaXRjc3pBQjBBMEZDblVPMzFFRmdIQURUUkwwNWZkUHE1Rzc5RUh1Q01yb3Zwdm04RHRROEFPS3gzaEhiL0hJQU9BRGhnUUhpTytDQ1lEZ0M0eVpqWUhQUkpZQjBBc05Pd3dCejNWUkE2QU9CWkk2Tnk2SGNCNlFDQUt3YUg1T2d2ZzlNQkFJOGFINDhUdmcxVUJ3QThNQ1VZNTN3ZHRBNEF1SmdWaWROK0g0QU9BTGliR29aOXZ3cGlEMThYQWRRMGZSMDgvemVDVGI4RUFPTkZpTDc1QlhBWDQwSUFEQk1rOU9ZZkFkM25PQWhZVzVEbzM0VFlBVnlFdWpRQWJVV0x1RmdGY0JmdkFnRTBFVERjWWgwQjNlYzRDRmhEd09qZmhOc0JYSVM5WkFEN1JZNnl1RHVBQzFzQklLUEkwYjlKVUFBYk5RQmtFVC82TjNHUGdCN0lja0dCNGhLRlZab2R3SVd0QUJCVG91amY1Q3VBalJvQTRrZ1gvWnVzQmJCUkE4QmNTYU4vazdzQU5tb0FHQzkxOUc5V0tJQ05HZ0RHV0NENk4rc1V3SVVtQUhwWUp2Y3ZGaXlBalJvQVdsa3YramZMRnNDRkpnQ09XVFgzTDlZdmdBdE5BT3l4Zk81ZkZDcUFDMDBBdksxTzdsOVVMSUQ3bEFGVVZqRDA3NnRlQVBjcEE2aWdlT2pmcHdDZXBBOWdEUkwvS1FyZ1pvb0JZaEwwdC9vL294YmMra05mNGV3QUFBQUFTVVZPUks1Q1lJST0iLCAic2l6ZXMiOiAiNTEyeDUxMiIsICJ0eXBlIjogImltYWdlL3BuZyIsICJwdXJwb3NlIjogImFueSBtYXNrYWJsZSJ9XX0=">
+<meta name="theme-color" content="#0E1116">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="FTL Calc">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="icon" type="image/png" sizes="192x192" href="data:image/png;base64,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">
+<style>
+  :root{
+    --bg:#0E1116;
+    --panel:#161B22;
+    --panel2:#1C232C;
+    --border:#2A313C;
+    --border-soft:#232A33;
+    --text:#E8EAED;
+    --dim:#8B94A3;
+    --dim2:#5B6472;
+    --amber:#E8A33D;
+    --teal:#4FC3B0;
+    --red:#E2574C;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .app{max-width:720px;margin:0 auto;padding:22px 16px 72px;}
+
+  header.top{margin-bottom:18px;}
+  header.top .tail{
+    font-size:11px;letter-spacing:.06em;color:var(--dim2);text-transform:uppercase;
+    margin-bottom:6px;
+  }
+  header.top h1{
+    font-size:22px;margin:0 0 6px;font-weight:650;letter-spacing:-0.01em;
+  }
+  header.top .sub{font-size:13px;color:var(--dim);}
+  header.top .rev{
+    margin-top:10px;font-size:12px;color:var(--amber);
+    border-left:2px solid var(--amber);padding-left:10px;
+  }
+
+  nav.tabs{
+    display:flex;gap:6px;overflow-x:auto;padding:2px 0 14px;
+    -webkit-overflow-scrolling:touch;
+    border-bottom:1px solid var(--border);margin-bottom:18px;
+  }
+  nav.tabs::-webkit-scrollbar{display:none;}
+  nav.tabs button{
+    flex:0 0 auto;background:none;border:1px solid var(--border);
+    color:var(--dim);font-family:var(--sans);font-size:13px;padding:9px 14px;
+    border-radius:7px;cursor:pointer;white-space:nowrap;
+  }
+  nav.tabs button.active{
+    color:var(--bg);background:var(--amber);border-color:var(--amber);font-weight:600;
+  }
+
+  .panel{display:none;}
+  .panel.active{display:block;animation:fade .15s ease;}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+
+  h2.section-title{font-size:16px;margin:0 0 4px;font-weight:650;}
+  p.section-desc{font-size:13px;color:var(--dim);margin:0 0 18px;}
+
+  .field{margin-bottom:16px;}
+  .field label{
+    display:block;font-size:11px;letter-spacing:.05em;text-transform:uppercase;
+    color:var(--dim);margin-bottom:7px;
+  }
+  .field input[type=text],
+  .field input[type=number],
+  .field input[type=time],
+  .field select{
+    width:100%;background:var(--panel2);border:1px solid var(--border);
+    color:var(--text);font-family:var(--sans);font-size:15px;padding:11px 12px;
+    border-radius:8px;
+  }
+  .field input:focus,.field select:focus{outline:2px solid var(--teal);outline-offset:1px;}
+  .hint{font-size:12px;color:var(--dim2);margin-top:6px;}
+
+  .seg{display:flex;gap:8px;flex-wrap:wrap;}
+  .seg button{
+    flex:1 1 auto;min-width:110px;background:var(--panel2);border:1px solid var(--border);
+    color:var(--dim);font-family:var(--sans);font-size:13.5px;padding:11px 10px;
+    border-radius:8px;cursor:pointer;
+  }
+  .seg button.active{
+    background:var(--panel);color:var(--text);border-color:var(--teal);
+    box-shadow:inset 0 0 0 1px var(--teal);
+  }
+
+  .card{
+    background:var(--panel);border:1px solid var(--border);border-radius:10px;
+    padding:16px;margin-bottom:16px;
+  }
+  .card .clause{
+    float:right;font-size:10.5px;font-family:var(--mono);color:var(--dim2);
+    border:1px solid var(--border-soft);padding:2px 6px;border-radius:5px;
+  }
+
+  .result{
+    background:var(--panel);border:1px solid var(--border);border-radius:10px;
+    padding:18px;margin-top:6px;
+  }
+  .result .row{
+    display:flex;justify-content:space-between;align-items:baseline;
+    padding:8px 0;border-bottom:1px solid var(--border-soft);
+    font-size:13.5px;
+  }
+  .result .row:last-child{border-bottom:none;}
+  .result .row .k{color:var(--dim);}
+  .result .row .v{font-family:var(--mono);font-size:14px;color:var(--text);}
+  .result .headline{
+    text-align:center;padding:14px 0 18px;
+  }
+  .result .headline .num{
+    font-family:var(--mono);font-size:40px;font-weight:600;color:var(--amber);
+    letter-spacing:-0.02em;
+  }
+  .result .headline .lbl{font-size:12px;color:var(--dim);margin-top:4px;letter-spacing:.02em;}
+
+  .headline-row{display:flex;justify-content:center;gap:22px;padding:14px 0 18px;flex-wrap:wrap;}
+  .headline-row .item{flex:1 1 140px;text-align:center;}
+  .headline-row .num{font-family:var(--mono);font-size:32px;font-weight:600;letter-spacing:-0.02em;}
+  .headline-row .num.amber{color:var(--amber);}
+  .headline-row .num.teal{color:var(--teal);}
+  .headline-row .lbl{font-size:11px;color:var(--dim);margin-top:4px;letter-spacing:.02em;}
+
+  .status{
+    display:inline-block;font-size:11px;padding:3px 8px;border-radius:5px;
+    font-weight:600;letter-spacing:.02em;
+  }
+  .status.ok{background:rgba(79,195,176,.14);color:var(--teal);}
+  .status.warn{background:rgba(232,163,61,.16);color:var(--amber);}
+  .status.bad{background:rgba(226,87,76,.16);color:var(--red);}
+
+  .note{
+    font-size:12.5px;color:var(--dim);background:var(--panel2);
+    border:1px solid var(--border-soft);border-radius:8px;padding:11px 12px;margin-top:10px;
+  }
+  .note.warn{border-color:rgba(232,163,61,.35);color:#D9BC8C;}
+  .note strong{color:var(--text);}
+
+  details.helper{margin:14px 0;border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+  details.helper summary{
+    padding:12px 14px;cursor:pointer;font-size:13.5px;color:var(--teal);
+    background:var(--panel);list-style:none;
+  }
+  details.helper summary::-webkit-details-marker{display:none;}
+  details.helper[open] summary{border-bottom:1px solid var(--border);}
+  details.helper .inner{padding:14px;background:var(--panel);}
+
+  table.ref{width:100%;border-collapse:collapse;font-size:12.5px;margin:10px 0 18px;}
+  table.ref th,table.ref td{
+    border:1px solid var(--border-soft);padding:7px 8px;text-align:left;
+  }
+  table.ref th{background:var(--panel2);color:var(--dim);font-weight:600;font-size:11px;}
+  table.ref td{color:var(--text);}
+
+  dl.gloss{margin:0;}
+  dl.gloss dt{font-weight:650;font-size:13.5px;margin-top:14px;}
+  dl.gloss dd{margin:4px 0 0;font-size:13px;color:var(--dim);}
+
+  .changelog li{margin-bottom:8px;font-size:13px;color:var(--dim);}
+  .changelog strong{color:var(--text);}
+
+  footer.foot{
+    margin-top:32px;padding-top:16px;border-top:1px solid var(--border);
+    font-size:11.5px;color:var(--dim2);
+  }
+
+  .btn{
+    display:inline-block;background:var(--teal);color:#0B1210;font-weight:650;
+    font-size:13.5px;padding:10px 16px;border:none;border-radius:8px;cursor:pointer;
+    margin-top:6px;
+  }
+  .btn.ghost{background:none;border:1px solid var(--border);color:var(--dim);font-weight:500;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  @media (max-width:420px){.grid2{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <header class="top">
+    <div class="tail">Jet Concierge Club · Part-NCC OMA · Section 7.5</div>
+    <h1>Flight Time Limitation Calculator</h1>
+    <div class="sub">Built from <strong>2026_JCC_PART_NCC_OMA_I2R19</strong> (Issue 2, Rev 19 — 29 June 2026). Private/Part-NCC two-pilot operations.</div>
+    <div class="rev">Planning aid only — not a substitute for the OMA itself, Centrik FTL reporting, or NPFO/SM approval. Confirm this is the revision current for your aircraft before relying on it operationally.</div>
+  </header>
+
+  <nav class="tabs" id="tabs">
+    <button data-tab="fdp" class="active">Max FDP</button>
+    <button data-tab="rest">Rest</button>
+    <button data-tab="cumulative">Cumulative &amp; Days Off</button>
+    <button data-tab="longrange">Long-Range Exception</button>
+    <button data-tab="reference">Reference</button>
+  </nav>
+
+  <!-- ===================== TAB 1: MAX FDP ===================== -->
+  <section class="panel active" id="panel-fdp">
+    <h2 class="section-title">Maximum Flying Duty Period</h2>
+    <p class="section-desc">Two-pilot crew. Table A applies if acclimatised at the place the FDP starts; Table B otherwise. <span class="clause" style="float:none;display:inline-block;">OMA 7.5.8</span></p>
+
+    <div class="field">
+      <label>Acclimatisation status</label>
+      <div class="seg" id="seg-acclim">
+        <button data-val="acclim" class="active">Acclimatised</button>
+        <button data-val="notacclim">Not acclimatised</button>
+      </div>
+    </div>
+
+    <div class="field" id="field-starttime">
+      <label>Local time of report / FDP start</label>
+      <input type="time" id="startTime" value="09:00">
+      <div class="hint">Used for the Table A start-time band (if acclimatised) and to work out the latest blocks-on time below either way.</div>
+    </div>
+
+    <div class="field" id="field-precedingrest" style="display:none;">
+      <label>Length of preceding rest (hours)</label>
+      <input type="number" id="precedingRest" value="12" min="0" step="0.5">
+      <div class="hint">Table B row is "≤18h or ≥30h" vs "between 18h and 30h."</div>
+    </div>
+
+    <div class="field">
+      <label id="lbl-sectors">Number of sectors planned</label>
+      <input type="number" id="sectors" value="2" min="1" max="12" step="1">
+      <div class="hint" id="hint-sectors">Table A caps at "8 or more."</div>
+    </div>
+
+    <details class="helper">
+      <summary>Got a sector longer than 9h01? (two-pilot long-range adjustment — OMA 7.5.9)</summary>
+      <div class="inner">
+        <p class="section-desc" style="margin-bottom:12px;">Only relevant with a bare two-pilot crew and no relief pilot carried. A long sector is treated as more than one sector for the table lookup above.</p>
+        <div class="field">
+          <label>Longest scheduled sector</label>
+          <div class="seg" id="seg-longsector">
+            <button data-val="none" class="active">9h00 or less</button>
+            <button data-val="mid">9h01 – 11h00</button>
+            <button data-val="long">Over 11h00</button>
+          </div>
+        </div>
+        <div id="longsector-result"></div>
+        <div class="note">If an additional, current, type-rated pilot is carried, this adjustment doesn't apply — use the actual sector count directly in the table above instead.</div>
+      </div>
+    </details>
+
+    <div class="field">
+      <label>Extension method (choose one, if any)</label>
+      <div class="seg" id="seg-ext">
+        <button data-val="none" class="active">None</button>
+        <button data-val="split">Split duty</button>
+        <button data-val="relief">In-flight relief</button>
+      </div>
+    </div>
+
+    <div id="ext-split" style="display:none;">
+      <div class="grid2">
+        <div class="field">
+          <label>Start of split (local)</label>
+          <input type="time" id="splitStart" value="14:00">
+        </div>
+        <div class="field">
+          <label>End of split (local)</label>
+          <input type="time" id="splitEnd" value="19:00">
+        </div>
+      </div>
+      <div class="hint">Rest is worked out automatically from these two times. Enter the actual start/end of the break — the minimum 20 minutes for immediate pre/post-flight duties is trimmed off automatically.</div>
+    </div>
+
+    <div id="ext-relief" style="display:none;">
+      <div class="field">
+        <label>Rest taken in</label>
+        <div class="seg" id="seg-relieftype">
+          <button data-val="bunk" class="active">Bunk</button>
+          <button data-val="seat">Seat</button>
+        </div>
+      </div>
+      <div class="field">
+        <label>Total in-flight rest (need not be consecutive)</label>
+        <input type="number" id="reliefRest" value="4" min="0" step="0.5">
+      </div>
+    </div>
+
+    <div class="result" id="fdp-result"></div>
+
+    <div class="note">
+      <strong>Separately available, not pre-planned:</strong> OCC may extend the duty at the planning stage by up to <strong>1h00</strong> with crew agreement, no SM/NPFO sign-off needed (7.5.13). On the day, the PIC may extend the actual FDP by up to <strong>3h00</strong> at their discretion (or more in a genuine emergency) — calculated on what actually happened, not what was planned (7.5.14). Both must be reported via Centrik.
+    </div>
+  </section>
+
+  <!-- ===================== TAB 2: REST ===================== -->
+  <section class="panel" id="panel-rest">
+    <h2 class="section-title">Minimum Rest Period</h2>
+    <p class="section-desc">Standard minimum rest before an FDP. <span class="clause" style="float:none;display:inline-block;">OMA 7.5.12</span></p>
+
+    <div class="field">
+      <label>Length of the preceding duty period (hours)</label>
+      <input type="number" id="precedingDuty" value="10" min="0" step="0.5">
+    </div>
+
+    <div class="field">
+      <label>Away from base?</label>
+      <div class="seg" id="seg-awaybase">
+        <button data-val="yes" class="active">Yes</button>
+        <button data-val="no">No</button>
+      </div>
+    </div>
+
+    <div id="awaybase-fields">
+      <div class="field">
+        <label>Company-provided suitable accommodation?</label>
+        <div class="seg" id="seg-accom">
+          <button data-val="yes" class="active">Yes</button>
+          <button data-val="no">No</button>
+        </div>
+      </div>
+      <div class="field">
+        <label>Travel time between aerodrome and accommodation, each way (minutes)</label>
+        <input type="number" id="travelMin" value="20" min="0" step="5">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Did the preceding duty (incl. any positioning) exceed 20 hours?</label>
+      <div class="seg" id="seg-over20">
+        <button data-val="no" class="active">No</button>
+        <button data-val="yes">Yes</button>
+      </div>
+    </div>
+
+    <div class="result" id="rest-result"></div>
+
+    <details class="helper">
+      <summary>PIC's discretion to reduce rest further (OMA 7.5.15 — rewritten in this revision)</summary>
+      <div class="inner">
+        <p class="section-desc" style="margin-bottom:12px;">
+          This is no longer a simple "not below 9 hours" rule. Before a PIC reduces rest below the 7.5.12 minimum, a documented fatigue risk assessment covering all crew is required, monitored by the NPFO and NPGO. It considers: length of preceding duty, current/perceived fatigue, frequency of recent extensions/reductions, acclimatisation status, impact of the time-of-day change, any additional duties before the next FDP, transport time to accommodation, and the length/complexity of the following FDP.
+        </p>
+        <div class="field">
+          <label>Proposed reduced rest (hours)</label>
+          <input type="number" id="picReducedRest" value="8.5" min="0" step="0.25">
+        </div>
+        <div class="field">
+          <label>Actual transport time to and from accommodation, combined (hours)</label>
+          <input type="number" id="picTransport" value="0.5" min="0" step="0.25">
+        </div>
+        <div id="pic-discretion-result"></div>
+        <div class="note warn"><strong>Reminder:</strong> the 60-minute minimum reporting time is part of the FDP and can never be reduced to accommodate a rest reduction, regardless of this floor.</div>
+        <div class="note">Reporting timing (7.5.16): an <strong>FTL exceedance</strong> report goes in immediately after the flight. A <strong>reduction-of-rest</strong> report must go in <em>before</em> the next flight — the one following the reduced rest.</div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ===================== TAB 3: CUMULATIVE ===================== -->
+  <section class="panel" id="panel-cumulative">
+    <h2 class="section-title">Cumulative Duty &amp; Days Off</h2>
+    <p class="section-desc">Rolling limits on duty and flight time, plus days-off entitlement. <span class="clause" style="float:none;display:inline-block;">OMA 7.5.17 – 7.5.19</span></p>
+
+    <div class="card">
+      <span class="clause">7.5.19.1</span>
+      <div style="font-weight:600;margin-bottom:10px;">Maximum duty hours</div>
+      <div class="grid2">
+        <div class="field"><label>Duty hours, trailing 7 days</label><input type="number" id="d7" value="0" min="0" step="0.5"></div>
+        <div class="field"><label>Duty hours, trailing 14 days</label><input type="number" id="d14" value="0" min="0" step="0.5"></div>
+        <div class="field"><label>Duty hours, trailing 28 days</label><input type="number" id="d28" value="0" min="0" step="0.5"></div>
+        <div class="field"><label>Duty hours, trailing 12 months</label><input type="number" id="d365" value="0" min="0" step="1"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="clause">7.5.18</span>
+      <div style="font-weight:600;margin-bottom:10px;">Absolute flight time limits</div>
+      <div class="grid2">
+        <div class="field"><label>Flight time, trailing 28 days</label><input type="number" id="f28" value="0" min="0" step="0.5"></div>
+        <div class="field"><label>Flight time, trailing 12 months</label><input type="number" id="f365" value="0" min="0" step="1"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="clause">7.5.17</span>
+      <div style="font-weight:600;margin-bottom:10px;">Days off</div>
+      <div class="field"><label>Consecutive duty days already worked without a day off</label><input type="number" id="consecDuty" value="0" min="0" step="1"></div>
+      <div class="grid2">
+        <div class="field"><label>Days off taken, trailing 28 days</label><input type="number" id="daysOff28" value="0" min="0" step="1"></div>
+        <div class="field"><label>Days off taken, trailing 84 days</label><input type="number" id="daysOff84" value="0" min="0" step="1"></div>
+      </div>
+      <div class="field">
+        <label>Had 2 consecutive days off within the last 16 days?</label>
+        <div class="seg" id="seg-consecoff">
+          <button data-val="yes" class="active">Yes</button>
+          <button data-val="no">No</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="result" id="cumulative-result"></div>
+  </section>
+
+  <!-- ===================== TAB 4: LONG RANGE ===================== -->
+  <section class="panel" id="panel-longrange">
+    <h2 class="section-title">Owner-Flight Long-Range Exception</h2>
+    <p class="section-desc">For a two-pilot crew flying a sector over 9 hours, planned <em>without</em> the 7.5.9 sector-multiplier limits. <span class="clause" style="float:none;display:inline-block;">OMA 7.5.9.1</span></p>
+
+    <div class="card">
+      <div style="font-weight:600;margin-bottom:10px;">All of these must hold</div>
+      <label style="display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--text);margin-bottom:12px;font-weight:400;">
+        <input type="checkbox" id="lr1" style="margin-top:3px;"> Flight is for the purpose of flying the owner — not a charter flight
+      </label>
+      <label style="display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--text);margin-bottom:12px;font-weight:400;">
+        <input type="checkbox" id="lr2" style="margin-top:3px;"> Crew have had at least 18h off duty before starting the long-range duty
+      </label>
+      <label style="display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--text);margin-bottom:12px;font-weight:400;">
+        <input type="checkbox" id="lr3" style="margin-top:3px;"> The duty immediately before it ended before 20:00 local, followed by a minimum 18h off including a local night
+      </label>
+      <label style="display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--text);margin-bottom:0;font-weight:400;">
+        <input type="checkbox" id="lr4" style="margin-top:3px;"> Commander's discretion for this duty will be capped at 2h, not the usual 3h
+      </label>
+    </div>
+
+    <div class="grid2">
+      <div class="field"><label>Such duties already flown in trailing 28 days</label><input type="number" id="lrCount" value="0" min="0" step="1"></div>
+      <div class="field"><label>Cumulative duty hours, trailing 28 days</label><input type="number" id="lrHours" value="0" min="0" step="0.5"></div>
+    </div>
+
+    <div class="result" id="longrange-result"></div>
+  </section>
+
+  <!-- ===================== TAB 5: REFERENCE ===================== -->
+  <section class="panel" id="panel-reference">
+    <h2 class="section-title">Reference</h2>
+    <p class="section-desc">Quick lookup — definitions and clause map from OMA Section 7.5.</p>
+
+    <div class="card">
+      <div style="font-weight:600;margin-bottom:10px;">What changed vs. the 2021 edition (Issue 1/Rev 11)</div>
+      <ul class="changelog" style="padding-left:18px;margin:0;">
+        <li><strong>Rest accommodation floor:</strong> 9h → <strong>8h</strong> (7.5.12, 7.5.15)</li>
+        <li><strong>1-hour rest reduction trigger:</strong> previously only when earned rest was exactly 10h; now applies whenever earned rest is <strong>at least 10h</strong></li>
+        <li><strong>7.5.15 PIC discretion to reduce rest:</strong> rewritten from a flat 9h floor into a formal, documented 11-factor fatigue risk assessment, monitored by NPFO/NPGO; floor is now 8h accommodation + actual transport time</li>
+        <li><strong>7.5.16 reporting timing</strong> made explicit: exceedance reports immediately after the flight; rest-reduction reports before the next flight</li>
+        <li><strong>7.5.9.1 long-range table:</strong> a sector over 11h when not acclimatised was previously "Not Applicable" — now permitted, counted as 3 sectors</li>
+      </ul>
+      <div class="hint" style="margin-top:10px;">Everything else — Table A/B values, split duty, in-flight relief, the 65/105/190/2000-hour duty limits, 100h/900h flight-time limits, and the days-off pattern — is unchanged.</div>
+    </div>
+
+    <table class="ref">
+      <tr><th>Clause</th><th>Covers</th></tr>
+      <tr><td>7.5.2</td><td>Definitions (acclimatised, local night, days off, etc.)</td></tr>
+      <tr><td>7.5.8.2 / .3</td><td>Table A (acclimatised) / Table B (not acclimatised)</td></tr>
+      <tr><td>7.5.9 / 7.5.9.1</td><td>Two-pilot long sector (&gt;9h) adjustment / owner-flight exception</td></tr>
+      <tr><td>7.5.10</td><td>Extension by in-flight relief</td></tr>
+      <tr><td>7.5.11</td><td>Extension by split duty</td></tr>
+      <tr><td>7.5.12</td><td>Minimum rest period</td></tr>
+      <tr><td>7.5.13</td><td>OCC planned FTL variation (+1h max)</td></tr>
+      <tr><td>7.5.14</td><td>PIC discretion to extend FDP (+3h max)</td></tr>
+      <tr><td>7.5.15 / .16</td><td>PIC discretion to reduce rest / reporting</td></tr>
+      <tr><td>7.5.17</td><td>Days off pattern</td></tr>
+      <tr><td>7.5.18</td><td>Absolute flight-time limits (GAR 91.1215)</td></tr>
+      <tr><td>7.5.19</td><td>Cumulative duty hours</td></tr>
+      <tr><td>7.5.22</td><td>Non-company flying (&lt;1,570kg MTOW, non-commercial, or NP Flight Ops authorised)</td></tr>
+    </table>
+
+    <dl class="gloss">
+      <dt>Acclimatised</dt>
+      <dd>3 consecutive local nights on the ground in a time zone ≤2h wide with uninterrupted sleep. Stays acclimatised until a duty finishes somewhere local time differs by more than 2h from departure.</dd>
+      <dt>Local night</dt>
+      <dd>8 hours falling between 2200 and 0800 local time.</dd>
+      <dt>Days off</dt>
+      <dd>A single day off = 2 local nights, minimum 34 hours. Consecutive days off add a further local night each.</dd>
+      <dt>Sector</dt>
+      <dd>From an aircraft first moving under its own power to coming to rest after landing, at the parking position.</dd>
+      <dt>Split duty</dt>
+      <dd>An FDP of two or more sectors separated by less than a minimum rest period.</dd>
+      <dt>Suitable accommodation</dt>
+      <dd>A well-furnished bedroom with control over noise, ventilation, light, and temperature.</dd>
+    </dl>
+  </section>
+
+  <footer class="foot">
+    Source: 2026_JCC_PART_NCC_OMA_I2R19, Issue 2 / Rev 19, 29 June 2026, Section 7.5 (Flight Time Limitation System), referencing GAR 91.1215 and GAR 125.1205. Prior edition referenced: I1R11, 20 July 2021. Check with your ops team that this remains the current revision before relying on it operationally.
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  // ---------- Tab navigation ----------
+  const tabBtns = document.querySelectorAll('#tabs button');
+  tabBtns.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      tabBtns.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+      document.getElementById('panel-'+btn.dataset.tab).classList.add('active');
+    });
+  });
+
+  // ---------- Generic segmented control helper ----------
+  function seg(id, onChange){
+    const el = document.getElementById(id);
+    const btns = el.querySelectorAll('button');
+    btns.forEach(b=>{
+      b.addEventListener('click',()=>{
+        btns.forEach(x=>x.classList.remove('active'));
+        b.classList.add('active');
+        onChange(b.dataset.val);
+      });
+    });
+    return ()=> el.querySelector('button.active').dataset.val;
+  }
+
+  function hhmm(h){
+    if(h===null||h===undefined||isNaN(h)) return '—';
+    const sign = h<0 ? '-':'';
+    h = Math.abs(h);
+    const hh = Math.floor(h+1e-9);
+    const mm = Math.round((h-hh)*60);
+    return sign+hh+':'+String(mm).padStart(2,'0');
+  }
+
+  // ================= FDP TAB =================
+  const TABLE_A = [
+    {label:'0600–0659', test:m=>m>=360&&m<=419, vals:[15,14.25,13.5,12.75,12,11.5,11,11]},
+    {label:'0700–1259', test:m=>m>=420&&m<=779, vals:[16,15.25,14.5,13.75,13,12.5,12,11.5]},
+    {label:'1300–1759', test:m=>m>=780&&m<=1079, vals:[15,14.25,13.5,12.75,12,11.5,11,11]},
+    {label:'1800–2159', test:m=>m>=1080&&m<=1319, vals:[14,13.25,12.5,11.75,11,11,11,11]},
+    {label:'2200–0559', test:m=>m>=1320||m<360, vals:[13,12.25,11.5,11,11,11,11,11]},
+  ];
+  const TABLE_B = [
+    {label:'Preceding rest ≤18h or ≥30h', vals:[15,14.25,13.5,12.75,12,11.25,11]},
+    {label:'Preceding rest 18h–30h',       vals:[13.5,13,12.5,11.75,11,11,11]},
+  ];
+
+  let acclimState = 'acclim';
+  seg('seg-acclim', v=>{
+    acclimState = v;
+    document.getElementById('field-precedingrest').style.display = v==='acclim' ? 'none' : '';
+    document.getElementById('hint-sectors').textContent = v==='acclim'
+      ? 'Table A caps at "8 or more."'
+      : 'Table B caps at "7 or more."';
+    renderFDP();
+  });
+
+  let extMethod = 'none';
+  seg('seg-ext', v=>{
+    extMethod = v;
+    document.getElementById('ext-split').style.display = v==='split' ? '' : 'none';
+    document.getElementById('ext-relief').style.display = v==='relief' ? '' : 'none';
+    renderFDP();
+  });
+
+  let reliefType = 'bunk';
+  seg('seg-relieftype', v=>{ reliefType=v; renderFDP(); });
+
+  let longSector = 'none';
+  seg('seg-longsector', v=>{
+    longSector = v;
+    const box = document.getElementById('longsector-result');
+    if(v==='none'){ box.innerHTML=''; renderFDP(); return; }
+    const acc = acclimState==='acclim';
+    let modSectors;
+    if(v==='mid') modSectors = acc ? 1 : 2;
+    if(v==='long') modSectors = acc ? 2 : 3; // 2026 rev: no longer "Not Applicable"
+    box.innerHTML = '<div class="note"><strong>Modified sector count to use above: '+modSectors+'</strong><br>Set the "Number of sectors" field to this value, then read the FDP off the table.</div>';
+    renderFDP();
+  });
+
+  ['startTime','precedingRest','sectors','splitStart','splitEnd','reliefRest'].forEach(id=>{
+    document.getElementById(id).addEventListener('input', renderFDP);
+  });
+
+  function timeToMinutes(t){
+    if(!t) return 0;
+    const [hh,mm] = t.split(':').map(Number);
+    return (hh||0)*60+(mm||0);
+  }
+
+  function renderFDP(){
+    const sectorsInput = parseInt(document.getElementById('sectors').value||'1',10);
+    let tableLine='', tableHours=0, capLabel='';
+
+    if(acclimState==='acclim'){
+      const [hh,mm] = document.getElementById('startTime').value.split(':').map(Number);
+      const minutes = (hh||0)*60+(mm||0);
+      const band = TABLE_A.find(b=>b.test(minutes)) || TABLE_A[4];
+      const idx = Math.min(Math.max(sectorsInput,1),8)-1;
+      tableHours = band.vals[idx];
+      capLabel = sectorsInput>=8 ? '8+' : String(sectorsInput);
+      tableLine = 'Table A · '+band.label+' · '+capLabel+' sector(s)';
+    } else {
+      const rest = parseFloat(document.getElementById('precedingRest').value||'0');
+      const row = (rest<=18||rest>=30) ? TABLE_B[0] : TABLE_B[1];
+      const idx = Math.min(Math.max(sectorsInput,1),7)-1;
+      tableHours = row.vals[idx];
+      capLabel = sectorsInput>=7 ? '7+' : String(sectorsInput);
+      tableLine = 'Table B · '+row.label+' · '+capLabel+' sector(s)';
+    }
+
+    let ext = 0, extLine = '', capNote = '', splitLine = '';
+    if(extMethod==='split'){
+      const sMin = timeToMinutes(document.getElementById('splitStart').value);
+      const eMin = timeToMinutes(document.getElementById('splitEnd').value);
+      let gapMin = eMin - sMin;
+      if(gapMin < 0) gapMin += 1440;
+      const rawGap = gapMin/60;
+      const BUFFER = 20/60; // 20-min minimum for immediate pre/post-flight duties, excluded from rest
+      const r = Math.max(0, rawGap - BUFFER);
+      splitLine = 'Gap '+hhmm(rawGap)+' − 0:20 buffer = '+hhmm(r)+' rest';
+      if(r<3){ ext=0; extLine='Split duty rest <3h → no extension'; }
+      else if(r<=10){ ext=r/2; extLine='Split duty · '+hhmm(r)+' rest → +'+hhmm(ext); }
+      else { ext=5; extLine='Split duty rest >10h is outside the 3–10h table — treat as the 10h max (+5:00) or confirm with ops.'; }
+    } else if(extMethod==='relief'){
+      const r = parseFloat(document.getElementById('reliefRest').value||'0');
+      if(r<3){ ext=0; extLine='In-flight rest <3h → no extension'; }
+      else if(reliefType==='bunk'){ ext=r/2; capNote='cap: FDP ≤ 20:00'; extLine='Bunk rest · '+r+'h → +'+hhmm(ext)+' ('+capNote+')'; }
+      else { ext=r/3; capNote='cap: FDP ≤ 18:00'; extLine='Seat rest · '+r+'h → +'+hhmm(ext)+' ('+capNote+')'; }
+    }
+
+    let total = tableHours + ext;
+    let capped = false;
+    if(extMethod==='relief'){
+      const cap = reliefType==='bunk' ? 20 : 18;
+      if(total>cap){ total=cap; capped=true; }
+    }
+
+    // Latest blocks-on (local) — start time + total FDP, wrapping past midnight
+    const startMinutes = timeToMinutes(document.getElementById('startTime').value);
+    let blocksMinutesRaw = startMinutes + total*60;
+    const dayOffset = Math.floor(blocksMinutesRaw/1440);
+    const blocksMinutes = ((blocksMinutesRaw%1440)+1440)%1440;
+    const bh = Math.floor(blocksMinutes/60);
+    const bm = Math.round(blocksMinutes%60);
+    const blocksLabel = String(bh).padStart(2,'0')+':'+String(bm).padStart(2,'0')+(dayOffset>0?' (+'+dayOffset+'d)':'');
+
+    const box = document.getElementById('fdp-result');
+    box.innerHTML =
+      '<div class="headline-row">'+
+        '<div class="item"><div class="num amber">'+hhmm(total)+'</div><div class="lbl">MAX FDP'+(capped?' (CAPPED)':'')+'</div></div>'+
+        '<div class="item"><div class="num teal">'+blocksLabel+'</div><div class="lbl">LATEST BLOCKS-ON (LOCAL)</div></div>'+
+      '</div>'+
+      '<div class="row"><span class="k">Table limit</span><span class="v">'+hhmm(tableHours)+'</span></div>'+
+      '<div class="row"><span class="k">'+tableLine+'</span><span class="v"></span></div>'+
+      (extMethod!=='none' ? '<div class="row"><span class="k">'+extLine+'</span><span class="v"></span></div>' : '')+
+      (extMethod==='split' ? '<div class="row"><span class="k">'+splitLine+'</span><span class="v"></span></div>' : '');
+  }
+
+  // ================= REST TAB =================
+  let awayBase = true, accomProvided = true, over20 = false;
+  seg('seg-awaybase', v=>{ awayBase = v==='yes'; document.getElementById('awaybase-fields').style.display = awayBase?'':'none'; renderRest(); });
+  seg('seg-accom', v=>{ accomProvided = v==='yes'; renderRest(); });
+  seg('seg-over20', v=>{ over20 = v==='yes'; renderRest(); });
+  ['precedingDuty','travelMin'].forEach(id=> document.getElementById(id).addEventListener('input', renderRest));
+
+  function renderRest(){
+    const duty = parseFloat(document.getElementById('precedingDuty').value||'0');
+    let base = Math.max(duty,10);
+    let reduced = base;
+    const ACCOM_FLOOR = 8; // 2026 rev: was 9
+
+    let reducedApplied = false;
+    if(awayBase && accomProvided && base>=10){
+      reduced = Math.max(base-1, ACCOM_FLOOR);
+      reducedApplied = true;
+    }
+
+    let travelExtra = 0;
+    if(awayBase){
+      const travelEachWay = parseFloat(document.getElementById('travelMin').value||'0')/60;
+      const totalTravel = travelEachWay*2;
+      travelExtra = Math.max(0, totalTravel-1);
+    }
+
+    const finalRest = reduced + travelExtra;
+
+    const box = document.getElementById('rest-result');
+    box.innerHTML =
+      '<div class="headline"><div class="num">'+hhmm(finalRest)+'</div><div class="lbl">MINIMUM REST REQUIRED</div></div>'+
+      '<div class="row"><span class="k">Base (max of preceding duty, or 10h)</span><span class="v">'+hhmm(base)+'</span></div>'+
+      (reducedApplied ? '<div class="row"><span class="k">−1h reduction (away, accommodation provided, floor '+ACCOM_FLOOR+'h)</span><span class="v">'+hhmm(reduced)+'</span></div>' : '')+
+      (travelExtra>0 ? '<div class="row"><span class="k">+ travel time over 1h combined</span><span class="v">+'+hhmm(travelExtra)+'</span></div>' : '')+
+      (over20 ? '<div class="row"><span class="k">Duty incl. positioning &gt;20h</span><span class="v"><span class="status warn">Local night required</span></span></div>' : '');
+  }
+
+  ['picReducedRest','picTransport'].forEach(id=> document.getElementById(id) && document.getElementById(id).addEventListener('input', renderPicDiscretion));
+  function renderPicDiscretion(){
+    const proposed = parseFloat(document.getElementById('picReducedRest').value||'0');
+    const transport = parseFloat(document.getElementById('picTransport').value||'0');
+    const floor = 8 + transport;
+    const ok = proposed >= floor;
+    const box = document.getElementById('pic-discretion-result');
+    box.innerHTML =
+      '<div class="result" style="margin-top:0;">'+
+      '<div class="row"><span class="k">Floor (8h accommodation + transport time)</span><span class="v">'+hhmm(floor)+'</span></div>'+
+      '<div class="row"><span class="k">Proposed rest</span><span class="v">'+hhmm(proposed)+'</span></div>'+
+      '<div class="row"><span class="k">Status</span><span class="v"><span class="status '+(ok?'ok':'bad')+'">'+(ok?'Permitted if risk-assessed & documented':'Below the absolute floor — not permitted')+'</span></span></div>'+
+      '</div>';
+  }
+
+  // ================= CUMULATIVE TAB =================
+  const LIMITS = {d7:65, d14:105, d28:190, d365:2000, f28:100, f365:900};
+  let consecOffOk = true;
+  seg('seg-consecoff', v=>{ consecOffOk = v==='yes'; renderCumulative(); });
+  ['d7','d14','d28','d365','f28','f365','consecDuty','daysOff28','daysOff84'].forEach(id=>{
+    document.getElementById(id).addEventListener('input', renderCumulative);
+  });
+
+  function statusFor(used, limit){
+    const pct = used/limit;
+    if(used>=limit) return 'bad';
+    if(pct>=0.9) return 'warn';
+    return 'ok';
+  }
+
+  function renderCumulative(){
+    const vals = {};
+    ['d7','d14','d28','d365','f28','f365'].forEach(k=> vals[k]=parseFloat(document.getElementById(k).value||'0'));
+    const consecDuty = parseInt(document.getElementById('consecDuty').value||'0',10);
+    const daysOff28 = parseInt(document.getElementById('daysOff28').value||'0',10);
+    const daysOff84 = parseInt(document.getElementById('daysOff84').value||'0',10);
+
+    function line(label, used, limit, unit){
+      const st = statusFor(used, limit);
+      const remaining = Math.max(limit-used,0);
+      const msg = st==='bad' ? 'Limit reached/exceeded' : (remaining.toFixed(1).replace(/\.0$/,'')+unit+' remaining');
+      return '<div class="row"><span class="k">'+label+'</span><span class="v"><span class="status '+st+'">'+msg+'</span></span></div>';
+    }
+
+    let rows = '';
+    rows += line('Duty · 65h / 7 days', vals.d7, 65, 'h');
+    rows += line('Duty · 105h / 14 days', vals.d14, 105, 'h');
+    rows += line('Duty · 190h / 28 days', vals.d28, 190, 'h');
+    rows += line('Duty · 2000h / 12 months', vals.d365, 2000, 'h');
+    rows += line('Flight time · 100h / 28 days', vals.f28, 100, 'h');
+    rows += line('Flight time · 900h / 12 months', vals.f365, 900, 'h');
+
+    const consecSt = consecDuty>=7 ? 'bad' : (consecDuty>=6?'warn':'ok');
+    rows += '<div class="row"><span class="k">Consecutive duty days (max 7, may position on day 8)</span><span class="v"><span class="status '+consecSt+'">'+consecDuty+' day(s)'+(consecDuty>=7?' — day off due':'')+'</span></span></div>';
+
+    const off28St = daysOff28>=7 ? 'ok' : 'bad';
+    rows += '<div class="row"><span class="k">Days off, trailing 28 days (min 7)</span><span class="v"><span class="status '+off28St+'">'+daysOff28+'</span></span></div>';
+
+    const off84St = daysOff84>=24 ? 'ok' : 'bad';
+    rows += '<div class="row"><span class="k">Days off, trailing 84 days (avg 8/28d → min 24)</span><span class="v"><span class="status '+off84St+'">'+daysOff84+'</span></span></div>';
+
+    const consecOffSt = consecOffOk ? 'ok' : 'bad';
+    rows += '<div class="row"><span class="k">2 consecutive days off within last 16 days</span><span class="v"><span class="status '+consecOffSt+'">'+(consecOffOk?'Yes':'Overdue')+'</span></span></div>';
+
+    document.getElementById('cumulative-result').innerHTML = rows;
+  }
+
+  // ================= LONG RANGE TAB =================
+  ['lr1','lr2','lr3','lr4','lrCount','lrHours'].forEach(id=>{
+    document.getElementById(id).addEventListener('input', renderLongRange);
+    document.getElementById(id).addEventListener('change', renderLongRange);
+  });
+  function renderLongRange(){
+    const checks = ['lr1','lr2','lr3','lr4'].map(id=>document.getElementById(id).checked);
+    const allChecked = checks.every(Boolean);
+    const count = parseInt(document.getElementById('lrCount').value||'0',10);
+    const hours = parseFloat(document.getElementById('lrHours').value||'0');
+
+    const countSt = count>=4 ? 'bad' : (count===3?'warn':'ok');
+    const hoursSt = hours>=170 ? 'bad' : (hours>=153?'warn':'ok');
+
+    document.getElementById('longrange-result').innerHTML =
+      '<div class="row"><span class="k">Conditions met</span><span class="v"><span class="status '+(allChecked?'ok':'bad')+'">'+(allChecked?'All 4 confirmed':'Incomplete')+'</span></span></div>'+
+      '<div class="row"><span class="k">Duties this type, trailing 28 days (max 4)</span><span class="v"><span class="status '+countSt+'">'+count+'</span></span></div>'+
+      '<div class="row"><span class="k">Cumulative duty, trailing 28 days (max 170h)</span><span class="v"><span class="status '+hoursSt+'">'+hours+'h</span></span></div>';
+  }
+
+  // ---------- Initial render ----------
+  renderFDP();
+  renderRest();
+  renderPicDiscretion();
+  renderCumulative();
+  renderLongRange();
+})();
+</script>
+</body>
+</html>
