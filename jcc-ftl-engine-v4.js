@@ -115,8 +115,16 @@
     if(inp.extension?.type==='split'){const s=split(inp.rule,max,inp.extension);max=s.max;if(!s.ok)reviews.push(s.reason);else if(s.extension)notes.push(`Split duty +${s.extension.toFixed(2)}h`);}
     const p=applyPIC(inp.rule,max,inp.pic);max=p.max;if(!p.ok)reviews.push(p.reason);else if(p.extension)notes.push(`PIC discretion +${p.extension.toFixed(2)}h`);
     const v=applyVariation(inp.rule,max,inp.variation);max=v.max;if(!v.ok)reviews.push(v.reason);else if(v.extension)notes.push(`Planned variation +${v.extension.toFixed(2)}h`);
-    const planned=inp.plannedFDPHours;const assessed=Number.isFinite(planned);const legal=reviews.length===0&&(!assessed||planned<=max+EPS);
-    return {ok:reviews.length===0,review:reviews.length>0,legal,assessed,maxFDPHours:max,fdpStartMin,fdpStartDeltaMinutes,notes,reviews,table:b.table,modifiedSectors:b.modifiedSectors};
+    const planned=inp.plannedFDPHours;
+    const assessed=Number.isFinite(planned);
+    const knownLongest=Number.isFinite(inp.longestSectorHours)?inp.longestSectorHours:0;
+    const minimumKnownFDP=knownLongest>0 ? knownLongest + TABLES[inp.rule].reportMin/60 : 0;
+    const intrinsicallyIllegal=minimumKnownFDP>max+EPS;
+    if(intrinsicallyIllegal){
+      notes.push('Minimum known FDP '+minimumKnownFDP.toFixed(2)+'h exceeds maximum '+max.toFixed(2)+'h');
+    }
+    const legal=reviews.length===0&&!intrinsicallyIllegal&&(!assessed||planned<=max+EPS);
+    return {ok:reviews.length===0,review:reviews.length>0,legal,assessed,intrinsicallyIllegal,minimumKnownFDP,maxFDPHours:max,fdpStartMin,fdpStartDeltaMinutes,notes,reviews,table:b.table,modifiedSectors:b.modifiedSectors};
   }
   function minimumRest(rule,{precedingDutyHours,away=false,suitableAccommodation=false,travelEachWayHours=0,dutyIncludingPositioningHours=0}={}){
     const cfg=TABLES[rule];let base=Math.max(precedingDutyHours||0,cfg.minRest),r=base,reduced=false;
