@@ -215,3 +215,19 @@ test('unknown airport fails visibly rather than silently assuming UTC', async ({
   await expect(page.locator('#utc')).toHaveText('Location not resolved');
   await expect(page.locator('#de')).toHaveText('—');
 });
+
+
+test('additional current type-rated pilot removes long-sector penalty immediately', async ({ page }) => {
+  await page.locator('[data-rule="CAT"]').click();
+  await page.locator('#longestSectorTime').fill('10:00');
+  await page.locator('#calc').click();
+  const penalized = await page.locator('#mf').textContent();
+
+  await page.locator('[data-ext="relief"]').click();
+  await page.locator('#reliefQualified').check();
+  await expect(page.locator('#sectorBand')).toHaveText('Sector penalty removed');
+  await expect(page.locator('#sectorRuleHint')).toContainText('use actual sectors planned');
+  await page.locator('#calc').click();
+  const unpenalized = await page.locator('#mf').textContent();
+  expect(unpenalized).not.toEqual(penalized);
+});
