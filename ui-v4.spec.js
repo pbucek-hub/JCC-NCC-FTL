@@ -127,7 +127,9 @@ test('extension controls progressively reveal only required fields', async ({ pa
 
   await page.locator('[data-ext="relief"]').click();
   await expect(page.locator('#reliefRest')).toBeVisible();
-  await expect(page.locator('#reliefFacility')).toBeVisible();
+  await expect(page.locator('[data-fac="jump"]')).toBeVisible();
+  await expect(page.locator('[data-fac="seat"]')).toBeVisible();
+  await expect(page.locator('[data-fac="bunk"]')).toBeVisible();
   await expect(page.locator('#reliefQualified')).toBeVisible();
 
   await page.locator('[data-ext="none"]').click();
