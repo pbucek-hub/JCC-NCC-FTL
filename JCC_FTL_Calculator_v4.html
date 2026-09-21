@@ -12,10 +12,12 @@
 <section id="max">
 <div class="grid">
 <div class="card"><div class="title">Acclimatisation status</div><div class="two"><button class="seg on" data-acc="1">Acclimatised</button><button class="seg" data-acc="0">Not acclimatised</button></div></div>
-<div class="card"><div class="title" id="longQ">Sector &gt; 9h01?</div><div class="two"><button class="seg" data-long="1">Yes</button><button class="seg on" data-long="0">No</button></div></div>
+<div class="card"><div class="title">Longest planned sector</div>
+<div class="two"><input class="input" id="longestSectorTime" type="time" value="06:00" step="60"><div><div class="input" id="sectorBand" style="display:flex;align-items:center">No long-sector penalty</div><div class="small" id="sectorRuleHint"></div></div></div>
+<div class="small">Enter scheduled flight time of the longest sector. The applicable NCC/CAT-AOC modified-sector rule is applied automatically.</div></div>
 <div class="card"><div class="title">Report time / location</div><div class="two"><div><input class="input" id="report" type="time" value="09:00"><div class="small">Local report time</div><input class="input" id="reportDate" type="date" style="margin-top:8px;font-size:15px"></div><div><input class="input" id="apt" value="LHR" placeholder="ICAO/IATA/city"><div class="small" id="utc">UTC —</div></div></div></div>
 <div class="card"><div class="title">Number of sectors</div><div class="step"><button class="btn" id="minus">−</button><div class="n" id="sn">2</div><button class="btn" id="plus">+</button></div><div class="small" id="cap">Table A caps at 8+</div></div>
-<div class="card hidden" id="prCard"><div class="title">Preceding rest</div><input class="input" id="precedingRest" type="number" step="0.25" value="12"><div class="small">Required for Table B when not acclimatised.</div></div><div class="card hidden" id="longDetailCard"><div class="title">Long-sector details</div><div class="two"><input class="input" id="longestSector" type="number" step="0.0166667" value="10" placeholder="Longest sector h"><input class="input" id="longSectorCount" type="number" min="1" step="1" value="1" placeholder="No. long sectors"></div></div></div>
+<div class="card hidden" id="prCard"><div class="title">Preceding rest</div><input class="input" id="precedingRest" type="number" step="0.25" value="12"><div class="small">Required for Table B when not acclimatised.</div></div>
 
 <div class="card"><div class="row"><div class="grow title">Manual report-time override</div><div class="switch"><button class="seg on" data-ov="0">Off</button><button class="seg" data-ov="1">On</button></div></div><div id="ovfields" class="two hidden"><input class="input" id="orig" type="time" value="09:00"><input class="input" id="actual" type="time" value="09:00"></div></div>
 
@@ -49,7 +51,7 @@
 <script>
 (function(){
 const E=window.JCCFTLEngine,$=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
-const state={rule:'NCC',acc:true,sectors:2,long:false,ext:'none',away:false,override:false};
+const state={rule:'NCC',acc:true,sectors:2,ext:'none',away:false,override:false};
 const airports={
  LHR:['Europe/London','London Heathrow'],EGLL:['Europe/London','London Heathrow'],LTN:['Europe/London','London Luton'],EGGW:['Europe/London','London Luton'],STN:['Europe/London','London Stansted'],EGSS:['Europe/London','London Stansted'],
  TEB:['America/New_York','Teterboro'],KTEB:['America/New_York','Teterboro'],JFK:['America/New_York','New York JFK'],KJFK:['America/New_York','New York JFK'],EWR:['America/New_York','Newark'],KEWR:['America/New_York','Newark'],
@@ -83,13 +85,30 @@ function updateUTC(){
  $('#utc').textContent='UTC '+z+' (UTC'+(off>=0?'+':'')+(off/60)+')';return u;
 }
 function renderRuleUI(){
- $('#longQ').textContent='Sector > '+(state.rule==='CAT'?'7h00?':'9h00?');
  $('#pvh').textContent=state.rule==='NCC'?'NCC: up to 1h may be OCC-planned with crew approval; larger approved variations require the case process.':'CAT/AOC: planned variation section in supplied Section 7 is Reserved.';
  $('#cap').textContent=state.acc?'Table A caps at 8+':'Table B caps at 7+';
 }
 function renderConditions(){
  $('#prCard').classList.toggle('hidden',state.acc);
- $('#longDetailCard').classList.toggle('hidden',!state.long);
+ updateSectorBand();
+}
+function longestSectorHours(){
+ const v=$('#longestSectorTime').value||'00:00',a=v.split(':').map(Number);
+ return a[0]+a[1]/60;
+}
+function updateSectorBand(){
+ const h=longestSectorHours(); let label='',hint='';
+ if(state.rule==='NCC'){
+   if(h<=9){label='No long-sector penalty';hint='NCC: penalty begins at 09:01.'}
+   else if(h<=11){label='09:01–11:00';hint=state.acc?'Modified as 1 sector':'Modified as 2 sectors'}
+   else {label='>11:00';hint=state.acc?'Modified as 2 sectors':'Modified as 3 sectors'}
+ } else {
+   if(h<=7){label='No long-sector penalty';hint='CAT/AOC: penalty begins above 07:00.'}
+   else if(h<=9){label='>07:00–09:00';hint=state.acc?'Modified as 2 sectors':'Modified as 4 sectors'}
+   else if(h<=11){label='>09:00–11:00';hint=state.acc?'Modified as 3 sectors':'Modified as 4 sectors'}
+   else {label='>11:00';hint=state.acc?'Modified as 4 sectors':'Not applicable for two-pilot non-acclimatised crew'}
+ }
+ $('#sectorBand').textContent=label; $('#sectorRuleHint').textContent=hint;
 }
 function renderExt(){
  const e=$('#extfields');
@@ -108,7 +127,7 @@ function collect(){
  return {
   rule:state.rule,acc:state.acc,reportMin:hm(state.override?$('#actual').value:$('#report').value),sectors:state.sectors,
   precedingRestHours:+$('#precedingRest').value||0,
-  longestSectorHours:state.long?(+$('#longestSector').value||0):0,longSectorCount:state.long?(+$('#longSectorCount').value||1):0,
+  longestSectorHours:longestSectorHours(),longSectorCount:(longestSectorHours()>E.longThreshold(state.rule)?1:0),
   additionalCurrentTypeRatedPilot:$('#addCurrentPilot').checked||(state.ext==='relief'&&!!$('#additionalCurrent')?.checked),
   extension:ext,
   delayed:{enabled:$('#dr').checked,originalMin:hm($('#dro').value),actualMin:hm($('#dra').value),undisturbed:$('#drUndisturbed').checked},
@@ -148,7 +167,6 @@ function setRule(rule){
 }
 $$('[data-rule]').forEach(b=>b.onclick=()=>setRule(b.dataset.rule));
 $$('[data-acc]').forEach(b=>b.onclick=()=>{state.acc=b.dataset.acc==='1';$$('[data-acc]').forEach(x=>x.classList.toggle('on',x===b));renderRuleUI();renderConditions();calc()});
-$$('[data-long]').forEach(b=>b.onclick=()=>{state.long=b.dataset.long==='1';$$('[data-long]').forEach(x=>x.classList.toggle('on',x===b));renderConditions();calc()});
 $('#minus').onclick=()=>{state.sectors=Math.max(1,state.sectors-1);$('#sn').textContent=state.sectors;calc()};
 $('#plus').onclick=()=>{state.sectors=Math.min(12,state.sectors+1);$('#sn').textContent=state.sectors;calc()};
 $$('[data-ov]').forEach(b=>b.onclick=()=>{state.override=b.dataset.ov==='1';$$('[data-ov]').forEach(x=>x.classList.toggle('on',x===b));$('#ovfields').classList.toggle('hidden',!state.override);if(state.override&&$('#actual').value==='09:00'){$('#orig').value=$('#report').value;$('#actual').value=$('#report').value}calc()});
@@ -156,12 +174,12 @@ $$('[data-ext]').forEach(b=>b.onclick=()=>{state.ext=b.dataset.ext;$$('[data-ext
 $$('[data-away]').forEach(b=>b.onclick=()=>{state.away=b.dataset.away==='1';$$('[data-away]').forEach(x=>x.classList.toggle('on',x===b));rest()});
 $$('.tab').forEach(b=>b.onclick=()=>{const t=b.dataset.tab;$$('.tab').forEach(x=>x.classList.toggle('on',x===b));['max','rest','cum'].forEach(id=>$('#'+id).classList.toggle('hidden',id!==t));if(t==='rest')rest();if(t==='cum')cum()});
 $('#adv').onclick=()=>$('#am').classList.add('open');$('#ac').onclick=()=>$('#am').classList.remove('open');$('#aa').onclick=()=>{$('#am').classList.remove('open');calc();cum()};
-$('#calc').onclick=calc;['report','reportDate','apt','orig','actual','precedingRest','longestSector','longSectorCount'].forEach(id=>$('#'+id)?.addEventListener('input',calc));
+$('#calc').onclick=calc;['report','reportDate','apt','orig','actual','precedingRest','longestSectorTime'].forEach(id=>$('#'+id)?.addEventListener('input',calc));
 ['pd','dutyPos','travelEach','suitableAccommodation'].forEach(id=>$('#'+id)?.addEventListener('input',rest));
 ['d7','d14','d28','d12','f28','f12','consec','off28','off84','offYear','pairOK'].forEach(id=>$('#'+id)?.addEventListener('input',cum));
 $('#oma').onclick=$('#refnav').onclick=()=>{$('#refs').innerHTML='<h3>NCC</h3><p>2026 JCC Part-NCC OMA I2R19, Section 7.5. Tables A/B; 7.5.9 long-range; 7.5.10 relief; 7.5.11 split duty; 7.5.12 rest; planned variations; PIC discretion; 7.5.17–19 days off/flying/cumulative limits.</p><h3>CAT/AOC</h3><p>JCC OMA Section 7, embedded revision 20201201_JCC_OMA_I1R8. Tables A/B; long-range; delayed reporting; standby; interrupted rest; relief; split duty; rest; PIC discretion; days off; cumulative limits. Planned variation section is Reserved.</p>';$('#rm').classList.add('open')};$('#rc').onclick=()=>$('#rm').classList.remove('open');
 $('#save').onclick=()=>{localStorage.setItem('jcc-ftl-last',JSON.stringify({input:collect(),result:calc(),date:$('#reportDate').value,location:$('#apt').value,savedAt:new Date().toISOString()}));$('#save').textContent='Saved ✓';setTimeout(()=>$('#save').textContent='Save',1000)};
 $('#share').onclick=async()=>{const r=calc(),txt='JCC FTL Calculation\nRuleset: '+state.rule+'\nMaximum FDP: '+fmt(r.maxFDPHours)+'\nDuty end: '+$('#de').textContent+'\nResult: '+$('#st').textContent;try{if(navigator.share)await navigator.share({title:'JCC FTL Calculation',text:txt});else{await navigator.clipboard.writeText(txt);alert('Calculation copied')}}catch(e){}};
-renderExt();renderRuleUI();renderConditions();setRule('NCC');
+renderExt();renderRuleUI();renderConditions();$('#longestSectorTime').addEventListener('input',()=>{updateSectorBand();calc()});setRule('NCC');
 })();
 </script></body></html>
