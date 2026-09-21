@@ -242,6 +242,12 @@ function longestSectorHours(){
 }
 function updateSectorBand(){
  const h=longestSectorHours(); let label='',hint='';
+ const extraPilot = state.ext==='relief' && !!$('#reliefQualified')?.checked;
+ if(extraPilot && h>E.longThreshold(state.rule)){
+   label='Sector penalty removed';
+   hint=(state.rule==='CAT'?'OMA 7.15':'NCC long-range rule')+': use actual sectors planned.';
+   $('#sectorBand').textContent=label; $('#sectorRuleHint').textContent=hint; return;
+ }
  if(state.rule==='NCC'){
    if(h<=9){label='No long-sector penalty';hint='NCC: penalty begins at 09:01.'}
    else if(h<=11){label='09:01–11:00';hint=state.acc?'Modified as 1 sector':'Modified as 2 sectors'}
@@ -261,7 +267,7 @@ function renderExt(){
  if(state.ext==='split'){
    e.innerHTML='<div class="two"><div><div class="small">Ground interval (hours)</div><input class="input" id="groundInterval" type="number" value="4.5" step=".0166667"></div><div><div class="small">Immediate post+pre duties (hours)</div><input class="input" id="excludedDuty" type="number" value="'+(state.rule==='CAT'?'0.5':'0.333333')+'" step=".0166667"></div></div><label class="small"><input type="checkbox" id="splitFacilityOK"> Required rest place/accommodation conditions confirmed</label>';
  } else {
-   e.innerHTML='<div class="small" style="margin-bottom:8px"><b>Additional current type-rated pilot</b> — OMA 7.15 long-sector modified-sector limits are removed and OMA 7.14 is entered using the actual sectors planned.</div><label class="small"><input type="checkbox" id="reliefQualified"> Additional pilot is current and type-rated</label><div class="small" style="margin-top:10px">Pilot rest facility / arrangement</div><div class="ext" style="margin-top:6px"><button class="seg on" data-fac="jump">Jump seat</button><button class="seg" data-fac="seat">Reclining seat</button><button class="seg" data-fac="bunk">Bunk</button></div><div id="reliefRestWrap" class="hidden" style="margin-top:10px"><div class="small">Total qualifying in-flight rest (hours)</div><input class="input" id="reliefRest" type="number" value="3" step=".0166667"><label class="small"><input type="checkbox" id="reliefFacilityOK"> Required screened/rest-facility conditions confirmed</label></div><div class="small" id="jumpHint" style="margin-top:8px">Jump seat: long-sector penalty removed if pilot qualification is confirmed; no in-flight-rest FDP extension.</div>';
+   e.innerHTML='<div class="small" style="margin-bottom:8px"><b>Additional current type-rated pilot</b> — OMA 7.15 long-sector modified-sector limits are removed and OMA 7.14 is entered using the actual sectors planned.</div><label class="small"><input type="checkbox" id="reliefQualified"> Additional current type-rated pilot carried — remove long-sector penalty</label><div class="small" style="margin-top:10px">Pilot rest facility / arrangement</div><div class="ext" style="margin-top:6px"><button class="seg on" data-fac="jump">Jump seat</button><button class="seg" data-fac="seat">Reclining seat</button><button class="seg" data-fac="bunk">Bunk</button></div><div id="reliefRestWrap" class="hidden" style="margin-top:10px"><div class="small">Total qualifying in-flight rest (hours)</div><input class="input" id="reliefRest" type="number" value="3" step=".0166667"><label class="small"><input type="checkbox" id="reliefFacilityOK"> Required screened/rest-facility conditions confirmed</label></div><div class="small" id="jumpHint" style="margin-top:8px">Jump seat: long-sector penalty removed if pilot qualification is confirmed; no in-flight-rest FDP extension.</div>';
  }
 }
 function collect(){
@@ -323,7 +329,7 @@ $$('[data-ov]').forEach(b=>b.onclick=()=>{state.override=b.dataset.ov==='1';$$('
 $('[data-ext]').forEach(b=>b.onclick=()=>{state.ext=b.dataset.ext;$('[data-ext]').forEach(x=>x.classList.toggle('on',x===b));renderExt();wireFacility();calc()});
 function wireFacility(){
  $('[data-fac]').forEach(b=>b.onclick=()=>{$('[data-fac]').forEach(x=>x.classList.toggle('on',x===b));const fac=b.dataset.fac;$('#reliefRestWrap').classList.toggle('hidden',fac==='jump');$('#jumpHint').textContent=fac==='jump'?'Jump seat: long-sector penalty removed if pilot qualification is confirmed; no in-flight-rest FDP extension.':'Qualifying rest may extend FDP subject to Chapter 7 rest-credit rules and caps.';calc()});
- $('#reliefQualified')?.addEventListener('change',calc);$('#reliefRest')?.addEventListener('input',calc);$('#reliefFacilityOK')?.addEventListener('change',calc);
+ $('#reliefQualified')?.addEventListener('change',()=>{updateSectorBand();calc()});$('#reliefRest')?.addEventListener('input',calc);$('#reliefFacilityOK')?.addEventListener('change',calc);
 }
 $$('[data-away]').forEach(b=>b.onclick=()=>{state.away=b.dataset.away==='1';$$('[data-away]').forEach(x=>x.classList.toggle('on',x===b));rest()});
 $$('.tab').forEach(b=>b.onclick=()=>{const t=b.dataset.tab;$$('.tab').forEach(x=>x.classList.toggle('on',x===b));['max','rest','cum'].forEach(id=>$('#'+id).classList.toggle('hidden',id!==t));if(t==='rest')rest();if(t==='cum')cum()});
