@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#071727"><title>JCC FTL Calculator</title>
 <style>
-:root{--b:#071727;--p:#0d2944cc;--l:#6ca5cc44;--t:#eef6ff;--m:#a9bad0;--bl:#168cff;--g:#20d06d;--a:#f4b23d;--r:#ef5c63}*{box-sizing:border-box}button,input,select,.card,.grid>*,.two>*,.rules>*,.tabs>*{min-width:0;max-width:100%}button{white-space:normal;overflow-wrap:anywhere}.top>div:nth-child(2){min-width:0}body{margin:0;background:radial-gradient(circle at 50% 10%,#12385f,#071727 48%,#030a12);color:var(--t);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.app{max-width:820px;margin:auto;padding:18px}.top{display:flex;align-items:center;gap:14px}.logo{font-size:34px}.top h1{margin:0;font-size:29px}.top p{margin:4px 0 0;color:#bfd0e3}.sp{margin-left:auto}.btn,.seg,.tab,.input{border:1px solid var(--l);background:#12314ecc;color:var(--t);border-radius:16px}.btn,.seg,.tab{min-height:50px;padding:0 16px;font-size:16px}.on{background:linear-gradient(#2ab1ff,#1759ec);box-shadow:0 0 22px #159cff66}.notice{margin:14px 0;padding:12px 15px;border:1px solid #d89a28aa;border-radius:18px;background:#6b4a123d;color:#ffc74c}.card{border:1px solid var(--l);background:linear-gradient(150deg,#123654d9,#091c30d9);border-radius:20px;padding:14px;margin-top:12px;backdrop-filter:blur(16px)}.rules{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;align-items:center}.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:12px}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.title{font-size:17px;margin-bottom:10px}.input{width:100%;min-height:52px;padding:0 13px;font-size:21px}.small{font-size:13px;color:var(--m);margin-top:6px}.step{display:grid;grid-template-columns:58px 1fr 58px;align-items:center;gap:8px}.step .n{text-align:center;font-size:28px}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.row .grow{flex:1}.switch{display:flex;margin-left:auto}.switch button{min-width:100px}.ext{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.adv{cursor:pointer}.result{border-color:#47e58a;background:linear-gradient(145deg,#08703dcc,#064023e6)}.result.amber{border-color:#f2b53f;background:linear-gradient(145deg,#7f5514dd,#4c330ddd)}.result.red{border-color:#f2656c;background:linear-gradient(145deg,#711821dd,#3b0c12ee)}.rh{display:flex;align-items:center;gap:12px}.status{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:#8bf2b3;color:#07371b;font-size:30px;font-weight:800}.amber .status{background:#ffd87e;color:#573500}.red .status{background:#ff9da2;color:#5c0d12}.rh h2{font-size:30px;margin:0}.metrics{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #ffffff33;margin-top:12px}.metric{padding:14px}.metric+ .metric{border-left:1px solid #ffffff33}.metric b{display:block;font-size:33px;margin-top:5px}.actions{display:grid;grid-template-columns:1fr 140px;gap:10px;margin-top:12px}.primary{min-height:62px;border:0;border-radius:19px;background:linear-gradient(#24aaff,#1758ef);color:white;font-size:21px}.footer{display:grid;grid-template-columns:repeat(4,1fr);margin-top:16px;border:1px solid var(--l);border-radius:24px;overflow:hidden}.nav{min-height:72px;border:0;background:#0d243bcc;color:#d8e6f3}.nav.on{background:#1664c866;color:#53c6ff}.modal{display:none;position:fixed;inset:0;background:#000b;place-items:center;padding:18px;z-index:20}.modal.open{display:grid}.sheet{max-width:680px;width:100%;max-height:88vh;overflow:auto;background:#0c2944;border:1px solid var(--l);border-radius:22px;padding:18px}.opt{border:1px solid var(--l);border-radius:14px;padding:11px;margin:9px 0}.hidden{display:none!important}@media(max-width:650px){.app{padding:10px}.top{gap:8px}.top h1{font-size:22px}.top p{font-size:13px}.logo{font-size:28px}.top .btn{padding:0 9px;font-size:13px;min-height:44px}.grid{grid-template-columns:1fr 1fr;gap:8px}.two{gap:6px}.title{font-size:14px}.rules{grid-template-columns:.72fr 1fr 1fr;gap:6px}.tabs{gap:6px}.btn,.seg,.tab{font-size:13px;padding:0 6px}.input{font-size:17px;padding:0 8px}.small{font-size:12px}.card{padding:10px;margin-top:8px}.metrics b{font-size:27px}.switch button{min-width:0;flex:1}.ext{gap:6px}.notice{font-size:13px}.footer .nav{font-size:12px}}
+:root{--b:#071727;--p:#0d2944cc;--l:#6ca5cc44;--t:#eef6ff;--m:#a9bad0;--bl:#168cff;--g:#20d06d;--a:#f4b23d;--r:#ef5c63}*{box-sizing:border-box}button,input,select,.card,.grid>*,.two>*,.rules>*,.tabs>*{min-width:0;max-width:100%}button{white-space:normal;overflow-wrap:anywhere}.top>div:nth-child(2){min-width:0}body{margin:0;background:radial-gradient(circle at 50% 10%,#12385f,#071727 48%,#030a12);color:var(--t);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.app{max-width:820px;margin:auto;padding:18px}.top{display:flex;align-items:center;gap:14px}.logo{font-size:34px}.top h1{margin:0;font-size:29px}.top p{margin:4px 0 0;color:#bfd0e3}.sp{margin-left:auto}.btn,.seg,.tab,.input{border:1px solid var(--l);background:#12314ecc;color:var(--t);border-radius:16px}.btn,.seg,.tab{min-height:50px;padding:0 16px;font-size:16px}.on{background:linear-gradient(#2ab1ff,#1759ec);box-shadow:0 0 22px #159cff66}.notice{margin:14px 0;padding:12px 15px;border:1px solid #d89a28aa;border-radius:18px;background:#6b4a123d;color:#ffc74c}.card{border:1px solid var(--l);background:linear-gradient(150deg,#123654d9,#091c30d9);border-radius:20px;padding:14px;margin-top:12px;backdrop-filter:blur(16px)}.rules{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;align-items:center}.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:12px}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.title{font-size:17px;margin-bottom:10px}.input{width:100%;min-height:52px;padding:0 13px;font-size:21px}.small{font-size:13px;color:var(--m);margin-top:6px}.step{display:grid;grid-template-columns:58px 1fr 58px;align-items:center;gap:8px}.step .n{text-align:center;font-size:28px}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.row .grow{flex:1}.switch{display:flex;margin-left:auto}.switch button{min-width:100px}.ext{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.ext4{grid-template-columns:repeat(4,1fr)}.adv{cursor:pointer}.result{border-color:#47e58a;background:linear-gradient(145deg,#08703dcc,#064023e6)}.result.amber{border-color:#f2b53f;background:linear-gradient(145deg,#7f5514dd,#4c330ddd)}.result.red{border-color:#f2656c;background:linear-gradient(145deg,#711821dd,#3b0c12ee)}.rh{display:flex;align-items:center;gap:12px}.status{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:#8bf2b3;color:#07371b;font-size:30px;font-weight:800}.amber .status{background:#ffd87e;color:#573500}.red .status{background:#ff9da2;color:#5c0d12}.rh h2{font-size:30px;margin:0}.metrics{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #ffffff33;margin-top:12px}.metric{padding:14px}.metric+ .metric{border-left:1px solid #ffffff33}.metric b{display:block;font-size:33px;margin-top:5px}.actions{display:grid;grid-template-columns:1fr 140px;gap:10px;margin-top:12px}.primary{min-height:62px;border:0;border-radius:19px;background:linear-gradient(#24aaff,#1758ef);color:white;font-size:21px}.footer{display:grid;grid-template-columns:repeat(4,1fr);margin-top:16px;border:1px solid var(--l);border-radius:24px;overflow:hidden}.nav{min-height:72px;border:0;background:#0d243bcc;color:#d8e6f3}.nav.on{background:#1664c866;color:#53c6ff}.modal{display:none;position:fixed;inset:0;background:#000b;place-items:center;padding:18px;z-index:20}.modal.open{display:grid}.sheet{max-width:680px;width:100%;max-height:88vh;overflow:auto;background:#0c2944;border:1px solid var(--l);border-radius:22px;padding:18px}.opt{border:1px solid var(--l);border-radius:14px;padding:11px;margin:9px 0}.hidden{display:none!important}@media(max-width:650px){.app{padding:10px}.top{gap:8px}.top h1{font-size:22px}.top p{font-size:13px}.logo{font-size:28px}.top .btn{padding:0 9px;font-size:13px;min-height:44px}.grid{grid-template-columns:1fr 1fr;gap:8px}.two{gap:6px}.title{font-size:14px}.rules{grid-template-columns:.72fr 1fr 1fr;gap:6px}.tabs{gap:6px}.btn,.seg,.tab{font-size:13px;padding:0 6px}.input{font-size:17px;padding:0 8px}.small{font-size:12px}.card{padding:10px;margin-top:8px}.metrics b{font-size:27px}.switch button{min-width:0;flex:1}.ext{gap:6px}.ext4{grid-template-columns:repeat(2,1fr)}.notice{font-size:13px}.footer .nav{font-size:12px}}
 </style></head><body><div class="app">
 <div class="top"><div class="logo">◷</div><div><h1>JCC FTL Calculator</h1><p>NCC & Commercial Air Transport (AOC)</p></div><div class="sp"><button class="btn" id="oma">OMA Ref</button></div></div>
 <div class="notice"><b>Planning aid only — not a substitute for the OMA itself.</b><div class="small">Confirm the applicable manual revision before operational use.</div></div>
@@ -12,14 +12,16 @@
 <section id="max">
 <div class="grid">
 <div class="card"><div class="title">Acclimatisation status</div><div class="two"><button class="seg on" data-acc="1">Acclimatised</button><button class="seg" data-acc="0">Not acclimatised</button></div></div>
-<div class="card"><div class="title" id="longQ">Sector &gt; 9h01?</div><div class="two"><button class="seg" data-long="1">Yes</button><button class="seg on" data-long="0">No</button></div></div>
+<div class="card"><div class="title">Longest planned sector</div>
+<div class="two"><input class="input" id="longestSectorTime" type="time" value="06:00" step="60"><div><div class="input" id="sectorBand" style="display:flex;align-items:center">No long-sector penalty</div><div class="small" id="sectorRuleHint"></div></div></div>
+<div class="small">Enter scheduled flight time of the longest sector. The applicable NCC/CAT-AOC modified-sector rule is applied automatically.</div></div>
 <div class="card"><div class="title">Report time / location</div><div class="two"><div><input class="input" id="report" type="time" value="09:00"><div class="small">Local report time</div><input class="input" id="reportDate" type="date" style="margin-top:8px;font-size:15px"></div><div><input class="input" id="apt" value="LHR" placeholder="ICAO/IATA/city"><div class="small" id="utc">UTC —</div></div></div></div>
 <div class="card"><div class="title">Number of sectors</div><div class="step"><button class="btn" id="minus">−</button><div class="n" id="sn">2</div><button class="btn" id="plus">+</button></div><div class="small" id="cap">Table A caps at 8+</div></div>
-<div class="card hidden" id="prCard"><div class="title">Preceding rest</div><input class="input" id="precedingRest" type="number" step="0.25" value="12"><div class="small">Required for Table B when not acclimatised.</div></div><div class="card hidden" id="longDetailCard"><div class="title">Long-sector details</div><div class="two"><input class="input" id="longestSector" type="number" step="0.0166667" value="10" placeholder="Longest sector h"><input class="input" id="longSectorCount" type="number" min="1" step="1" value="1" placeholder="No. long sectors"></div></div></div>
+<div class="card hidden" id="prCard"><div class="title">Preceding rest</div><input class="input" id="precedingRest" type="number" step="0.25" value="12"><div class="small">Required for Table B when not acclimatised.</div></div>
 
 <div class="card"><div class="row"><div class="grow title">Manual report-time override</div><div class="switch"><button class="seg on" data-ov="0">Off</button><button class="seg" data-ov="1">On</button></div></div><div id="ovfields" class="two hidden"><input class="input" id="orig" type="time" value="09:00"><input class="input" id="actual" type="time" value="09:00"></div></div>
 
-<div class="card"><div class="title">Sector extension method</div><div class="ext"><button class="seg on" data-ext="none">None</button><button class="seg" data-ext="split">Split duty</button><button class="seg" data-ext="relief">In-flight relief</button></div><div id="extfields" class="hidden" style="margin-top:10px"></div></div>
+<div class="card"><div class="title">Sector extension method</div><div class="ext"><button class="seg on" data-ext="none">None</button><button class="seg" data-ext="relief">Additional pilot / in-flight relief</button><button class="seg" data-ext="split">Split duty</button></div><div id="extfields" class="hidden" style="margin-top:10px"></div></div>
 
 <div class="card adv" id="adv"><div class="row"><div class="grow"><div class="title">Advanced options</div><div class="small">Standby, delayed reporting, interrupted rest, cumulative limits, days off, PIC discretion and planned variations.</div></div><div style="font-size:28px">›</div></div></div>
 
@@ -40,7 +42,7 @@
 <div class="opt"><label><input type="checkbox" id="ir"> Interrupted rest</label><div class="two"><input class="input" id="ird" type="time" value="03:00"><input class="input" id="irl" type="time" value="06:00"></div></div>
 <div class="opt"><div class="small">PIC discretion extension (hours)</div><div class="two"><input class="input" id="pic" type="number" min="0" max="3" step=".25" value="0"><select class="input" id="picContext"><option value="early">Before first/earlier sector</option><option value="last">Immediately before last sector</option></select></div></div>
 <div class="opt"><div class="small">Planned variation (hours)</div><input class="input" id="pv" type="number" min="0" step=".25" value="0"><label class="small"><input type="checkbox" id="crewApproved"> Crew approval confirmed</label><label class="small"><input type="checkbox" id="fullApproved"> NPFO / SM / crew approval + case risk assessment confirmed</label><div class="small" id="pvh"></div></div>
-<div class="opt"><label><input type="checkbox" id="addCurrentPilot"> Additional current type-rated pilot carried</label></div><div class="opt"><div class="small">Planned FDP for legality check (hours)</div><input class="input" id="planned" type="number" min="0" step=".25" placeholder="Optional"></div>
+<div class="opt"><div class="small">Planned FDP for legality check (hours)</div><input class="input" id="planned" type="number" min="0" step=".25" placeholder="Optional"></div>
 <button class="primary" id="aa">Apply</button></div></div>
 
 <div class="modal" id="rm"><div class="sheet"><button class="btn sp" id="rc">Close</button><h2>OMA references</h2><div id="refs"></div></div></div>
@@ -193,7 +195,7 @@
 <script>
 (function(){
 const E=window.JCCFTLEngine,$=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
-const state={rule:'NCC',acc:true,sectors:2,long:false,ext:'none',away:false,override:false};
+const state={rule:'NCC',acc:true,sectors:2,ext:'none',away:false,override:false};
 const airports={
  LHR:['Europe/London','London Heathrow'],EGLL:['Europe/London','London Heathrow'],LTN:['Europe/London','London Luton'],EGGW:['Europe/London','London Luton'],STN:['Europe/London','London Stansted'],EGSS:['Europe/London','London Stansted'],
  TEB:['America/New_York','Teterboro'],KTEB:['America/New_York','Teterboro'],JFK:['America/New_York','New York JFK'],KJFK:['America/New_York','New York JFK'],EWR:['America/New_York','Newark'],KEWR:['America/New_York','Newark'],
@@ -227,13 +229,30 @@ function updateUTC(){
  $('#utc').textContent='UTC '+z+' (UTC'+(off>=0?'+':'')+(off/60)+')';return u;
 }
 function renderRuleUI(){
- $('#longQ').textContent='Sector > '+(state.rule==='CAT'?'7h00?':'9h00?');
  $('#pvh').textContent=state.rule==='NCC'?'NCC: up to 1h may be OCC-planned with crew approval; larger approved variations require the case process.':'CAT/AOC: planned variation section in supplied Section 7 is Reserved.';
  $('#cap').textContent=state.acc?'Table A caps at 8+':'Table B caps at 7+';
 }
 function renderConditions(){
  $('#prCard').classList.toggle('hidden',state.acc);
- $('#longDetailCard').classList.toggle('hidden',!state.long);
+ updateSectorBand();
+}
+function longestSectorHours(){
+ const v=$('#longestSectorTime').value||'00:00',a=v.split(':').map(Number);
+ return a[0]+a[1]/60;
+}
+function updateSectorBand(){
+ const h=longestSectorHours(); let label='',hint='';
+ if(state.rule==='NCC'){
+   if(h<=9){label='No long-sector penalty';hint='NCC: penalty begins at 09:01.'}
+   else if(h<=11){label='09:01–11:00';hint=state.acc?'Modified as 1 sector':'Modified as 2 sectors'}
+   else {label='>11:00';hint=state.acc?'Modified as 2 sectors':'Modified as 3 sectors'}
+ } else {
+   if(h<=7){label='No long-sector penalty';hint='CAT/AOC: penalty begins above 07:00.'}
+   else if(h<=9){label='>07:00–09:00';hint=state.acc?'Modified as 2 sectors':'Modified as 4 sectors'}
+   else if(h<=11){label='>09:00–11:00';hint=state.acc?'Modified as 3 sectors':'Modified as 4 sectors'}
+   else {label='>11:00';hint=state.acc?'Modified as 4 sectors':'Not applicable for two-pilot non-acclimatised crew'}
+ }
+ $('#sectorBand').textContent=label; $('#sectorRuleHint').textContent=hint;
 }
 function renderExt(){
  const e=$('#extfields');
@@ -242,18 +261,24 @@ function renderExt(){
  if(state.ext==='split'){
    e.innerHTML='<div class="two"><div><div class="small">Ground interval (hours)</div><input class="input" id="groundInterval" type="number" value="4.5" step=".0166667"></div><div><div class="small">Immediate post+pre duties (hours)</div><input class="input" id="excludedDuty" type="number" value="'+(state.rule==='CAT'?'0.5':'0.333333')+'" step=".0166667"></div></div><label class="small"><input type="checkbox" id="splitFacilityOK"> Required rest place/accommodation conditions confirmed</label>';
  } else {
-   e.innerHTML='<div class="two"><div><div class="small">Total in-flight rest (hours)</div><input class="input" id="reliefRest" type="number" value="3" step=".0166667"></div><select class="input" id="reliefFacility"><option value="bunk">Bunk</option><option value="seat">Reclining seat</option></select></div><label class="small"><input type="checkbox" id="reliefQualified"> Relief pilot qualifications confirmed</label><label class="small"><input type="checkbox" id="reliefFacilityOK"> Qualifying screened/rest facility confirmed</label><label class="small"><input type="checkbox" id="additionalCurrent"> Additional current type-rated pilot carried</label>';
+   e.innerHTML='<div class="small" style="margin-bottom:8px"><b>Additional current type-rated pilot</b> — OMA 7.15 long-sector modified-sector limits are removed and OMA 7.14 is entered using the actual sectors planned.</div><label class="small"><input type="checkbox" id="reliefQualified"> Additional pilot is current and type-rated</label><div class="small" style="margin-top:10px">Pilot rest facility / arrangement</div><div class="ext" style="margin-top:6px"><button class="seg on" data-fac="jump">Jump seat</button><button class="seg" data-fac="seat">Reclining seat</button><button class="seg" data-fac="bunk">Bunk</button></div><div id="reliefRestWrap" class="hidden" style="margin-top:10px"><div class="small">Total qualifying in-flight rest (hours)</div><input class="input" id="reliefRest" type="number" value="3" step=".0166667"><label class="small"><input type="checkbox" id="reliefFacilityOK"> Required screened/rest-facility conditions confirmed</label></div><div class="small" id="jumpHint" style="margin-top:8px">Jump seat: long-sector penalty removed if pilot qualification is confirmed; no in-flight-rest FDP extension.</div>';
  }
 }
 function collect(){
  const ext={type:state.ext};
  if(state.ext==='split'){ext.groundIntervalHours=+$('#groundInterval').value||0;ext.excludedDutyHours=+$('#excludedDuty').value||0;ext.facilityQualified=$('#splitFacilityOK').checked}
- if(state.ext==='relief'){ext.restHours=+$('#reliefRest').value||0;ext.facility=$('#reliefFacility').value;ext.qualified=$('#reliefQualified').checked;ext.facilityQualified=$('#reliefFacilityOK').checked}
+ if(state.ext==='relief'){
+   const fac=document.querySelector('[data-fac].on')?.dataset.fac||'jump';
+   ext.facility=fac;
+   ext.qualified=$('#reliefQualified').checked;
+   if(fac==='jump'){ext.type='none';ext.restHours=0;ext.facilityQualified=false}
+   else {ext.restHours=+$('#reliefRest').value||0;ext.facilityQualified=$('#reliefFacilityOK').checked}
+ }
  return {
   rule:state.rule,acc:state.acc,reportMin:hm(state.override?$('#actual').value:$('#report').value),sectors:state.sectors,
   precedingRestHours:+$('#precedingRest').value||0,
-  longestSectorHours:state.long?(+$('#longestSector').value||0):0,longSectorCount:state.long?(+$('#longSectorCount').value||1):0,
-  additionalCurrentTypeRatedPilot:$('#addCurrentPilot').checked||(state.ext==='relief'&&!!$('#additionalCurrent')?.checked),
+  longestSectorHours:longestSectorHours(),longSectorCount:(longestSectorHours()>E.longThreshold(state.rule)?1:0),
+  additionalCurrentTypeRatedPilot:(state.ext==='relief'&&!!$('#reliefQualified')?.checked),
   extension:ext,
   delayed:{enabled:$('#dr').checked,originalMin:hm($('#dro').value),actualMin:hm($('#dra').value),undisturbed:$('#drUndisturbed').checked},
   standby:{enabled:$('#sb').checked,startMin:hm($('#sbs').value),reportMin:hm($('#sbc').value)},
@@ -292,20 +317,23 @@ function setRule(rule){
 }
 $$('[data-rule]').forEach(b=>b.onclick=()=>setRule(b.dataset.rule));
 $$('[data-acc]').forEach(b=>b.onclick=()=>{state.acc=b.dataset.acc==='1';$$('[data-acc]').forEach(x=>x.classList.toggle('on',x===b));renderRuleUI();renderConditions();calc()});
-$$('[data-long]').forEach(b=>b.onclick=()=>{state.long=b.dataset.long==='1';$$('[data-long]').forEach(x=>x.classList.toggle('on',x===b));renderConditions();calc()});
 $('#minus').onclick=()=>{state.sectors=Math.max(1,state.sectors-1);$('#sn').textContent=state.sectors;calc()};
 $('#plus').onclick=()=>{state.sectors=Math.min(12,state.sectors+1);$('#sn').textContent=state.sectors;calc()};
 $$('[data-ov]').forEach(b=>b.onclick=()=>{state.override=b.dataset.ov==='1';$$('[data-ov]').forEach(x=>x.classList.toggle('on',x===b));$('#ovfields').classList.toggle('hidden',!state.override);if(state.override&&$('#actual').value==='09:00'){$('#orig').value=$('#report').value;$('#actual').value=$('#report').value}calc()});
-$$('[data-ext]').forEach(b=>b.onclick=()=>{state.ext=b.dataset.ext;$$('[data-ext]').forEach(x=>x.classList.toggle('on',x===b));renderExt();calc()});
+$('[data-ext]').forEach(b=>b.onclick=()=>{state.ext=b.dataset.ext;$('[data-ext]').forEach(x=>x.classList.toggle('on',x===b));renderExt();wireFacility();calc()});
+function wireFacility(){
+ $('[data-fac]').forEach(b=>b.onclick=()=>{$('[data-fac]').forEach(x=>x.classList.toggle('on',x===b));const fac=b.dataset.fac;$('#reliefRestWrap').classList.toggle('hidden',fac==='jump');$('#jumpHint').textContent=fac==='jump'?'Jump seat: long-sector penalty removed if pilot qualification is confirmed; no in-flight-rest FDP extension.':'Qualifying rest may extend FDP subject to Chapter 7 rest-credit rules and caps.';calc()});
+ $('#reliefQualified')?.addEventListener('change',calc);$('#reliefRest')?.addEventListener('input',calc);$('#reliefFacilityOK')?.addEventListener('change',calc);
+}
 $$('[data-away]').forEach(b=>b.onclick=()=>{state.away=b.dataset.away==='1';$$('[data-away]').forEach(x=>x.classList.toggle('on',x===b));rest()});
 $$('.tab').forEach(b=>b.onclick=()=>{const t=b.dataset.tab;$$('.tab').forEach(x=>x.classList.toggle('on',x===b));['max','rest','cum'].forEach(id=>$('#'+id).classList.toggle('hidden',id!==t));if(t==='rest')rest();if(t==='cum')cum()});
 $('#adv').onclick=()=>$('#am').classList.add('open');$('#ac').onclick=()=>$('#am').classList.remove('open');$('#aa').onclick=()=>{$('#am').classList.remove('open');calc();cum()};
-$('#calc').onclick=calc;['report','reportDate','apt','orig','actual','precedingRest','longestSector','longSectorCount'].forEach(id=>$('#'+id)?.addEventListener('input',calc));
+$('#calc').onclick=calc;['report','reportDate','apt','orig','actual','precedingRest','longestSectorTime'].forEach(id=>$('#'+id)?.addEventListener('input',calc));
 ['pd','dutyPos','travelEach','suitableAccommodation'].forEach(id=>$('#'+id)?.addEventListener('input',rest));
 ['d7','d14','d28','d12','f28','f12','consec','off28','off84','offYear','pairOK'].forEach(id=>$('#'+id)?.addEventListener('input',cum));
-$('#oma').onclick=$('#refnav').onclick=()=>{$('#refs').innerHTML='<h3>NCC</h3><p>2026 JCC Part-NCC OMA I2R19, Section 7.5. Tables A/B; 7.5.9 long-range; 7.5.10 relief; 7.5.11 split duty; 7.5.12 rest; planned variations; PIC discretion; 7.5.17–19 days off/flying/cumulative limits.</p><h3>CAT/AOC</h3><p>JCC OMA Section 7, embedded revision 20201201_JCC_OMA_I1R8. Tables A/B; long-range; delayed reporting; standby; interrupted rest; relief; split duty; rest; PIC discretion; days off; cumulative limits. Planned variation section is Reserved.</p>';$('#rm').classList.add('open')};$('#rc').onclick=()=>$('#rm').classList.remove('open');
+$('#oma').onclick=$('#refnav').onclick=()=>{$('#refs').innerHTML='<h3>NCC</h3><p>2026 JCC Part-NCC OMA I2R19, Section 7.5. Tables A/B; 7.5.9 long-range; 7.5.10 relief; 7.5.11 split duty; 7.5.12 rest; planned variations; PIC discretion; 7.5.17–19 days off/flying/cumulative limits.</p><h3>CAT/AOC</h3><p>JCC OMA Section 7, embedded revision 20201201_JCC_OMA_I1R8. OMA 7.14 provides the applicable FDP tables. OMA 7.15, Limits on Two Flight Crew Long Range Operations, applies the long-sector modified-sector logic. Where an additional current type-rated pilot is carried, the 7.15 limits do not apply and the permissible FDP is determined from OMA 7.14 using the duty start time and actual sectors planned. Delayed reporting, standby, interrupted rest, relief, split duty, rest, PIC discretion, days off and cumulative limits are also implemented. Planned variation section is Reserved.</p>';$('#rm').classList.add('open')};$('#rc').onclick=()=>$('#rm').classList.remove('open');
 $('#save').onclick=()=>{localStorage.setItem('jcc-ftl-last',JSON.stringify({input:collect(),result:calc(),date:$('#reportDate').value,location:$('#apt').value,savedAt:new Date().toISOString()}));$('#save').textContent='Saved ✓';setTimeout(()=>$('#save').textContent='Save',1000)};
 $('#share').onclick=async()=>{const r=calc(),txt='JCC FTL Calculation\nRuleset: '+state.rule+'\nMaximum FDP: '+fmt(r.maxFDPHours)+'\nDuty end: '+$('#de').textContent+'\nResult: '+$('#st').textContent;try{if(navigator.share)await navigator.share({title:'JCC FTL Calculation',text:txt});else{await navigator.clipboard.writeText(txt);alert('Calculation copied')}}catch(e){}};
-renderExt();renderRuleUI();renderConditions();setRule('NCC');
+renderExt();wireFacility();renderRuleUI();renderConditions();$('#longestSectorTime').addEventListener('input',()=>{updateSectorBand();calc()});setRule('NCC');
 })();
 </script></body></html>
