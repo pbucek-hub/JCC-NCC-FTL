@@ -29,7 +29,7 @@
 
 <section id="rest" class="hidden"><div class="card"><div class="title">Minimum rest</div><div class="two"><div><div class="small">Preceding duty (hours)</div><input class="input" id="pd" type="number" value="12" step=".25"></div><div><div class="small">Duty incl. positioning (hours)</div><input class="input" id="dutyPos" type="number" value="12" step=".25"></div><div><div class="small">Travel each way (hours)</div><input class="input" id="travelEach" type="number" value="0" step=".25"></div><div><div class="small">Away from base?</div><div class="two"><button class="seg" data-away="1">Yes</button><button class="seg on" data-away="0">No</button></div></div></div><label class="small"><input type="checkbox" id="suitableAccommodation"> Suitable accommodation confirmed</label><div class="metric"><span>Minimum rest required</span><b id="rr">—</b></div><div class="small" id="rref"></div></div></section>
 
-<section id="cum" class="hidden"><div class="card"><div class="title">Cumulative limits & days off</div><div class="two"><input class="input" id="d7" type="number" value="0" placeholder="Duty 7d"><input class="input" id="d14" type="number" value="0" placeholder="Duty 14d"><input class="input" id="d28" type="number" value="0" placeholder="Duty 28d"><input class="input" id="d12" type="number" value="0" placeholder="Duty 12m"><input class="input" id="f28" type="number" value="0" placeholder="Flight 28d"><input class="input" id="f12" type="number" value="0" placeholder="Flight 12m"><input class="input" id="consec" type="number" value="0" placeholder="Consecutive duty days"><input class="input" id="off28" type="number" value="7" placeholder="Days off 28d"><input class="input" id="offYear" type="number" value="96" placeholder="Days off calendar year"><label class="small"><input type="checkbox" id="pairOK" checked> Two-consecutive-days-off sequence satisfied</label></div><div id="cr" class="small" style="margin-top:12px"></div></div></section>
+<section id="cum" class="hidden"><div class="card"><div class="title">Cumulative limits & days off</div><div class="two"><input class="input" id="d7" type="number" value="0" placeholder="Duty 7d"><input class="input" id="d14" type="number" value="0" placeholder="Duty 14d"><input class="input" id="d28" type="number" value="0" placeholder="Duty 28d"><input class="input" id="d12" type="number" value="0" placeholder="Duty 12m"><input class="input" id="f28" type="number" value="0" placeholder="Flight 28d"><input class="input" id="f12" type="number" value="0" placeholder="Flight 12m"><input class="input" id="consec" type="number" value="0" placeholder="Consecutive duty days"><input class="input" id="off28" type="number" value="7" placeholder="Days off 28d"><input class="input" id="off84" type="number" value="24" placeholder="Days off 12 weeks"><input class="input" id="offYear" type="number" value="96" placeholder="Days off calendar year"><label class="small"><input type="checkbox" id="pairOK" checked> Two-consecutive-days-off sequence satisfied</label></div><div id="cr" class="small" style="margin-top:12px"></div></div></section>
 
 <div class="footer"><button class="nav on">✈<br>Plan</button><button class="nav">▥<br>Results</button><button class="nav">◷<br>Limits</button><button class="nav" id="refnav">▤<br>Reference</button></div>
 </div>
@@ -40,7 +40,7 @@
 <div class="opt"><label><input type="checkbox" id="ir"> Interrupted rest</label><div class="two"><input class="input" id="ird" type="time" value="03:00"><input class="input" id="irl" type="time" value="06:00"></div></div>
 <div class="opt"><div class="small">PIC discretion extension (hours)</div><div class="two"><input class="input" id="pic" type="number" min="0" max="3" step=".25" value="0"><select class="input" id="picContext"><option value="early">Before first/earlier sector</option><option value="last">Immediately before last sector</option></select></div></div>
 <div class="opt"><div class="small">Planned variation (hours)</div><input class="input" id="pv" type="number" min="0" step=".25" value="0"><label class="small"><input type="checkbox" id="crewApproved"> Crew approval confirmed</label><label class="small"><input type="checkbox" id="fullApproved"> NPFO / SM / crew approval + case risk assessment confirmed</label><div class="small" id="pvh"></div></div>
-<div class="opt"><div class="small">Planned FDP for legality check (hours)</div><input class="input" id="planned" type="number" min="0" step=".25" placeholder="Optional"></div>
+<div class="opt"><label><input type="checkbox" id="addCurrentPilot"> Additional current type-rated pilot carried</label></div><div class="opt"><div class="small">Planned FDP for legality check (hours)</div><input class="input" id="planned" type="number" min="0" step=".25" placeholder="Optional"></div>
 <button class="primary" id="aa">Apply</button></div></div>
 
 <div class="modal" id="rm"><div class="sheet"><button class="btn sp" id="rc">Close</button><h2>OMA references</h2><div id="refs"></div></div></div>
@@ -49,7 +49,7 @@
 <script>
 (function(){
 const E=window.JCCFTLEngine,$=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
-const state={rule:'NCC',acc:true,sectors:2,long:false,ext:'none',away:false};
+const state={rule:'NCC',acc:true,sectors:2,long:false,ext:'none',away:false,override:false};
 const airports={
  LHR:['Europe/London','London Heathrow'],EGLL:['Europe/London','London Heathrow'],LTN:['Europe/London','London Luton'],EGGW:['Europe/London','London Luton'],STN:['Europe/London','London Stansted'],EGSS:['Europe/London','London Stansted'],
  TEB:['America/New_York','Teterboro'],KTEB:['America/New_York','Teterboro'],JFK:['America/New_York','New York JFK'],KJFK:['America/New_York','New York JFK'],EWR:['America/New_York','Newark'],KEWR:['America/New_York','Newark'],
@@ -58,7 +58,7 @@ const airports={
  DXB:['Asia/Dubai','Dubai'],OMDB:['Asia/Dubai','Dubai'],DOH:['Asia/Qatar','Doha'],OTHH:['Asia/Qatar','Doha'],HND:['Asia/Tokyo','Tokyo Haneda'],RJTT:['Asia/Tokyo','Tokyo Haneda']
 };
 function hm(v){if(!v)return 0;const a=v.split(':').map(Number);return a[0]*60+a[1]}
-function fmt(h){if(!Number.isFinite(h))return '—';const m=Math.round(h*60);return Math.floor(m/60)+':'+String(m%60).padStart(2,'0')}
+function fmt(h){if(!Number.isFinite(h))return '—';const m=Math.round(h*60);return Math.floor(m/60)+':'+String(m%60).padStart(2,'0')} function minToTime(m){m=((m%1440)+1440)%1440;return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0')}
 function today(){const d=new Date();return d.toISOString().slice(0,10)}
 $('#reportDate').value=today();
 function timezone(){const k=$('#apt').value.trim().toUpperCase();return airports[k]?.[0]||null}
@@ -75,10 +75,10 @@ function utcForLocal(dateStr,timeStr,tz){
  return new Date(guess);
 }
 function updateUTC(){
- const tz=timezone(),u=utcForLocal($('#reportDate').value,$('#report').value,tz);
+ const tz=timezone(),effective=state.override?$('#actual').value:$('#report').value,u=utcForLocal($('#reportDate').value,effective,tz);
  if(!u){$('#utc').textContent='Location not resolved';return null}
  const z=String(u.getUTCHours()).padStart(2,'0')+':'+String(u.getUTCMinutes()).padStart(2,'0');
- const localMinutes=hm($('#report').value),utcMinutes=u.getUTCHours()*60+u.getUTCMinutes();
+ const localMinutes=hm(effective),utcMinutes=u.getUTCHours()*60+u.getUTCMinutes();
  let off=localMinutes-utcMinutes;if(off>720)off-=1440;if(off<-720)off+=1440;
  $('#utc').textContent='UTC '+z+' (UTC'+(off>=0?'+':'')+(off/60)+')';return u;
 }
@@ -106,10 +106,10 @@ function collect(){
  if(state.ext==='split'){ext.groundIntervalHours=+$('#groundInterval').value||0;ext.excludedDutyHours=+$('#excludedDuty').value||0;ext.facilityQualified=$('#splitFacilityOK').checked}
  if(state.ext==='relief'){ext.restHours=+$('#reliefRest').value||0;ext.facility=$('#reliefFacility').value;ext.qualified=$('#reliefQualified').checked;ext.facilityQualified=$('#reliefFacilityOK').checked}
  return {
-  rule:state.rule,acc:state.acc,reportMin:hm($('#report').value),sectors:state.sectors,
+  rule:state.rule,acc:state.acc,reportMin:hm(state.override?$('#actual').value:$('#report').value),sectors:state.sectors,
   precedingRestHours:+$('#precedingRest').value||0,
   longestSectorHours:state.long?(+$('#longestSector').value||0):0,longSectorCount:state.long?(+$('#longSectorCount').value||1):0,
-  additionalCurrentTypeRatedPilot:state.ext==='relief'&&!!$('#additionalCurrent')?.checked,
+  additionalCurrentTypeRatedPilot:$('#addCurrentPilot').checked||(state.ext==='relief'&&!!$('#additionalCurrent')?.checked),
   extension:ext,
   delayed:{enabled:$('#dr').checked,originalMin:hm($('#dro').value),actualMin:hm($('#dra').value),undisturbed:$('#drUndisturbed').checked},
   standby:{enabled:$('#sb').checked,startMin:hm($('#sbs').value),reportMin:hm($('#sbc').value)},
@@ -123,11 +123,12 @@ function calc(){
  updateUTC(); const input=collect(),r=E.evaluate(input),box=$('#res');
  let status='LEGAL',sub='Within JCC '+(state.rule==='NCC'?'NCC':'CAT/AOC')+' rule limits',amber=false;
  if(r.review){status='NOT CONFIRMED';sub=r.reviews.join(' • ');amber=true}
- else if(r.assessed&&!r.legal){status='NOT LEGAL';sub='Planned FDP exceeds the applicable limit';amber=true}
+ else if(!r.assessed){status='LIMIT ONLY';sub='Enter planned FDP in Advanced Options for a legal/not-legal determination';amber=true}
+ else if(!r.legal){status='NOT LEGAL';sub='Planned FDP exceeds the applicable limit';amber=true}
  box.className='card result'+(amber?' amber':'');$('#si').textContent=amber?'!':'✓';$('#st').textContent=status;$('#ss').textContent=sub;$('#mf').textContent=fmt(r.maxFDPHours);
- const tz=timezone(),startUTC=utcForLocal($('#reportDate').value,$('#report').value,tz);
+ const tz=timezone(),inputReport=state.override?$('#actual').value:$('#report').value,baseStartTime=input.delayed.enabled?minToTime(input.delayed.originalMin):inputReport,startUTC=utcForLocal($('#reportDate').value,baseStartTime,tz);
  if(startUTC&&Number.isFinite(r.maxFDPHours)){
-   const d=new Date(startUTC.getTime()+r.maxFDPHours*3600000);$('#de').textContent=String(d.getUTCHours()).padStart(2,'0')+':'+String(d.getUTCMinutes()).padStart(2,'0')+' UTC';
+   const d=new Date(startUTC.getTime()+((r.fdpStartDeltaMinutes||0)/60+r.maxFDPHours)*3600000);$('#de').textContent=String(d.getUTCHours()).padStart(2,'0')+':'+String(d.getUTCMinutes()).padStart(2,'0')+' UTC';
  } else $('#de').textContent='—';
  $('#trace').textContent=[...(r.notes||[]),...(r.reviews||[])].join(' • ');
  return r;
@@ -137,7 +138,7 @@ function rest(){
  $('#rr').textContent=fmt(r.restHours);$('#rref').textContent=(r.reduced?'Away-base reduction applied. ':'')+(r.travelExtra?'Travel addition '+fmt(r.travelExtra)+'. ':'')+(r.requiresLocalNight?'Ensuing rest must include a local night.':'');
 }
 function cum(){
- const r=E.cumulative(state.rule,{d7:+$('#d7').value||0,d14:+$('#d14').value||0,d28:+$('#d28').value||0,d12:+$('#d12').value||0,f28:+$('#f28').value||0,f12:+$('#f12').value||0,consecutiveDutyDays:+$('#consec').value||0,daysOff28:+$('#off28').value||0,twoConsecutiveDaysOffOK:$('#pairOK').checked,daysOffYear:+$('#offYear').value||0});
+ const r=E.cumulative(state.rule,{d7:+$('#d7').value||0,d14:+$('#d14').value||0,d28:+$('#d28').value||0,d12:+$('#d12').value||0,f28:+$('#f28').value||0,f12:+$('#f12').value||0,consecutiveDutyDays:+$('#consec').value||0,daysOff28:+$('#off28').value||0,daysOff84:+$('#off84').value||0,twoConsecutiveDaysOffOK:$('#pairOK').checked,daysOffYear:+$('#offYear').value||0});
  const L=r.limits;$('#cr').innerHTML='Duty limits: '+L[0]+' / '+L[1]+' / '+L[2]+' / '+L[3]+' h<br>Flight limits: 100h/28d, 900h/12m<br>Days-off pair sequence: '+E.TABLES[state.rule].daysPair+' days'+(state.rule==='CAT'?' + 96 days free/year':'')+'<br><b>'+(r.legal?'WITHIN ENTERED LIMITS':'LIMIT BREACH: '+r.breaches.join(' • '))+'</b>';
 }
 function setRule(rule){
@@ -150,14 +151,14 @@ $$('[data-acc]').forEach(b=>b.onclick=()=>{state.acc=b.dataset.acc==='1';$$('[da
 $$('[data-long]').forEach(b=>b.onclick=()=>{state.long=b.dataset.long==='1';$$('[data-long]').forEach(x=>x.classList.toggle('on',x===b));renderConditions();calc()});
 $('#minus').onclick=()=>{state.sectors=Math.max(1,state.sectors-1);$('#sn').textContent=state.sectors;calc()};
 $('#plus').onclick=()=>{state.sectors=Math.min(12,state.sectors+1);$('#sn').textContent=state.sectors;calc()};
-$$('[data-ov]').forEach(b=>b.onclick=()=>{$$('[data-ov]').forEach(x=>x.classList.toggle('on',x===b));$('#ovfields').classList.toggle('hidden',b.dataset.ov==='0')});
+$('[data-ov]').forEach(b=>b.onclick=()=>{state.override=b.dataset.ov==='1';$('[data-ov]').forEach(x=>x.classList.toggle('on',x===b));$('#ovfields').classList.toggle('hidden',!state.override);if(state.override&&$('#actual').value==='09:00'){$('#orig').value=$('#report').value;$('#actual').value=$('#report').value}calc()});
 $$('[data-ext]').forEach(b=>b.onclick=()=>{state.ext=b.dataset.ext;$$('[data-ext]').forEach(x=>x.classList.toggle('on',x===b));renderExt();calc()});
 $$('[data-away]').forEach(b=>b.onclick=()=>{state.away=b.dataset.away==='1';$$('[data-away]').forEach(x=>x.classList.toggle('on',x===b));rest()});
 $$('.tab').forEach(b=>b.onclick=()=>{const t=b.dataset.tab;$$('.tab').forEach(x=>x.classList.toggle('on',x===b));['max','rest','cum'].forEach(id=>$('#'+id).classList.toggle('hidden',id!==t));if(t==='rest')rest();if(t==='cum')cum()});
 $('#adv').onclick=()=>$('#am').classList.add('open');$('#ac').onclick=()=>$('#am').classList.remove('open');$('#aa').onclick=()=>{$('#am').classList.remove('open');calc();cum()};
-$('#calc').onclick=calc;['report','reportDate','apt','precedingRest','longestSector','longSectorCount'].forEach(id=>$('#'+id)?.addEventListener('input',calc));
+$('#calc').onclick=calc;['report','reportDate','apt','orig','actual','precedingRest','longestSector','longSectorCount'].forEach(id=>$('#'+id)?.addEventListener('input',calc));
 ['pd','dutyPos','travelEach','suitableAccommodation'].forEach(id=>$('#'+id)?.addEventListener('input',rest));
-['d7','d14','d28','d12','f28','f12','consec','off28','offYear','pairOK'].forEach(id=>$('#'+id)?.addEventListener('input',cum));
+['d7','d14','d28','d12','f28','f12','consec','off28','off84','offYear','pairOK'].forEach(id=>$('#'+id)?.addEventListener('input',cum));
 $('#oma').onclick=$('#refnav').onclick=()=>{$('#refs').innerHTML='<h3>NCC</h3><p>2026 JCC Part-NCC OMA I2R19, Section 7.5. Tables A/B; 7.5.9 long-range; 7.5.10 relief; 7.5.11 split duty; 7.5.12 rest; planned variations; PIC discretion; 7.5.17–19 days off/flying/cumulative limits.</p><h3>CAT/AOC</h3><p>JCC OMA Section 7, embedded revision 20201201_JCC_OMA_I1R8. Tables A/B; long-range; delayed reporting; standby; interrupted rest; relief; split duty; rest; PIC discretion; days off; cumulative limits. Planned variation section is Reserved.</p>';$('#rm').classList.add('open')};$('#rc').onclick=()=>$('#rm').classList.remove('open');
 $('#save').onclick=()=>{localStorage.setItem('jcc-ftl-last',JSON.stringify({input:collect(),result:calc(),date:$('#reportDate').value,location:$('#apt').value,savedAt:new Date().toISOString()}));$('#save').textContent='Saved ✓';setTimeout(()=>$('#save').textContent='Save',1000)};
 $('#share').onclick=async()=>{const r=calc(),txt='JCC FTL Calculation\nRuleset: '+state.rule+'\nMaximum FDP: '+fmt(r.maxFDPHours)+'\nDuty end: '+$('#de').textContent+'\nResult: '+$('#st').textContent;try{if(navigator.share)await navigator.share({title:'JCC FTL Calculation',text:txt});else{await navigator.clipboard.writeText(txt);alert('Calculation copied')}}catch(e){}};
