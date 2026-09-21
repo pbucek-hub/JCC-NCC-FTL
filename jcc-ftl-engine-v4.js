@@ -88,7 +88,7 @@
     return {ok:true,max:max+hours,extension:hours,reason:'Approved case-specific NCC variation'};
   }
   function evaluate(inp){
-    const notes=[],reviews=[];let fdpStartMin=inp.reportMin;
+    const notes=[],reviews=[];let fdpStartMin=inp.reportMin,fdpStartDeltaMinutes=0;
     const baseInput={rule:inp.rule,acc:inp.acc,sectors:inp.sectors,precedingRestHours:inp.precedingRestHours,longestSectorHours:inp.longestSectorHours,longSectorCount:inp.longSectorCount,additionalCurrentTypeRatedPilot:inp.additionalCurrentTypeRatedPilot};
     function at(t){return tableLimit({...baseInput,reportMin:t})}
     let b=at(inp.reportMin);if(!b.ok)return {...b,legal:false,notes,reviews:[b.reason]};let max=b.max;notes.push(`Table ${b.table}; modified sectors ${b.modifiedSectors}`);
@@ -96,9 +96,9 @@
       if(inp.rule!=='CAT')reviews.push('Delayed reporting numerical rule not present in supplied current NCC Section 7.5');
       else{
         const d=duration(inp.delayed.originalMin,inp.delayed.actualMin);
-        if(d>=10&&inp.delayed.undisturbed){b=at(inp.delayed.actualMin);if(!b.ok)return {...b,legal:false,notes,reviews:[b.reason]};max=b.max;fdpStartMin=inp.delayed.actualMin;notes.push('≥10h advance delay treated as rest; actual report used');}
-        else if(d<4){b=at(inp.delayed.originalMin);if(!b.ok)return {...b,legal:false,notes,reviews:[b.reason]};max=b.max;fdpStartMin=inp.delayed.actualMin;notes.push('Delayed report <4h: original band, FDP starts actual report');}
-        else{const bo=at(inp.delayed.originalMin),ba=at(inp.delayed.actualMin);if(!bo.ok||!ba.ok)return {ok:false,legal:false,review:true,reviews:[(bo.reason||ba.reason)],notes};max=Math.min(bo.max,ba.max);fdpStartMin=(inp.delayed.originalMin+240)%1440;notes.push('Delayed report ≥4h: more limiting planned/actual band; FDP starts original+4h');}
+        if(d>=10&&inp.delayed.undisturbed){b=at(inp.delayed.actualMin);if(!b.ok)return {...b,legal:false,notes,reviews:[b.reason]};max=b.max;fdpStartMin=inp.delayed.actualMin;fdpStartDeltaMinutes=Math.round(duration(inp.delayed.originalMin,inp.delayed.actualMin)*60);notes.push('≥10h advance delay treated as rest; actual report used');}
+        else if(d<4){b=at(inp.delayed.originalMin);if(!b.ok)return {...b,legal:false,notes,reviews:[b.reason]};max=b.max;fdpStartMin=inp.delayed.actualMin;fdpStartDeltaMinutes=Math.round(duration(inp.delayed.originalMin,inp.delayed.actualMin)*60);notes.push('Delayed report <4h: original band, FDP starts actual report');}
+        else{const bo=at(inp.delayed.originalMin),ba=at(inp.delayed.actualMin);if(!bo.ok||!ba.ok)return {ok:false,legal:false,review:true,reviews:[(bo.reason||ba.reason)],notes};max=Math.min(bo.max,ba.max);fdpStartMin=(inp.delayed.originalMin+240)%1440;fdpStartDeltaMinutes=240;notes.push('Delayed report ≥4h: more limiting planned/actual band; FDP starts original+4h');}
       }
     }
     if(inp.standby?.enabled){
@@ -116,7 +116,7 @@
     const p=applyPIC(inp.rule,max,inp.pic);max=p.max;if(!p.ok)reviews.push(p.reason);else if(p.extension)notes.push(`PIC discretion +${p.extension.toFixed(2)}h`);
     const v=applyVariation(inp.rule,max,inp.variation);max=v.max;if(!v.ok)reviews.push(v.reason);else if(v.extension)notes.push(`Planned variation +${v.extension.toFixed(2)}h`);
     const planned=inp.plannedFDPHours;const assessed=Number.isFinite(planned);const legal=reviews.length===0&&(!assessed||planned<=max+EPS);
-    return {ok:reviews.length===0,review:reviews.length>0,legal,assessed,maxFDPHours:max,fdpStartMin,notes,reviews,table:b.table,modifiedSectors:b.modifiedSectors};
+    return {ok:reviews.length===0,review:reviews.length>0,legal,assessed,maxFDPHours:max,fdpStartMin,fdpStartDeltaMinutes,notes,reviews,table:b.table,modifiedSectors:b.modifiedSectors};
   }
   function minimumRest(rule,{precedingDutyHours,away=false,suitableAccommodation=false,travelEachWayHours=0,dutyIncludingPositioningHours=0}={}){
     const cfg=TABLES[rule];let base=Math.max(precedingDutyHours||0,cfg.minRest),r=base,reduced=false;
@@ -134,6 +134,7 @@
     [['d7',L[0]],['d14',L[1]],['d28',L[2]],['d12',L[3]],['f28',100],['f12',900]].forEach(([k,l])=>{if(Number.isFinite(v[k])&&v[k]>l+EPS)breaches.push(`${k} exceeds ${l}`)});
     if(Number.isFinite(v.consecutiveDutyDays)&&v.consecutiveDutyDays>7)breaches.push('More than 7 consecutive duty days');
     if(Number.isFinite(v.daysOff28)&&v.daysOff28<7)breaches.push('Fewer than 7 days off in 4 weeks');
+    if(Number.isFinite(v.daysOff84)&&v.daysOff84<24)breaches.push('Fewer than 24 days off across three consecutive 4-week periods');
     if(v.twoConsecutiveDaysOffOK===false)breaches.push(`Two consecutive days off requirement not met (${TABLES[rule].daysPair}-day sequence)`);
     if(rule==='CAT'&&Number.isFinite(v.daysOffYear)&&v.daysOffYear<96)breaches.push('Fewer than 96 days free of duty in calendar year');
     return {legal:breaches.length===0,breaches,limits:L};
