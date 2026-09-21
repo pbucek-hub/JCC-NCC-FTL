@@ -231,3 +231,18 @@ test('additional current type-rated pilot removes long-sector penalty immediatel
   const unpenalized = await page.locator('#mf').textContent();
   expect(unpenalized).not.toEqual(penalized);
 });
+
+
+test('intrinsically impossible CAT long-sector duty is red NOT LEGAL without planned FDP input', async ({ page }) => {
+  await page.locator('[data-rule="CAT"]').click();
+  await page.locator('[data-acc="0"]').click();
+  await page.locator('#precedingRest').fill('12');
+  await page.locator('#plus').click(); // 3 sectors from default 2 then back down below
+  await page.locator('#minus').click(); // return to 2
+  await page.locator('#longestSectorTime').fill('11:00');
+  await page.locator('#calc').click();
+  await expect(page.locator('#st')).toHaveText('NOT LEGAL');
+  await expect(page.locator('#res')).toHaveClass(/red/);
+  await expect(page.locator('#ss')).toContainText('12:00');
+  await expect(page.locator('#ss')).toContainText('10:00');
+});
