@@ -295,7 +295,7 @@ $$('[data-acc]').forEach(b=>b.onclick=()=>{state.acc=b.dataset.acc==='1';$$('[da
 $$('[data-long]').forEach(b=>b.onclick=()=>{state.long=b.dataset.long==='1';$$('[data-long]').forEach(x=>x.classList.toggle('on',x===b));renderConditions();calc()});
 $('#minus').onclick=()=>{state.sectors=Math.max(1,state.sectors-1);$('#sn').textContent=state.sectors;calc()};
 $('#plus').onclick=()=>{state.sectors=Math.min(12,state.sectors+1);$('#sn').textContent=state.sectors;calc()};
-$('[data-ov]').forEach(b=>b.onclick=()=>{state.override=b.dataset.ov==='1';$('[data-ov]').forEach(x=>x.classList.toggle('on',x===b));$('#ovfields').classList.toggle('hidden',!state.override);if(state.override&&$('#actual').value==='09:00'){$('#orig').value=$('#report').value;$('#actual').value=$('#report').value}calc()});
+$$('[data-ov]').forEach(b=>b.onclick=()=>{state.override=b.dataset.ov==='1';$$('[data-ov]').forEach(x=>x.classList.toggle('on',x===b));$('#ovfields').classList.toggle('hidden',!state.override);if(state.override&&$('#actual').value==='09:00'){$('#orig').value=$('#report').value;$('#actual').value=$('#report').value}calc()});
 $$('[data-ext]').forEach(b=>b.onclick=()=>{state.ext=b.dataset.ext;$$('[data-ext]').forEach(x=>x.classList.toggle('on',x===b));renderExt();calc()});
 $$('[data-away]').forEach(b=>b.onclick=()=>{state.away=b.dataset.away==='1';$$('[data-away]').forEach(x=>x.classList.toggle('on',x===b));rest()});
 $$('.tab').forEach(b=>b.onclick=()=>{const t=b.dataset.tab;$$('.tab').forEach(x=>x.classList.toggle('on',x===b));['max','rest','cum'].forEach(id=>$('#'+id).classList.toggle('hidden',id!==t));if(t==='rest')rest();if(t==='cum')cum()});
