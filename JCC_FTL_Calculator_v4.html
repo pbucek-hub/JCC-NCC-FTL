@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#071727"><title>JCC FTL Calculator</title>
+<style>
+:root{--b:#071727;--p:#0d2944cc;--l:#6ca5cc44;--t:#eef6ff;--m:#a9bad0;--bl:#168cff;--g:#20d06d;--a:#f4b23d;--r:#ef5c63}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% 10%,#12385f,#071727 48%,#030a12);color:var(--t);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.app{max-width:820px;margin:auto;padding:18px}.top{display:flex;align-items:center;gap:14px}.logo{font-size:34px}.top h1{margin:0;font-size:29px}.top p{margin:4px 0 0;color:#bfd0e3}.sp{margin-left:auto}.btn,.seg,.tab,.input{border:1px solid var(--l);background:#12314ecc;color:var(--t);border-radius:16px}.btn,.seg,.tab{min-height:50px;padding:0 16px;font-size:16px}.on{background:linear-gradient(#2ab1ff,#1759ec);box-shadow:0 0 22px #159cff66}.notice{margin:14px 0;padding:12px 15px;border:1px solid #d89a28aa;border-radius:18px;background:#6b4a123d;color:#ffc74c}.card{border:1px solid var(--l);background:linear-gradient(150deg,#123654d9,#091c30d9);border-radius:20px;padding:14px;margin-top:12px;backdrop-filter:blur(16px)}.rules{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;align-items:center}.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:12px}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.title{font-size:17px;margin-bottom:10px}.input{width:100%;min-height:52px;padding:0 13px;font-size:21px}.small{font-size:13px;color:var(--m);margin-top:6px}.step{display:grid;grid-template-columns:58px 1fr 58px;align-items:center;gap:8px}.step .n{text-align:center;font-size:28px}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.row .grow{flex:1}.switch{display:flex;margin-left:auto}.switch button{min-width:100px}.ext{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.adv{cursor:pointer}.result{border-color:#47e58a;background:linear-gradient(145deg,#08703dcc,#064023e6)}.result.amber{border-color:#f2b53f;background:linear-gradient(145deg,#7f5514dd,#4c330ddd)}.result.red{border-color:#f2656c;background:linear-gradient(145deg,#711821dd,#3b0c12ee)}.rh{display:flex;align-items:center;gap:12px}.status{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:#8bf2b3;color:#07371b;font-size:30px;font-weight:800}.amber .status{background:#ffd87e;color:#573500}.red .status{background:#ff9da2;color:#5c0d12}.rh h2{font-size:30px;margin:0}.metrics{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #ffffff33;margin-top:12px}.metric{padding:14px}.metric+ .metric{border-left:1px solid #ffffff33}.metric b{display:block;font-size:33px;margin-top:5px}.actions{display:grid;grid-template-columns:1fr 140px;gap:10px;margin-top:12px}.primary{min-height:62px;border:0;border-radius:19px;background:linear-gradient(#24aaff,#1758ef);color:white;font-size:21px}.footer{display:grid;grid-template-columns:repeat(4,1fr);margin-top:16px;border:1px solid var(--l);border-radius:24px;overflow:hidden}.nav{min-height:72px;border:0;background:#0d243bcc;color:#d8e6f3}.nav.on{background:#1664c866;color:#53c6ff}.modal{display:none;position:fixed;inset:0;background:#000b;place-items:center;padding:18px;z-index:20}.modal.open{display:grid}.sheet{max-width:680px;width:100%;max-height:88vh;overflow:auto;background:#0c2944;border:1px solid var(--l);border-radius:22px;padding:18px}.opt{border:1px solid var(--l);border-radius:14px;padding:11px;margin:9px 0}.hidden{display:none!important}@media(max-width:650px){.app{padding:12px}.top h1{font-size:24px}.top p{font-size:14px}.grid{grid-template-columns:1fr 1fr}.title{font-size:15px}.rules{grid-template-columns:.8fr 1fr 1fr}.btn,.seg,.tab{font-size:15px;padding:0 8px}.metrics b{font-size:29px}}
+</style></head><body><div class="app">
+<div class="top"><div class="logo">◷</div><div><h1>JCC FTL Calculator</h1><p>NCC & Commercial Air Transport (AOC)</p></div><div class="sp"><button class="btn" id="oma">OMA Ref</button></div></div>
+<div class="notice"><b>Planning aid only — not a substitute for the OMA itself.</b><div class="small">Confirm the applicable manual revision before operational use.</div></div>
+
+<div class="card rules"><div>Rule set</div><button class="seg on" data-rule="NCC">NCC</button><button class="seg" data-rule="CAT">CAT / AOC</button></div>
+<div class="tabs"><button class="tab on" data-tab="max">Max FDP</button><button class="tab" data-tab="rest">Rest</button><button class="tab" data-tab="cum">Cumulative & Days Off</button></div>
+
+<section id="max">
+<div class="grid">
+<div class="card"><div class="title">Acclimatisation status</div><div class="two"><button class="seg on" data-acc="1">Acclimatised</button><button class="seg" data-acc="0">Not acclimatised</button></div></div>
+<div class="card"><div class="title" id="longQ">Sector &gt; 9h01?</div><div class="two"><button class="seg" data-long="1">Yes</button><button class="seg on" data-long="0">No</button></div></div>
+<div class="card"><div class="title">Report time / location</div><div class="two"><div><input class="input" id="report" type="time" value="09:00"><div class="small">Local report time</div><input class="input" id="reportDate" type="date" style="margin-top:8px;font-size:15px"></div><div><input class="input" id="apt" value="LHR" placeholder="ICAO/IATA/city"><div class="small" id="utc">UTC —</div></div></div></div>
+<div class="card"><div class="title">Number of sectors</div><div class="step"><button class="btn" id="minus">−</button><div class="n" id="sn">2</div><button class="btn" id="plus">+</button></div><div class="small" id="cap">Table A caps at 8+</div></div>
+<div class="card hidden" id="prCard"><div class="title">Preceding rest</div><input class="input" id="precedingRest" type="number" step="0.25" value="12"><div class="small">Required for Table B when not acclimatised.</div></div><div class="card hidden" id="longDetailCard"><div class="title">Long-sector details</div><div class="two"><input class="input" id="longestSector" type="number" step="0.0166667" value="10" placeholder="Longest sector h"><input class="input" id="longSectorCount" type="number" min="1" step="1" value="1" placeholder="No. long sectors"></div></div></div>
+
+<div class="card"><div class="row"><div class="grow title">Manual report-time override</div><div class="switch"><button class="seg on" data-ov="0">Off</button><button class="seg" data-ov="1">On</button></div></div><div id="ovfields" class="two hidden"><input class="input" id="orig" type="time" value="09:00"><input class="input" id="actual" type="time" value="09:00"></div></div>
+
+<div class="card"><div class="title">Sector extension method</div><div class="ext"><button class="seg on" data-ext="none">None</button><button class="seg" data-ext="split">Split duty</button><button class="seg" data-ext="relief">In-flight relief</button></div><div id="extfields" class="hidden" style="margin-top:10px"></div></div>
+
+<div class="card adv" id="adv"><div class="row"><div class="grow"><div class="title">Advanced options</div><div class="small">Standby, delayed reporting, interrupted rest, cumulative limits, days off, PIC discretion and planned variations.</div></div><div style="font-size:28px">›</div></div></div>
+
+<div class="card result" id="res"><div class="rh"><div class="status" id="si">✓</div><div><h2 id="st">LEGAL</h2><div id="ss">Within JCC NCC limits</div></div><button class="btn sp" id="share">Share</button></div><div class="metrics"><div class="metric"><span>Maximum duty period (FDP)</span><b id="mf">—</b></div><div class="metric"><span>Duty end time (UTC)</span><b id="de">—</b></div></div><div class="small" id="trace"></div></div>
+<div class="actions"><button class="primary" id="calc">Calculate →</button><button class="btn" id="save">Save</button></div>
+</section>
+
+<section id="rest" class="hidden"><div class="card"><div class="title">Minimum rest</div><div class="two"><div><div class="small">Preceding duty (hours)</div><input class="input" id="pd" type="number" value="12" step=".25"></div><div><div class="small">Duty incl. positioning (hours)</div><input class="input" id="dutyPos" type="number" value="12" step=".25"></div><div><div class="small">Travel each way (hours)</div><input class="input" id="travelEach" type="number" value="0" step=".25"></div><div><div class="small">Away from base?</div><div class="two"><button class="seg" data-away="1">Yes</button><button class="seg on" data-away="0">No</button></div></div></div><label class="small"><input type="checkbox" id="suitableAccommodation"> Suitable accommodation confirmed</label><div class="metric"><span>Minimum rest required</span><b id="rr">—</b></div><div class="small" id="rref"></div></div></section>
+
+<section id="cum" class="hidden"><div class="card"><div class="title">Cumulative limits & days off</div><div class="two"><input class="input" id="d7" type="number" value="0" placeholder="Duty 7d"><input class="input" id="d14" type="number" value="0" placeholder="Duty 14d"><input class="input" id="d28" type="number" value="0" placeholder="Duty 28d"><input class="input" id="d12" type="number" value="0" placeholder="Duty 12m"><input class="input" id="f28" type="number" value="0" placeholder="Flight 28d"><input class="input" id="f12" type="number" value="0" placeholder="Flight 12m"><input class="input" id="consec" type="number" value="0" placeholder="Consecutive duty days"><input class="input" id="off28" type="number" value="7" placeholder="Days off 28d"><input class="input" id="offYear" type="number" value="96" placeholder="Days off calendar year"><label class="small"><input type="checkbox" id="pairOK" checked> Two-consecutive-days-off sequence satisfied</label></div><div id="cr" class="small" style="margin-top:12px"></div></div></section>
+
+<div class="footer"><button class="nav on">✈<br>Plan</button><button class="nav">▥<br>Results</button><button class="nav">◷<br>Limits</button><button class="nav" id="refnav">▤<br>Reference</button></div>
+</div>
+
+<div class="modal" id="am"><div class="sheet"><button class="btn sp" id="ac">Close</button><h2>Advanced options</h2>
+<div class="opt"><label><input type="checkbox" id="sb"> Standby</label><div class="two"><input class="input" id="sbs" type="time" value="06:00"><input class="input" id="sbc" type="time" value="11:00"></div></div>
+<div class="opt"><label><input type="checkbox" id="dr"> Delayed reporting</label><div class="two"><input class="input" id="dro" type="time" value="09:00"><input class="input" id="dra" type="time" value="09:00"></div><label class="small"><input type="checkbox" id="drUndisturbed"> For delay ≥10h, no further Company disturbance until agreed time</label></div>
+<div class="opt"><label><input type="checkbox" id="ir"> Interrupted rest</label><div class="two"><input class="input" id="ird" type="time" value="03:00"><input class="input" id="irl" type="time" value="06:00"></div></div>
+<div class="opt"><div class="small">PIC discretion extension (hours)</div><div class="two"><input class="input" id="pic" type="number" min="0" max="3" step=".25" value="0"><select class="input" id="picContext"><option value="early">Before first/earlier sector</option><option value="last">Immediately before last sector</option></select></div></div>
+<div class="opt"><div class="small">Planned variation (hours)</div><input class="input" id="pv" type="number" min="0" step=".25" value="0"><label class="small"><input type="checkbox" id="crewApproved"> Crew approval confirmed</label><label class="small"><input type="checkbox" id="fullApproved"> NPFO / SM / crew approval + case risk assessment confirmed</label><div class="small" id="pvh"></div></div>
+<div class="opt"><div class="small">Planned FDP for legality check (hours)</div><input class="input" id="planned" type="number" min="0" step=".25" placeholder="Optional"></div>
+<button class="primary" id="aa">Apply</button></div></div>
+
+<div class="modal" id="rm"><div class="sheet"><button class="btn sp" id="rc">Close</button><h2>OMA references</h2><div id="refs"></div></div></div>
+
+<script src="jcc-ftl-engine-v4.js"></script>
+<script>
+(function(){
+const E=window.JCCFTLEngine,$=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
+const state={rule:'NCC',acc:true,sectors:2,long:false,ext:'none',away:false};
+const airports={
+ LHR:['Europe/London','London Heathrow'],EGLL:['Europe/London','London Heathrow'],LTN:['Europe/London','London Luton'],EGGW:['Europe/London','London Luton'],STN:['Europe/London','London Stansted'],EGSS:['Europe/London','London Stansted'],
+ TEB:['America/New_York','Teterboro'],KTEB:['America/New_York','Teterboro'],JFK:['America/New_York','New York JFK'],KJFK:['America/New_York','New York JFK'],EWR:['America/New_York','Newark'],KEWR:['America/New_York','Newark'],
+ LAX:['America/Los_Angeles','Los Angeles'],KLAX:['America/Los_Angeles','Los Angeles'],SFO:['America/Los_Angeles','San Francisco'],KSFO:['America/Los_Angeles','San Francisco'],
+ CDG:['Europe/Paris','Paris CDG'],LFPG:['Europe/Paris','Paris CDG'],ORY:['Europe/Paris','Paris Orly'],LFPO:['Europe/Paris','Paris Orly'],NCE:['Europe/Paris','Nice'],LFMN:['Europe/Paris','Nice'],
+ DXB:['Asia/Dubai','Dubai'],OMDB:['Asia/Dubai','Dubai'],DOH:['Asia/Qatar','Doha'],OTHH:['Asia/Qatar','Doha'],HND:['Asia/Tokyo','Tokyo Haneda'],RJTT:['Asia/Tokyo','Tokyo Haneda']
+};
+function hm(v){if(!v)return 0;const a=v.split(':').map(Number);return a[0]*60+a[1]}
+function fmt(h){if(!Number.isFinite(h))return '—';const m=Math.round(h*60);return Math.floor(m/60)+':'+String(m%60).padStart(2,'0')}
+function today(){const d=new Date();return d.toISOString().slice(0,10)}
+$('#reportDate').value=today();
+function timezone(){const k=$('#apt').value.trim().toUpperCase();return airports[k]?.[0]||null}
+function utcForLocal(dateStr,timeStr,tz){
+ if(!tz)return null;
+ const [Y,M,D]=dateStr.split('-').map(Number),[h,m]=timeStr.split(':').map(Number);
+ let guess=Date.UTC(Y,M-1,D,h,m);
+ for(let i=0;i<3;i++){
+   const parts=new Intl.DateTimeFormat('en-GB',{timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date(guess));
+   const val=t=>+parts.find(p=>p.type===t).value;
+   const rendered=Date.UTC(val('year'),val('month')-1,val('day'),val('hour')%24,val('minute'));
+   guess+=Date.UTC(Y,M-1,D,h,m)-rendered;
+ }
+ return new Date(guess);
+}
+function updateUTC(){
+ const tz=timezone(),u=utcForLocal($('#reportDate').value,$('#report').value,tz);
+ if(!u){$('#utc').textContent='Location not resolved';return null}
+ const z=String(u.getUTCHours()).padStart(2,'0')+':'+String(u.getUTCMinutes()).padStart(2,'0');
+ const localMinutes=hm($('#report').value),utcMinutes=u.getUTCHours()*60+u.getUTCMinutes();
+ let off=localMinutes-utcMinutes;if(off>720)off-=1440;if(off<-720)off+=1440;
+ $('#utc').textContent='UTC '+z+' (UTC'+(off>=0?'+':'')+(off/60)+')';return u;
+}
+function renderRuleUI(){
+ $('#longQ').textContent='Sector > '+(state.rule==='CAT'?'7h00?':'9h00?');
+ $('#pvh').textContent=state.rule==='NCC'?'NCC: up to 1h may be OCC-planned with crew approval; larger approved variations require the case process.':'CAT/AOC: planned variation section in supplied Section 7 is Reserved.';
+ $('#cap').textContent=state.acc?'Table A caps at 8+':'Table B caps at 7+';
+}
+function renderConditions(){
+ $('#prCard').classList.toggle('hidden',state.acc);
+ $('#longDetailCard').classList.toggle('hidden',!state.long);
+}
+function renderExt(){
+ const e=$('#extfields');
+ if(state.ext==='none'){e.classList.add('hidden');e.innerHTML='';return}
+ e.classList.remove('hidden');
+ if(state.ext==='split'){
+   e.innerHTML='<div class="two"><div><div class="small">Ground interval (hours)</div><input class="input" id="groundInterval" type="number" value="4.5" step=".0166667"></div><div><div class="small">Immediate post+pre duties (hours)</div><input class="input" id="excludedDuty" type="number" value="'+(state.rule==='CAT'?'0.5':'0.333333')+'" step=".0166667"></div></div><label class="small"><input type="checkbox" id="splitFacilityOK"> Required rest place/accommodation conditions confirmed</label>';
+ } else {
+   e.innerHTML='<div class="two"><div><div class="small">Total in-flight rest (hours)</div><input class="input" id="reliefRest" type="number" value="3" step=".0166667"></div><select class="input" id="reliefFacility"><option value="bunk">Bunk</option><option value="seat">Reclining seat</option></select></div><label class="small"><input type="checkbox" id="reliefQualified"> Relief pilot qualifications confirmed</label><label class="small"><input type="checkbox" id="reliefFacilityOK"> Qualifying screened/rest facility confirmed</label><label class="small"><input type="checkbox" id="additionalCurrent"> Additional current type-rated pilot carried</label>';
+ }
+}
+function collect(){
+ const ext={type:state.ext};
+ if(state.ext==='split'){ext.groundIntervalHours=+$('#groundInterval').value||0;ext.excludedDutyHours=+$('#excludedDuty').value||0;ext.facilityQualified=$('#splitFacilityOK').checked}
+ if(state.ext==='relief'){ext.restHours=+$('#reliefRest').value||0;ext.facility=$('#reliefFacility').value;ext.qualified=$('#reliefQualified').checked;ext.facilityQualified=$('#reliefFacilityOK').checked}
+ return {
+  rule:state.rule,acc:state.acc,reportMin:hm($('#report').value),sectors:state.sectors,
+  precedingRestHours:+$('#precedingRest').value||0,
+  longestSectorHours:state.long?(+$('#longestSector').value||0):0,longSectorCount:state.long?(+$('#longSectorCount').value||1):0,
+  additionalCurrentTypeRatedPilot:state.ext==='relief'&&!!$('#additionalCurrent')?.checked,
+  extension:ext,
+  delayed:{enabled:$('#dr').checked,originalMin:hm($('#dro').value),actualMin:hm($('#dra').value),undisturbed:$('#drUndisturbed').checked},
+  standby:{enabled:$('#sb').checked,startMin:hm($('#sbs').value),reportMin:hm($('#sbc').value)},
+  interruptedRest:{enabled:$('#ir').checked,disturbanceMin:hm($('#ird').value),departureRestMin:hm($('#irl').value)},
+  pic:{hours:+$('#pic').value||0,sectors:state.sectors,catContext:$('#picContext').value},
+  variation:{hours:+$('#pv').value||0,crewApproved:$('#crewApproved').checked,fullApproval:$('#fullApproved').checked},
+  plannedFDPHours:$('#planned').value===''?undefined:+$('#planned').value
+ };
+}
+function calc(){
+ updateUTC(); const input=collect(),r=E.evaluate(input),box=$('#res');
+ let status='LEGAL',sub='Within JCC '+(state.rule==='NCC'?'NCC':'CAT/AOC')+' rule limits',amber=false;
+ if(r.review){status='NOT CONFIRMED';sub=r.reviews.join(' • ');amber=true}
+ else if(r.assessed&&!r.legal){status='NOT LEGAL';sub='Planned FDP exceeds the applicable limit';amber=true}
+ box.className='card result'+(amber?' amber':'');$('#si').textContent=amber?'!':'✓';$('#st').textContent=status;$('#ss').textContent=sub;$('#mf').textContent=fmt(r.maxFDPHours);
+ const tz=timezone(),startUTC=utcForLocal($('#reportDate').value,$('#report').value,tz);
+ if(startUTC&&Number.isFinite(r.maxFDPHours)){
+   const d=new Date(startUTC.getTime()+r.maxFDPHours*3600000);$('#de').textContent=String(d.getUTCHours()).padStart(2,'0')+':'+String(d.getUTCMinutes()).padStart(2,'0')+' UTC';
+ } else $('#de').textContent='—';
+ $('#trace').textContent=[...(r.notes||[]),...(r.reviews||[])].join(' • ');
+ return r;
+}
+function rest(){
+ const r=E.minimumRest(state.rule,{precedingDutyHours:+$('#pd').value||0,away:state.away,suitableAccommodation:$('#suitableAccommodation').checked,travelEachWayHours:+$('#travelEach').value||0,dutyIncludingPositioningHours:+$('#dutyPos').value||0});
+ $('#rr').textContent=fmt(r.restHours);$('#rref').textContent=(r.reduced?'Away-base reduction applied. ':'')+(r.travelExtra?'Travel addition '+fmt(r.travelExtra)+'. ':'')+(r.requiresLocalNight?'Ensuing rest must include a local night.':'');
+}
+function cum(){
+ const r=E.cumulative(state.rule,{d7:+$('#d7').value||0,d14:+$('#d14').value||0,d28:+$('#d28').value||0,d12:+$('#d12').value||0,f28:+$('#f28').value||0,f12:+$('#f12').value||0,consecutiveDutyDays:+$('#consec').value||0,daysOff28:+$('#off28').value||0,twoConsecutiveDaysOffOK:$('#pairOK').checked,daysOffYear:+$('#offYear').value||0});
+ const L=r.limits;$('#cr').innerHTML='Duty limits: '+L[0]+' / '+L[1]+' / '+L[2]+' / '+L[3]+' h<br>Flight limits: 100h/28d, 900h/12m<br>Days-off pair sequence: '+E.TABLES[state.rule].daysPair+' days'+(state.rule==='CAT'?' + 96 days free/year':'')+'<br><b>'+(r.legal?'WITHIN ENTERED LIMITS':'LIMIT BREACH: '+r.breaches.join(' • '))+'</b>';
+}
+function setRule(rule){
+ state.rule=rule;$$('[data-rule]').forEach(b=>b.classList.toggle('on',b.dataset.rule===rule));
+ // Deliberately do not modify any input values here: ruleset switching is recalculation-only.
+ renderRuleUI();renderConditions();calc();rest();cum();
+}
+$$('[data-rule]').forEach(b=>b.onclick=()=>setRule(b.dataset.rule));
+$$('[data-acc]').forEach(b=>b.onclick=()=>{state.acc=b.dataset.acc==='1';$$('[data-acc]').forEach(x=>x.classList.toggle('on',x===b));renderRuleUI();renderConditions();calc()});
+$$('[data-long]').forEach(b=>b.onclick=()=>{state.long=b.dataset.long==='1';$$('[data-long]').forEach(x=>x.classList.toggle('on',x===b));renderConditions();calc()});
+$('#minus').onclick=()=>{state.sectors=Math.max(1,state.sectors-1);$('#sn').textContent=state.sectors;calc()};
+$('#plus').onclick=()=>{state.sectors=Math.min(12,state.sectors+1);$('#sn').textContent=state.sectors;calc()};
+$$('[data-ov]').forEach(b=>b.onclick=()=>{$$('[data-ov]').forEach(x=>x.classList.toggle('on',x===b));$('#ovfields').classList.toggle('hidden',b.dataset.ov==='0')});
+$$('[data-ext]').forEach(b=>b.onclick=()=>{state.ext=b.dataset.ext;$$('[data-ext]').forEach(x=>x.classList.toggle('on',x===b));renderExt();calc()});
+$$('[data-away]').forEach(b=>b.onclick=()=>{state.away=b.dataset.away==='1';$$('[data-away]').forEach(x=>x.classList.toggle('on',x===b));rest()});
+$$('.tab').forEach(b=>b.onclick=()=>{const t=b.dataset.tab;$$('.tab').forEach(x=>x.classList.toggle('on',x===b));['max','rest','cum'].forEach(id=>$('#'+id).classList.toggle('hidden',id!==t));if(t==='rest')rest();if(t==='cum')cum()});
+$('#adv').onclick=()=>$('#am').classList.add('open');$('#ac').onclick=()=>$('#am').classList.remove('open');$('#aa').onclick=()=>{$('#am').classList.remove('open');calc();cum()};
+$('#calc').onclick=calc;['report','reportDate','apt','precedingRest','longestSector','longSectorCount'].forEach(id=>$('#'+id)?.addEventListener('input',calc));
+['pd','dutyPos','travelEach','suitableAccommodation'].forEach(id=>$('#'+id)?.addEventListener('input',rest));
+['d7','d14','d28','d12','f28','f12','consec','off28','offYear','pairOK'].forEach(id=>$('#'+id)?.addEventListener('input',cum));
+$('#oma').onclick=$('#refnav').onclick=()=>{$('#refs').innerHTML='<h3>NCC</h3><p>2026 JCC Part-NCC OMA I2R19, Section 7.5. Tables A/B; 7.5.9 long-range; 7.5.10 relief; 7.5.11 split duty; 7.5.12 rest; planned variations; PIC discretion; 7.5.17–19 days off/flying/cumulative limits.</p><h3>CAT/AOC</h3><p>JCC OMA Section 7, embedded revision 20201201_JCC_OMA_I1R8. Tables A/B; long-range; delayed reporting; standby; interrupted rest; relief; split duty; rest; PIC discretion; days off; cumulative limits. Planned variation section is Reserved.</p>';$('#rm').classList.add('open')};$('#rc').onclick=()=>$('#rm').classList.remove('open');
+$('#save').onclick=()=>{localStorage.setItem('jcc-ftl-last',JSON.stringify({input:collect(),result:calc(),date:$('#reportDate').value,location:$('#apt').value,savedAt:new Date().toISOString()}));$('#save').textContent='Saved ✓';setTimeout(()=>$('#save').textContent='Save',1000)};
+$('#share').onclick=async()=>{const r=calc(),txt='JCC FTL Calculation\nRuleset: '+state.rule+'\nMaximum FDP: '+fmt(r.maxFDPHours)+'\nDuty end: '+$('#de').textContent+'\nResult: '+$('#st').textContent;try{if(navigator.share)await navigator.share({title:'JCC FTL Calculation',text:txt});else{await navigator.clipboard.writeText(txt);alert('Calculation copied')}}catch(e){}};
+renderExt();renderRuleUI();renderConditions();setRule('NCC');
+})();
+</script></body></html>
