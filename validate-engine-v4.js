@@ -88,3 +88,9 @@ for(const rule of ['NCC','CAT'])for(const acc of [true,false])for(const reportMi
   }
 }
 console.log(JSON.stringify({pass,fail,errors:errs.slice(0,30)},null,2));if(fail)process.exit(1);
+
+r=E.evaluate({rule:'CAT',acc:false,reportMin:540,sectors:2,precedingRestHours:12,longestSectorHours:11,longSectorCount:1,extension:{type:'none'}});
+ok(r.intrinsicallyIllegal,'CAT non-acclim 11h sector should be intrinsically illegal when min known FDP exceeds max');
+eq(r.minimumKnownFDP,12,'CAT 11h sector + 1h report minimum known FDP');
+eq(r.maxFDPHours,10,'CAT non-acclim 11h one long sector in 2-sector duty yields 10h max');
+ok(!r.legal,'intrinsically illegal case must not be legal');
