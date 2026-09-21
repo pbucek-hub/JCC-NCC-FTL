@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#071727"><title>JCC FTL Calculator</title>
+<style>
+:root{--b:#071727;--p:#0d2944cc;--l:#6ca5cc44;--t:#eef6ff;--m:#a9bad0;--bl:#168cff;--g:#20d06d;--a:#f4b23d;--r:#ef5c63}*{box-sizing:border-box}button,input,select,.card,.grid>*,.two>*,.rules>*,.tabs>*{min-width:0;max-width:100%}button{white-space:normal;overflow-wrap:anywhere}.top>div:nth-child(2){min-width:0}body{margin:0;background:radial-gradient(circle at 50% 10%,#12385f,#071727 48%,#030a12);color:var(--t);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.app{max-width:820px;margin:auto;padding:18px}.top{display:flex;align-items:center;gap:14px}.logo{font-size:34px}.top h1{margin:0;font-size:29px}.top p{margin:4px 0 0;color:#bfd0e3}.sp{margin-left:auto}.btn,.seg,.tab,.input{border:1px solid var(--l);background:#12314ecc;color:var(--t);border-radius:16px}.btn,.seg,.tab{min-height:50px;padding:0 16px;font-size:16px}.on{background:linear-gradient(#2ab1ff,#1759ec);box-shadow:0 0 22px #159cff66}.notice{margin:14px 0;padding:12px 15px;border:1px solid #d89a28aa;border-radius:18px;background:#6b4a123d;color:#ffc74c}.card{border:1px solid var(--l);background:linear-gradient(150deg,#123654d9,#091c30d9);border-radius:20px;padding:14px;margin-top:12px;backdrop-filter:blur(16px)}.rules{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;align-items:center}.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:12px}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.title{font-size:17px;margin-bottom:10px}.input{width:100%;min-height:52px;padding:0 13px;font-size:21px}.small{font-size:13px;color:var(--m);margin-top:6px}.step{display:grid;grid-template-columns:58px 1fr 58px;align-items:center;gap:8px}.step .n{text-align:center;font-size:28px}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.row .grow{flex:1}.switch{display:flex;margin-left:auto}.switch button{min-width:100px}.ext{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.ext4{grid-template-columns:repeat(4,1fr)}.adv{cursor:pointer}.result{border-color:#47e58a;background:linear-gradient(145deg,#08703dcc,#064023e6)}.result.amber{border-color:#f2b53f;background:linear-gradient(145deg,#7f5514dd,#4c330ddd)}.result.red{border-color:#f2656c;background:linear-gradient(145deg,#711821dd,#3b0c12ee)}.rh{display:flex;align-items:center;gap:12px}.status{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:#8bf2b3;color:#07371b;font-size:30px;font-weight:800}.amber .status{background:#ffd87e;color:#573500}.red .status{background:#ff9da2;color:#5c0d12}.rh h2{font-size:30px;margin:0}.metrics{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #ffffff33;margin-top:12px}.metric{padding:14px}.metric+ .metric{border-left:1px solid #ffffff33}.metric b{display:block;font-size:33px;margin-top:5px}.actions{display:grid;grid-template-columns:1fr 140px;gap:10px;margin-top:12px}.primary{min-height:62px;border:0;border-radius:19px;background:linear-gradient(#24aaff,#1758ef);color:white;font-size:21px}.primary.recompute{animation:softPulse 1.8s ease-in-out infinite}@keyframes softPulse{0%,100%{box-shadow:0 0 18px #159cff44;transform:scale(1)}50%{box-shadow:0 0 30px #36b7ff88;transform:scale(1.012)}}.footer{display:grid;grid-template-columns:repeat(4,1fr);margin-top:16px;border:1px solid var(--l);border-radius:24px;overflow:hidden}.nav{min-height:72px;border:0;background:#0d243bcc;color:#d8e6f3}.nav.on{background:#1664c866;color:#53c6ff}.modal{display:none;position:fixed;inset:0;background:#000b;place-items:center;padding:18px;z-index:20}.modal.open{display:grid}.sheet{max-width:680px;width:100%;max-height:88vh;overflow:auto;background:#0c2944;border:1px solid var(--l);border-radius:22px;padding:18px}.opt{border:1px solid var(--l);border-radius:14px;padding:11px;margin:9px 0}.hidden{display:none!important}@media(max-width:650px){.app{padding:10px}.top{gap:8px}.top h1{font-size:22px}.top p{font-size:13px}.logo{font-size:28px}.top .btn{padding:0 9px;font-size:13px;min-height:44px}.grid{grid-template-columns:1fr 1fr;gap:8px}.two{gap:6px}.title{font-size:14px}.rules{grid-template-columns:.72fr 1fr 1fr;gap:6px}.tabs{gap:6px}.btn,.seg,.tab{font-size:13px;padding:0 6px}.input{font-size:17px;padding:0 8px}.small{font-size:12px}.card{padding:10px;margin-top:8px}.metrics b{font-size:27px}.switch button{min-width:0;flex:1}.ext{gap:6px}.ext4{grid-template-columns:repeat(2,1fr)}.notice{font-size:13px}.footer .nav{font-size:12px}}
+</style></head><body><div class="app">
+<div class="top"><div class="logo">◷</div><div><h1>JCC FTL Calculator</h1><p>NCC & Commercial Air Transport (AOC)</p></div><div class="sp"><button class="btn" id="oma">OMA Ref</button></div></div>
+<div class="notice"><b>Planning aid only — not a substitute for the OMA itself.</b><div class="small">Confirm the applicable manual revision before operational use.</div></div>
+
+<div class="card rules"><div>Rule set</div><button class="seg on" data-rule="NCC">NCC</button><button class="seg" data-rule="CAT">CAT / AOC</button></div>
+<div class="tabs"><button class="tab on" data-tab="max">Max FDP</button><button class="tab" data-tab="rest">Rest</button><button class="tab" data-tab="cum">Cumulative & Days Off</button></div>
+
+<section id="max">
+<div class="grid">
+<div class="card"><div class="title">Acclimatisation status</div><div class="two"><button class="seg on" data-acc="1">Acclimatised</button><button class="seg" data-acc="0">Not acclimatised</button></div></div>
+<div class="card"><div class="title">Longest planned sector</div>
+<div class="two"><input class="input" id="longestSectorTime" type="time" value="06:00" step="60"><div><div class="input" id="sectorBand" style="display:flex;align-items:center">No long-sector penalty</div><div class="small" id="sectorRuleHint"></div></div></div>
+<div class="small">Enter scheduled flight time of the longest sector. The applicable NCC/CAT-AOC modified-sector rule is applied automatically.</div></div>
+<div class="card"><div class="title">Report time / location</div><div class="two"><div><input class="input" id="report" type="time" value="09:00"><div class="small">Local report time</div><input class="input" id="reportDate" type="date" style="margin-top:8px;font-size:15px"></div><div><input class="input" id="apt" value="LHR" placeholder="ICAO/IATA/city"><div class="small" id="utc">UTC —</div></div></div></div>
+<div class="card"><div class="title">Number of sectors</div><div class="step"><button class="btn" id="minus">−</button><div class="n" id="sn">2</div><button class="btn" id="plus">+</button></div><div class="small" id="cap">Table A caps at 8+</div></div>
+<div class="card hidden" id="prCard"><div class="title">Preceding rest</div><input class="input" id="precedingRest" type="number" step="0.25" value="12"><div class="small">Required for Table B when not acclimatised.</div></div>
+
+<div class="card"><div class="row"><div class="grow title">Manual report-time override</div><div class="switch"><button class="seg on" data-ov="0">Off</button><button class="seg" data-ov="1">On</button></div></div><div id="ovfields" class="two hidden"><input class="input" id="orig" type="time" value="09:00"><input class="input" id="actual" type="time" value="09:00"></div></div>
+
+<div class="card"><div class="title">Sector extension method</div><div class="ext"><button class="seg on" data-ext="none">None</button><button class="seg" data-ext="relief">Additional pilot / in-flight relief</button><button class="seg" data-ext="split">Split duty</button></div><div id="extfields" class="hidden" style="margin-top:10px"></div></div>
+
+<div class="card adv" id="adv"><div class="row"><div class="grow"><div class="title">Advanced options</div><div class="small">Standby, delayed reporting, interrupted rest, cumulative limits, days off, PIC discretion and planned variations.</div></div><div style="font-size:28px">›</div></div></div>
+
+<div class="card result" id="res"><div class="rh"><div class="status" id="si">✓</div><div><h2 id="st">LEGAL</h2><div id="ss">Within JCC NCC limits</div></div><button class="btn sp" id="share">Share</button></div><div class="metrics"><div class="metric"><span>Maximum duty period (FDP)</span><b id="mf">—</b></div><div class="metric"><span>Duty end time (UTC)</span><b id="de">—</b></div></div><div class="small" id="trace"></div></div>
+<div class="actions"><button class="primary" id="calc">Calculate →</button><button class="btn" id="save">Save</button></div>
+</section>
+
+<section id="rest" class="hidden"><div class="card"><div class="title">Minimum rest</div><div class="two"><div><div class="small">Preceding duty (hours)</div><input class="input" id="pd" type="number" value="12" step=".25"></div><div><div class="small">Duty incl. positioning (hours)</div><input class="input" id="dutyPos" type="number" value="12" step=".25"></div><div><div class="small">Travel each way (hours)</div><input class="input" id="travelEach" type="number" value="0" step=".25"></div><div><div class="small">Away from base?</div><div class="two"><button class="seg" data-away="1">Yes</button><button class="seg on" data-away="0">No</button></div></div></div><label class="small"><input type="checkbox" id="suitableAccommodation"> Suitable accommodation confirmed</label><div class="metric"><span>Minimum rest required</span><b id="rr">—</b></div><div class="small" id="rref"></div></div></section>
+
+<section id="cum" class="hidden"><div class="card"><div class="title">Cumulative limits & days off</div><div class="two"><input class="input" id="d7" type="number" value="0" placeholder="Duty 7d"><input class="input" id="d14" type="number" value="0" placeholder="Duty 14d"><input class="input" id="d28" type="number" value="0" placeholder="Duty 28d"><input class="input" id="d12" type="number" value="0" placeholder="Duty 12m"><input class="input" id="f28" type="number" value="0" placeholder="Flight 28d"><input class="input" id="f12" type="number" value="0" placeholder="Flight 12m"><input class="input" id="consec" type="number" value="0" placeholder="Consecutive duty days"><input class="input" id="off28" type="number" value="7" placeholder="Days off 28d"><input class="input" id="off84" type="number" value="24" placeholder="Days off 12 weeks"><input class="input" id="offYear" type="number" value="96" placeholder="Days off calendar year"><label class="small"><input type="checkbox" id="pairOK" checked> Two-consecutive-days-off sequence satisfied</label></div><div id="cr" class="small" style="margin-top:12px"></div></div></section>
+
+<div class="footer"><button class="nav on">✈<br>Plan</button><button class="nav">▥<br>Results</button><button class="nav">◷<br>Limits</button><button class="nav" id="refnav">▤<br>Reference</button></div>
+</div>
+
+<div class="modal" id="am"><div class="sheet"><button class="btn sp" id="ac">Close</button><h2>Advanced options</h2>
+<div class="opt"><label><input type="checkbox" id="sb"> Standby</label><div class="two"><input class="input" id="sbs" type="time" value="06:00"><input class="input" id="sbc" type="time" value="11:00"></div></div>
+<div class="opt"><label><input type="checkbox" id="dr"> Delayed reporting</label><div class="two"><input class="input" id="dro" type="time" value="09:00"><input class="input" id="dra" type="time" value="09:00"></div><label class="small"><input type="checkbox" id="drUndisturbed"> For delay ≥10h, no further Company disturbance until agreed time</label></div>
+<div class="opt"><label><input type="checkbox" id="ir"> Interrupted rest</label><div class="two"><input class="input" id="ird" type="time" value="03:00"><input class="input" id="irl" type="time" value="06:00"></div></div>
+<div class="opt"><div class="small">PIC discretion extension (hours)</div><div class="two"><input class="input" id="pic" type="number" min="0" max="3" step=".25" value="0"><select class="input" id="picContext"><option value="early">Before first/earlier sector</option><option value="last">Immediately before last sector</option></select></div></div>
+<div class="opt"><div class="small">Planned variation (hours)</div><input class="input" id="pv" type="number" min="0" step=".25" value="0"><label class="small"><input type="checkbox" id="crewApproved"> Crew approval confirmed</label><label class="small"><input type="checkbox" id="fullApproved"> NPFO / SM / crew approval + case risk assessment confirmed</label><div class="small" id="pvh"></div></div>
+<div class="opt"><div class="small">Planned FDP for legality check (hours)</div><input class="input" id="planned" type="number" min="0" step=".25" placeholder="Optional"></div>
+<button class="primary" id="aa">Apply</button></div></div>
+
+<div class="modal" id="rm"><div class="sheet"><button class="btn sp" id="rc">Close</button><h2>OMA references</h2><div id="refs"></div></div></div>
+
+<script>
+(function(root,factory){
+  const api=factory();
+  if(typeof module==='object'&&module.exports) module.exports=api;
+  else root.JCCFTLEngine=api;
+})(typeof globalThis!=='undefined'?globalThis:this,function(){
+  const TABLES={
+    NCC:{
+      A:[[15,14.25,13.5,12.75,12,11.5,11,11],[16,15.25,14.5,13.75,13,12.5,12,11.5],[15,14.25,13.5,12.75,12,11.5,11,11],[14,13.25,12.5,11.75,11,11,11,11],[13,12.25,11.5,11,11,11,11,11]],
+      B:[[15,14.25,13.5,12.75,12,11.25,11],[13.5,13,12.5,11.75,11,11,11]],
+      reportMin:60,postMin:30,minRest:10,awayAccommodationMin:8,localNightDuty:20,splitExcludedMin:20/60,reliefCaps:{bunk:20,seat:18},daysPair:16,cumulative:[65,105,190,2000]
+    },
+    CAT:{
+      A:[[13,12.25,11.5,10.75,10,9.5,9,9],[14,13.25,12.5,11.75,11,10.5,10,9.5],[13,12.25,11.5,10.75,10,9.5,9,9],[12,11.25,10.5,9.75,9,9,9,9],[11,10.25,9.5,9,9,9,9,9]],
+      B:[[13,12.25,11.5,10.75,10,9.25,9],[11.5,11,10.5,9.75,9,9,9]],
+      reportMin:60,postMin:30,minRest:12,awayAccommodationMin:10,localNightDuty:18,splitExcludedMin:30/60,reliefCaps:{bunk:18,seat:15},daysPair:14,cumulative:[55,95,190,2000]
+    }
+  };
+  const EPS=1e-8;
+  function band(min){min=((min%1440)+1440)%1440;if(min>=360&&min<420)return 0;if(min>=420&&min<780)return 1;if(min>=780&&min<1080)return 2;if(min>=1080&&min<1320)return 3;return 4}
+  function duration(start,end){let d=end-start;if(d<0)d+=1440;return d/60}
+  function capSectors(acc,sectors){return Math.min(Math.max(1,sectors),acc?8:7)}
+  function longThreshold(rule){return rule==='CAT'?7:9}
+  function longContribution(rule,acc,h){
+    if(rule==='NCC'){
+      if(h<=9)return 1;
+      if(h<=11)return acc?1:2;
+      return acc?2:3;
+    }
+    if(h<=7)return 1;
+    if(h<=9)return acc?2:4;
+    if(h<=11)return acc?3:4;
+    return acc?4:null;
+  }
+  function modifiedSectors({rule,acc,sectors,longestSectorHours=0,longSectorCount=0,additionalCurrentTypeRatedPilot=false}){
+    if(additionalCurrentTypeRatedPilot||longSectorCount===0||longestSectorHours<=longThreshold(rule)) return {ok:true,sectors};
+    if(longSectorCount<0||longSectorCount>sectors)return {ok:false,review:true,reason:'Long-sector count exceeds actual sectors'};
+    const c=longContribution(rule,acc,longestSectorHours);
+    if(c===null)return {ok:false,notApplicable:true,reason:'CAT two-pilot non-acclimatised sector over 11h is not applicable'};
+    return {ok:true,sectors:sectors-longSectorCount+c*longSectorCount,contribution:c};
+  }
+  function tableLimit({rule='NCC',acc=true,reportMin=540,sectors=1,precedingRestHours=12,longestSectorHours=0,longSectorCount=0,additionalCurrentTypeRatedPilot=false}){
+    const cfg=TABLES[rule];
+    const mod=modifiedSectors({rule,acc,sectors,longestSectorHours,longSectorCount,additionalCurrentTypeRatedPilot});
+    if(!mod.ok)return mod;
+    const s=capSectors(acc,mod.sectors);
+    if(acc)return {ok:true,max:cfg.A[band(reportMin)][s-1],table:'A',band:band(reportMin),modifiedSectors:mod.sectors};
+    if(Math.abs(precedingRestHours-30)<EPS)return {ok:false,review:true,reason:'Exactly 30h preceding rest is ambiguous in supplied Table B wording'};
+    const row=(precedingRestHours<=18||precedingRestHours>30)?0:1;
+    return {ok:true,max:cfg.B[row][s-1],table:'B',restBand:row,modifiedSectors:mod.sectors};
+  }
+  function relief(rule,base,{restHours=0,facility='bunk',qualified=false,facilityQualified=false}={}){
+    if(restHours<3)return {ok:true,max:base,extension:0,reason:'In-flight rest under 3h: no extension'};
+    if(!qualified||!facilityQualified)return {ok:false,review:true,max:base,reason:'Relief qualification/rest facility not confirmed'};
+    if(!['bunk','seat'].includes(facility))return {ok:false,review:true,max:base,reason:'Invalid relief facility'};
+    const factor=facility==='bunk'?0.5:1/3,cap=TABLES[rule].reliefCaps[facility],ext=restHours*factor;
+    return {ok:true,max:Math.min(base+ext,cap),extension:ext,cap};
+  }
+  function split(rule,base,{groundIntervalHours=0,excludedDutyHours=null,facilityQualified=false}={}){
+    const minExcluded=TABLES[rule].splitExcludedMin;
+    const excluded=Math.max(minExcluded,excludedDutyHours==null?minExcluded:excludedDutyHours);
+    const q=Math.max(0,groundIntervalHours-excluded);
+    if(q<3)return {ok:true,max:base,extension:0,qualifyingRest:q,reason:'Qualifying split rest under 3h: no extension'};
+    if(q>10)return {ok:false,review:true,max:base,qualifyingRest:q,reason:'Qualifying split rest over 10h is outside supplied split-duty table'};
+    if(!facilityQualified)return {ok:false,review:true,max:base,qualifyingRest:q,reason:q>6?'Suitable accommodation not confirmed':'Quiet/comfortable non-public rest place not confirmed'};
+    const ext=q/2;return {ok:true,max:base+ext,extension:ext,qualifyingRest:q};
+  }
+  function applyInterruptedRest(rule,max,{enabled=false,disturbanceMin=180,departureRestMin=360}={}){
+    if(!enabled)return {ok:true,max,addedFDP:0};
+    if(rule!=='CAT')return {ok:false,review:true,max,reason:'No numerical NCC interrupted-rest rule in supplied current NCC Section 7.5'};
+    const inWindow=disturbanceMin>=1380||disturbanceMin<420;
+    if(!inWindow)return {ok:true,max,addedFDP:0,reason:'Disturbance outside 2300-0700 rule window'};
+    let gap=departureRestMin-disturbanceMin;if(gap<0)gap+=1440;
+    if(gap<=60)return {ok:true,max,addedFDP:0,reason:'Disturbance not earlier than 1h before departure from place of rest'};
+    const add=(gap-60)/60;return {ok:true,max:Math.max(0,max-add),addedFDP:add};
+  }
+  function applyPIC(rule,max,{hours=0,sectors=1,catContext='early',emergency=false}={}){
+    if(hours<=0)return {ok:true,max,extension:0};
+    if(emergency)return {ok:false,review:true,max,reason:'Emergency discretion requires PIC operational judgement; not numerically automated'};
+    let cap=3;if(rule==='CAT'&&sectors>=2&&catContext!=='last')cap=2;
+    if(hours>cap+EPS)return {ok:false,review:true,max,reason:`Requested PIC discretion exceeds ${cap}h for this context`};
+    return {ok:true,max:max+hours,extension:hours,cap};
+  }
+  function applyVariation(rule,max,{hours=0,crewApproved=false,fullApproval=false}={}){
+    if(hours<=0)return {ok:true,max,extension:0};
+    if(rule==='CAT')return {ok:false,review:true,max,reason:'CAT OMA Section 7 planned variation section is Reserved'};
+    if(hours<=1+EPS){if(!crewApproved)return {ok:false,review:true,max,reason:'NCC planned variation up to 1h requires crew approval'};return {ok:true,max:max+hours,extension:hours};}
+    if(!fullApproval)return {ok:false,review:true,max,reason:'NCC variation over 1h requires NPFO/SM/crew approval and case-specific risk assessment'};
+    return {ok:true,max:max+hours,extension:hours,reason:'Approved case-specific NCC variation'};
+  }
+  function evaluate(inp){
+    const notes=[],reviews=[];let fdpStartMin=inp.reportMin,fdpStartDeltaMinutes=0;
+    const baseInput={rule:inp.rule,acc:inp.acc,sectors:inp.sectors,precedingRestHours:inp.precedingRestHours,longestSectorHours:inp.longestSectorHours,longSectorCount:inp.longSectorCount,additionalCurrentTypeRatedPilot:inp.additionalCurrentTypeRatedPilot};
+    function at(t){return tableLimit({...baseInput,reportMin:t})}
+    let b=at(inp.reportMin);if(!b.ok)return {...b,legal:false,notes,reviews:[b.reason]};let max=b.max;notes.push(`Table ${b.table}; modified sectors ${b.modifiedSectors}`);
+    if(inp.delayed?.enabled){
+      if(inp.rule!=='CAT')reviews.push('Delayed reporting numerical rule not present in supplied current NCC Section 7.5');
+      else{
+        const d=duration(inp.delayed.originalMin,inp.delayed.actualMin);
+        if(d>=10&&inp.delayed.undisturbed){b=at(inp.delayed.actualMin);if(!b.ok)return {...b,legal:false,notes,reviews:[b.reason]};max=b.max;fdpStartMin=inp.delayed.actualMin;fdpStartDeltaMinutes=Math.round(duration(inp.delayed.originalMin,inp.delayed.actualMin)*60);notes.push('≥10h advance delay treated as rest; actual report used');}
+        else if(d<4){b=at(inp.delayed.originalMin);if(!b.ok)return {...b,legal:false,notes,reviews:[b.reason]};max=b.max;fdpStartMin=inp.delayed.actualMin;fdpStartDeltaMinutes=Math.round(duration(inp.delayed.originalMin,inp.delayed.actualMin)*60);notes.push('Delayed report <4h: original band, FDP starts actual report');}
+        else{const bo=at(inp.delayed.originalMin),ba=at(inp.delayed.actualMin);if(!bo.ok||!ba.ok)return {ok:false,legal:false,review:true,reviews:[(bo.reason||ba.reason)],notes};max=Math.min(bo.max,ba.max);fdpStartMin=(inp.delayed.originalMin+240)%1440;fdpStartDeltaMinutes=240;notes.push('Delayed report ≥4h: more limiting planned/actual band; FDP starts original+4h');}
+      }
+    }
+    if(inp.standby?.enabled){
+      if(inp.rule!=='CAT')reviews.push('Standby numerical rule not present in supplied current NCC Section 7.5');
+      else{
+        const d=duration(inp.standby.startMin,inp.standby.reportMin??fdpStartMin);
+        if(d>12+EPS)reviews.push('CAT standby exceeds 12h maximum');
+        const bs=at(inp.standby.startMin),ba=at(fdpStartMin);if(!bs.ok||!ba.ok)return {ok:false,legal:false,review:true,reviews:[bs.reason||ba.reason],notes};
+        max=Math.min(max,bs.max,ba.max);if(d>=6)max-=d-6;notes.push(`CAT standby ${d.toFixed(2)}h${d>=6?' with excess-over-6 reduction':''}`);
+      }
+    }
+    const ir=applyInterruptedRest(inp.rule,max,inp.interruptedRest);max=ir.max;if(!ir.ok)reviews.push(ir.reason);else if(ir.addedFDP)notes.push(`Interrupted-rest count ${ir.addedFDP.toFixed(2)}h`);
+    if(inp.extension?.type==='relief'){const r=relief(inp.rule,max,inp.extension);max=r.max;if(!r.ok)reviews.push(r.reason);else if(r.extension)notes.push(`In-flight relief +${r.extension.toFixed(2)}h cap ${r.cap}h`);}
+    if(inp.extension?.type==='split'){const s=split(inp.rule,max,inp.extension);max=s.max;if(!s.ok)reviews.push(s.reason);else if(s.extension)notes.push(`Split duty +${s.extension.toFixed(2)}h`);}
+    const p=applyPIC(inp.rule,max,inp.pic);max=p.max;if(!p.ok)reviews.push(p.reason);else if(p.extension)notes.push(`PIC discretion +${p.extension.toFixed(2)}h`);
+    const v=applyVariation(inp.rule,max,inp.variation);max=v.max;if(!v.ok)reviews.push(v.reason);else if(v.extension)notes.push(`Planned variation +${v.extension.toFixed(2)}h`);
+    const planned=inp.plannedFDPHours;
+    const assessed=Number.isFinite(planned);
+    const knownLongest=Number.isFinite(inp.longestSectorHours)?inp.longestSectorHours:0;
+    const minimumKnownFDP=knownLongest>0 ? knownLongest + TABLES[inp.rule].reportMin/60 : 0;
+    const intrinsicallyIllegal=minimumKnownFDP>max+EPS;
+    if(intrinsicallyIllegal){
+      notes.push('Minimum known FDP '+minimumKnownFDP.toFixed(2)+'h exceeds maximum '+max.toFixed(2)+'h');
+    }
+    const legal=reviews.length===0&&!intrinsicallyIllegal&&(!assessed||planned<=max+EPS);
+    return {ok:reviews.length===0,review:reviews.length>0,legal,assessed,intrinsicallyIllegal,minimumKnownFDP,maxFDPHours:max,fdpStartMin,fdpStartDeltaMinutes,notes,reviews,table:b.table,modifiedSectors:b.modifiedSectors};
+  }
+  function minimumRest(rule,{precedingDutyHours,away=false,suitableAccommodation=false,travelEachWayHours=0,dutyIncludingPositioningHours=0}={}){
+    const cfg=TABLES[rule];let base=Math.max(precedingDutyHours||0,cfg.minRest),r=base,reduced=false;
+    if(away&&suitableAccommodation){
+      if(rule==='NCC'&&base>=10){r=base-1;reduced=true;}
+      if(rule==='CAT'&&Math.abs(base-12)<EPS){r=11;reduced=true;}
+    }
+    const travelExtra=away?Math.max(0,travelEachWayHours*2-1):0;r+=travelExtra;
+    const accommodationFloor=away&&suitableAccommodation?cfg.awayAccommodationMin+Math.max(0,travelEachWayHours*2):0;
+    if(accommodationFloor)r=Math.max(r,accommodationFloor);
+    return {restHours:r,reduced,travelExtra,requiresLocalNight:(dutyIncludingPositioningHours||0)>cfg.localNightDuty};
+  }
+  function cumulative(rule,v={}){
+    const L=TABLES[rule].cumulative;const breaches=[];
+    [['d7',L[0]],['d14',L[1]],['d28',L[2]],['d12',L[3]],['f28',100],['f12',900]].forEach(([k,l])=>{if(Number.isFinite(v[k])&&v[k]>l+EPS)breaches.push(`${k} exceeds ${l}`)});
+    if(Number.isFinite(v.consecutiveDutyDays)&&v.consecutiveDutyDays>7)breaches.push('More than 7 consecutive duty days');
+    if(Number.isFinite(v.daysOff28)&&v.daysOff28<7)breaches.push('Fewer than 7 days off in 4 weeks');
+    if(Number.isFinite(v.daysOff84)&&v.daysOff84<24)breaches.push('Fewer than 24 days off across three consecutive 4-week periods');
+    if(v.twoConsecutiveDaysOffOK===false)breaches.push(`Two consecutive days off requirement not met (${TABLES[rule].daysPair}-day sequence)`);
+    if(rule==='CAT'&&Number.isFinite(v.daysOffYear)&&v.daysOffYear<96)breaches.push('Fewer than 96 days free of duty in calendar year');
+    return {legal:breaches.length===0,breaches,limits:L};
+  }
+  return {TABLES,band,duration,longThreshold,longContribution,modifiedSectors,tableLimit,relief,split,applyInterruptedRest,applyPIC,applyVariation,evaluate,minimumRest,cumulative};
+});
+</script>
+<script>
+(function(){
+const E=window.JCCFTLEngine,$=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
+const state={rule:'NCC',acc:true,sectors:2,ext:'none',away:false,override:false};
+let recomputeTimer=null,dirty=false;
+function markDirty(){
+ dirty=true;
+ clearTimeout(recomputeTimer);
+ $('#calc').classList.remove('recompute');
+ recomputeTimer=setTimeout(()=>{if(dirty)$('#calc').classList.add('recompute')},5000);
+}
+function markClean(){
+ dirty=false;
+ clearTimeout(recomputeTimer);
+ $('#calc').classList.remove('recompute');
+}
+const airports={
+ LHR:['Europe/London','London Heathrow'],EGLL:['Europe/London','London Heathrow'],LTN:['Europe/London','London Luton'],EGGW:['Europe/London','London Luton'],STN:['Europe/London','London Stansted'],EGSS:['Europe/London','London Stansted'],
+ TEB:['America/New_York','Teterboro'],KTEB:['America/New_York','Teterboro'],JFK:['America/New_York','New York JFK'],KJFK:['America/New_York','New York JFK'],EWR:['America/New_York','Newark'],KEWR:['America/New_York','Newark'],
+ LAX:['America/Los_Angeles','Los Angeles'],KLAX:['America/Los_Angeles','Los Angeles'],SFO:['America/Los_Angeles','San Francisco'],KSFO:['America/Los_Angeles','San Francisco'],
+ CDG:['Europe/Paris','Paris CDG'],LFPG:['Europe/Paris','Paris CDG'],ORY:['Europe/Paris','Paris Orly'],LFPO:['Europe/Paris','Paris Orly'],NCE:['Europe/Paris','Nice'],LFMN:['Europe/Paris','Nice'],
+ DXB:['Asia/Dubai','Dubai'],OMDB:['Asia/Dubai','Dubai'],DOH:['Asia/Qatar','Doha'],OTHH:['Asia/Qatar','Doha'],HND:['Asia/Tokyo','Tokyo Haneda'],RJTT:['Asia/Tokyo','Tokyo Haneda']
+};
+function hm(v){if(!v)return 0;const a=v.split(':').map(Number);return a[0]*60+a[1]}
+function fmt(h){if(!Number.isFinite(h))return '—';const m=Math.round(h*60);return Math.floor(m/60)+':'+String(m%60).padStart(2,'0')} function minToTime(m){m=((m%1440)+1440)%1440;return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0')}
+function today(){const d=new Date();return d.toISOString().slice(0,10)}
+$('#reportDate').value=today();
+function timezone(){const k=$('#apt').value.trim().toUpperCase();return airports[k]?.[0]||null}
+function utcForLocal(dateStr,timeStr,tz){
+ if(!tz)return null;
+ const [Y,M,D]=dateStr.split('-').map(Number),[h,m]=timeStr.split(':').map(Number);
+ let guess=Date.UTC(Y,M-1,D,h,m);
+ for(let i=0;i<3;i++){
+   const parts=new Intl.DateTimeFormat('en-GB',{timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date(guess));
+   const val=t=>+parts.find(p=>p.type===t).value;
+   const rendered=Date.UTC(val('year'),val('month')-1,val('day'),val('hour')%24,val('minute'));
+   guess+=Date.UTC(Y,M-1,D,h,m)-rendered;
+ }
+ return new Date(guess);
+}
+function updateUTC(){
+ const tz=timezone(),effective=state.override?$('#actual').value:$('#report').value,u=utcForLocal($('#reportDate').value,effective,tz);
+ if(!u){$('#utc').textContent='Location not resolved';return null}
+ const z=String(u.getUTCHours()).padStart(2,'0')+':'+String(u.getUTCMinutes()).padStart(2,'0');
+ const localMinutes=hm(effective),utcMinutes=u.getUTCHours()*60+u.getUTCMinutes();
+ let off=localMinutes-utcMinutes;if(off>720)off-=1440;if(off<-720)off+=1440;
+ $('#utc').textContent='UTC '+z+' (UTC'+(off>=0?'+':'')+(off/60)+')';return u;
+}
+function renderRuleUI(){
+ $('#pvh').textContent=state.rule==='NCC'?'NCC: up to 1h may be OCC-planned with crew approval; larger approved variations require the case process.':'CAT/AOC: planned variation section in supplied Section 7 is Reserved.';
+ $('#cap').textContent=state.acc?'Table A caps at 8+':'Table B caps at 7+';
+}
+function renderConditions(){
+ $('#prCard').classList.toggle('hidden',state.acc);
+ updateSectorBand();
+}
+function longestSectorHours(){
+ const v=$('#longestSectorTime').value||'00:00',a=v.split(':').map(Number);
+ return a[0]+a[1]/60;
+}
+function updateSectorBand(){
+ const h=longestSectorHours(); let label='',hint='';
+ const extraPilot = state.ext==='relief' && !!$('#reliefQualified')?.checked;
+ if(extraPilot && h>E.longThreshold(state.rule)){
+   label='Sector penalty removed';
+   hint=(state.rule==='CAT'?'OMA 7.15':'NCC long-range rule')+': use actual sectors planned.';
+   $('#sectorBand').textContent=label; $('#sectorRuleHint').textContent=hint; return;
+ }
+ if(state.rule==='NCC'){
+   if(h<=9){label='No long-sector penalty';hint='NCC: penalty begins at 09:01.'}
+   else if(h<=11){label='09:01–11:00';hint=state.acc?'Modified as 1 sector':'Modified as 2 sectors'}
+   else {label='>11:00';hint=state.acc?'Modified as 2 sectors':'Modified as 3 sectors'}
+ } else {
+   if(h<=7){label='No long-sector penalty';hint='CAT/AOC: penalty begins above 07:00.'}
+   else if(h<=9){label='>07:00–09:00';hint=state.acc?'Modified as 2 sectors':'Modified as 4 sectors'}
+   else if(h<=11){label='>09:00–11:00';hint=state.acc?'Modified as 3 sectors':'Modified as 4 sectors'}
+   else {label='>11:00';hint=state.acc?'Modified as 4 sectors':'Not applicable for two-pilot non-acclimatised crew'}
+ }
+ $('#sectorBand').textContent=label; $('#sectorRuleHint').textContent=hint;
+}
+function renderExt(){
+ const e=$('#extfields');
+ if(state.ext==='none'){e.classList.add('hidden');e.innerHTML='';return}
+ e.classList.remove('hidden');
+ if(state.ext==='split'){
+   e.innerHTML='<div class="two"><div><div class="small">Ground interval (hours)</div><input class="input" id="groundInterval" type="number" value="4.5" step=".0166667"></div><div><div class="small">Immediate post+pre duties (hours)</div><input class="input" id="excludedDuty" type="number" value="'+(state.rule==='CAT'?'0.5':'0.333333')+'" step=".0166667"></div></div><label class="small"><input type="checkbox" id="splitFacilityOK"> Required rest place/accommodation conditions confirmed</label>';
+ } else {
+   e.innerHTML='<div class="small" style="margin-bottom:8px"><b>Additional current type-rated pilot</b> — OMA 7.15 long-sector modified-sector limits are removed and OMA 7.14 is entered using the actual sectors planned.</div><label class="small"><input type="checkbox" id="reliefQualified"> Additional current type-rated pilot carried — remove long-sector penalty</label><div class="small" style="margin-top:10px">Pilot rest facility / arrangement</div><div class="ext" style="margin-top:6px"><button class="seg on" data-fac="jump">Jump seat</button><button class="seg" data-fac="seat">Reclining seat</button><button class="seg" data-fac="bunk">Bunk</button></div><div id="reliefRestWrap" class="hidden" style="margin-top:10px"><div class="small">Total qualifying in-flight rest (hours)</div><input class="input" id="reliefRest" type="number" value="3" step=".0166667"><label class="small"><input type="checkbox" id="reliefFacilityOK"> Required screened/rest-facility conditions confirmed</label></div><div class="small" id="jumpHint" style="margin-top:8px">Jump seat: long-sector penalty removed if pilot qualification is confirmed; no in-flight-rest FDP extension.</div>';
+ }
+}
+function collect(){
+ const ext={type:state.ext};
+ if(state.ext==='split'){ext.groundIntervalHours=+$('#groundInterval').value||0;ext.excludedDutyHours=+$('#excludedDuty').value||0;ext.facilityQualified=$('#splitFacilityOK').checked}
+ if(state.ext==='relief'){
+   const fac=document.querySelector('[data-fac].on')?.dataset.fac||'jump';
+   ext.facility=fac;
+   ext.qualified=$('#reliefQualified').checked;
+   if(fac==='jump'){ext.type='none';ext.restHours=0;ext.facilityQualified=false}
+   else {ext.restHours=+$('#reliefRest').value||0;ext.facilityQualified=$('#reliefFacilityOK').checked}
+ }
+ return {
+  rule:state.rule,acc:state.acc,reportMin:hm(state.override?$('#actual').value:$('#report').value),sectors:state.sectors,
+  precedingRestHours:+$('#precedingRest').value||0,
+  longestSectorHours:longestSectorHours(),longSectorCount:(longestSectorHours()>E.longThreshold(state.rule)?1:0),
+  additionalCurrentTypeRatedPilot:(state.ext==='relief'&&!!$('#reliefQualified')?.checked),
+  extension:ext,
+  delayed:{enabled:$('#dr').checked,originalMin:hm($('#dro').value),actualMin:hm($('#dra').value),undisturbed:$('#drUndisturbed').checked},
+  standby:{enabled:$('#sb').checked,startMin:hm($('#sbs').value),reportMin:hm($('#sbc').value)},
+  interruptedRest:{enabled:$('#ir').checked,disturbanceMin:hm($('#ird').value),departureRestMin:hm($('#irl').value)},
+  pic:{hours:+$('#pic').value||0,sectors:state.sectors,catContext:$('#picContext').value},
+  variation:{hours:+$('#pv').value||0,crewApproved:$('#crewApproved').checked,fullApproval:$('#fullApproved').checked},
+  plannedFDPHours:$('#planned').value===''?undefined:+$('#planned').value
+ };
+}
+function calc(){
+ updateUTC(); const input=collect(),r=E.evaluate(input),box=$('#res');
+ let status='LEGAL',sub='Within JCC '+(state.rule==='NCC'?'NCC':'CAT/AOC')+' rule limits',tone='';
+ if(r.review){status='NOT CONFIRMED';sub=r.reviews.join(' • ');tone=' amber'}
+ else if(r.intrinsicallyIllegal){
+   status='NOT LEGAL';
+   sub='Known minimum FDP '+fmt(r.minimumKnownFDP)+' exceeds maximum permitted FDP '+fmt(r.maxFDPHours)+'.';
+   tone=' red';
+ }
+ else if(!r.assessed){status='LIMIT ONLY';sub='Enter planned FDP in Advanced Options for a legal/not-legal determination';tone=' amber'}
+ else if(!r.legal){status='NOT LEGAL';sub='Planned FDP exceeds the applicable limit';tone=' red'}
+ box.className='card result'+tone;$('#si').textContent=tone?'!':'✓';$('#st').textContent=status;$('#ss').textContent=sub;$('#mf').textContent=fmt(r.maxFDPHours);
+ const tz=timezone(),inputReport=state.override?$('#actual').value:$('#report').value,baseStartTime=input.delayed.enabled?minToTime(input.delayed.originalMin):inputReport,startUTC=utcForLocal($('#reportDate').value,baseStartTime,tz);
+ if(startUTC&&Number.isFinite(r.maxFDPHours)){
+   const d=new Date(startUTC.getTime()+((r.fdpStartDeltaMinutes||0)/60+r.maxFDPHours)*3600000);$('#de').textContent=String(d.getUTCHours()).padStart(2,'0')+':'+String(d.getUTCMinutes()).padStart(2,'0')+' UTC';
+ } else $('#de').textContent='—';
+ $('#trace').textContent=[...(r.notes||[]),...(r.reviews||[])].join(' • ');
+ return r;
+}
+function rest(){
+ const r=E.minimumRest(state.rule,{precedingDutyHours:+$('#pd').value||0,away:state.away,suitableAccommodation:$('#suitableAccommodation').checked,travelEachWayHours:+$('#travelEach').value||0,dutyIncludingPositioningHours:+$('#dutyPos').value||0});
+ $('#rr').textContent=fmt(r.restHours);$('#rref').textContent=(r.reduced?'Away-base reduction applied. ':'')+(r.travelExtra?'Travel addition '+fmt(r.travelExtra)+'. ':'')+(r.requiresLocalNight?'Ensuing rest must include a local night.':'');
+}
+function cum(){
+ const r=E.cumulative(state.rule,{d7:+$('#d7').value||0,d14:+$('#d14').value||0,d28:+$('#d28').value||0,d12:+$('#d12').value||0,f28:+$('#f28').value||0,f12:+$('#f12').value||0,consecutiveDutyDays:+$('#consec').value||0,daysOff28:+$('#off28').value||0,daysOff84:+$('#off84').value||0,twoConsecutiveDaysOffOK:$('#pairOK').checked,daysOffYear:+$('#offYear').value||0});
+ const L=r.limits;$('#cr').innerHTML='Duty limits: '+L[0]+' / '+L[1]+' / '+L[2]+' / '+L[3]+' h<br>Flight limits: 100h/28d, 900h/12m<br>Days-off pair sequence: '+E.TABLES[state.rule].daysPair+' days'+(state.rule==='CAT'?' + 96 days free/year':'')+'<br><b>'+(r.legal?'WITHIN ENTERED LIMITS':'LIMIT BREACH: '+r.breaches.join(' • '))+'</b>';
+}
+function setRule(rule){
+ state.rule=rule;$$('[data-rule]').forEach(b=>b.classList.toggle('on',b.dataset.rule===rule));
+ // Deliberately do not modify any input values here: ruleset switching is recalculation-only.
+ renderRuleUI();renderConditions();calc();markClean();rest();cum();
+}
+$$('[data-rule]').forEach(b=>b.onclick=()=>setRule(b.dataset.rule));
+$('[data-acc]').forEach(b=>b.onclick=()=>{state.acc=b.dataset.acc==='1';$('[data-acc]').forEach(x=>x.classList.toggle('on',x===b));renderRuleUI();renderConditions();markDirty()});
+$('#minus').onclick=()=>{state.sectors=Math.max(1,state.sectors-1);$('#sn').textContent=state.sectors;markDirty()};
+$('#plus').onclick=()=>{state.sectors=Math.min(12,state.sectors+1);$('#sn').textContent=state.sectors;markDirty()};
+$('[data-ov]').forEach(b=>b.onclick=()=>{state.override=b.dataset.ov==='1';$('[data-ov]').forEach(x=>x.classList.toggle('on',x===b));$('#ovfields').classList.toggle('hidden',!state.override);if(state.override&&$('#actual').value==='09:00'){$('#orig').value=$('#report').value;$('#actual').value=$('#report').value}updateUTC();markDirty()});
+$('[data-ext]').forEach(b=>b.onclick=()=>{state.ext=b.dataset.ext;$('[data-ext]').forEach(x=>x.classList.toggle('on',x===b));renderExt();wireFacility();calc()});
+function wireFacility(){
+ $('[data-fac]').forEach(b=>b.onclick=()=>{$('[data-fac]').forEach(x=>x.classList.toggle('on',x===b));const fac=b.dataset.fac;$('#reliefRestWrap').classList.toggle('hidden',fac==='jump');$('#jumpHint').textContent=fac==='jump'?'Jump seat: long-sector penalty removed if pilot qualification is confirmed; no in-flight-rest FDP extension.':'Qualifying rest may extend FDP subject to Chapter 7 rest-credit rules and caps.';calc()});
+ $('#reliefQualified')?.addEventListener('change',()=>{updateSectorBand();markDirty()});$('#reliefRest')?.addEventListener('input',markDirty);$('#reliefFacilityOK')?.addEventListener('change',markDirty);
+}
+$$('[data-away]').forEach(b=>b.onclick=()=>{state.away=b.dataset.away==='1';$$('[data-away]').forEach(x=>x.classList.toggle('on',x===b));rest()});
+$$('.tab').forEach(b=>b.onclick=()=>{const t=b.dataset.tab;$$('.tab').forEach(x=>x.classList.toggle('on',x===b));['max','rest','cum'].forEach(id=>$('#'+id).classList.toggle('hidden',id!==t));if(t==='rest')rest();if(t==='cum')cum()});
+$('#adv').onclick=()=>$('#am').classList.add('open');$('#ac').onclick=()=>$('#am').classList.remove('open');$('#aa').onclick=()=>{$('#am').classList.remove('open');cum();markDirty()};
+$('#calc').onclick=()=>{calc();markClean()};['report','reportDate','apt','orig','actual','precedingRest','longestSectorTime'].forEach(id=>$('#'+id)?.addEventListener('input',()=>{updateUTC();markDirty()}));
+['pd','dutyPos','travelEach','suitableAccommodation'].forEach(id=>$('#'+id)?.addEventListener('input',rest));
+['d7','d14','d28','d12','f28','f12','consec','off28','off84','offYear','pairOK'].forEach(id=>$('#'+id)?.addEventListener('input',cum));
+$('#oma').onclick=$('#refnav').onclick=()=>{$('#refs').innerHTML='<h3>NCC</h3><p>2026 JCC Part-NCC OMA I2R19, Section 7.5. Tables A/B; 7.5.9 long-range; 7.5.10 relief; 7.5.11 split duty; 7.5.12 rest; planned variations; PIC discretion; 7.5.17–19 days off/flying/cumulative limits.</p><h3>CAT/AOC</h3><p>JCC OMA Section 7, embedded revision 20201201_JCC_OMA_I1R8. OMA 7.14 provides the applicable FDP tables. OMA 7.15, Limits on Two Flight Crew Long Range Operations, applies the long-sector modified-sector logic. Where an additional current type-rated pilot is carried, the 7.15 limits do not apply and the permissible FDP is determined from OMA 7.14 using the duty start time and actual sectors planned. Delayed reporting, standby, interrupted rest, relief, split duty, rest, PIC discretion, days off and cumulative limits are also implemented. Planned variation section is Reserved.</p>';$('#rm').classList.add('open')};$('#rc').onclick=()=>$('#rm').classList.remove('open');
+$('#save').onclick=()=>{localStorage.setItem('jcc-ftl-last',JSON.stringify({input:collect(),result:calc(),date:$('#reportDate').value,location:$('#apt').value,savedAt:new Date().toISOString()}));$('#save').textContent='Saved ✓';setTimeout(()=>$('#save').textContent='Save',1000)};
+$('#share').onclick=async()=>{const r=calc(),txt='JCC FTL Calculation\nRuleset: '+state.rule+'\nMaximum FDP: '+fmt(r.maxFDPHours)+'\nDuty end: '+$('#de').textContent+'\nResult: '+$('#st').textContent;try{if(navigator.share)await navigator.share({title:'JCC FTL Calculation',text:txt});else{await navigator.clipboard.writeText(txt);alert('Calculation copied')}}catch(e){}};
+renderExt();wireFacility();renderRuleUI();renderConditions();$('#longestSectorTime').addEventListener('input',()=>{updateSectorBand();markDirty()});setRule('NCC');markClean();
+})();
+</script></body></html>

@@ -1,0 +1,13 @@
+{
+  "name": "jcc-ftl-calculator-validation",
+  "private": true,
+  "version": "4.0.0",
+  "scripts": {
+    "test:engine": "node validate-engine-v4.js",
+    "test:ui": "playwright test",
+    "test": "npm run test:engine && npm run test:ui"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.0"
+  }
+}

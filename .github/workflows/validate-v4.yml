@@ -1,0 +1,26 @@
+name: Validate JCC FTL v4
+
+on:
+  push:
+    branches:
+      - feature/dual-rules-liquid-glass
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install
+      - run: npx playwright install --with-deps chromium
+      - name: Engine validation
+        run: npm run test:engine
+      - name: Start static server
+        run: python3 -m http.server 8000 >/tmp/jcc-http.log 2>&1 &
+      - name: UI interaction validation
+        run: npm run test:ui
