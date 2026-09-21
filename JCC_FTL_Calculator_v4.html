@@ -152,11 +152,16 @@ function collect(){
 }
 function calc(){
  updateUTC(); const input=collect(),r=E.evaluate(input),box=$('#res');
- let status='LEGAL',sub='Within JCC '+(state.rule==='NCC'?'NCC':'CAT/AOC')+' rule limits',amber=false;
- if(r.review){status='NOT CONFIRMED';sub=r.reviews.join(' • ');amber=true}
- else if(!r.assessed){status='LIMIT ONLY';sub='Enter planned FDP in Advanced Options for a legal/not-legal determination';amber=true}
- else if(!r.legal){status='NOT LEGAL';sub='Planned FDP exceeds the applicable limit';amber=true}
- box.className='card result'+(amber?' amber':'');$('#si').textContent=amber?'!':'✓';$('#st').textContent=status;$('#ss').textContent=sub;$('#mf').textContent=fmt(r.maxFDPHours);
+ let status='LEGAL',sub='Within JCC '+(state.rule==='NCC'?'NCC':'CAT/AOC')+' rule limits',tone='';
+ if(r.review){status='NOT CONFIRMED';sub=r.reviews.join(' • ');tone=' amber'}
+ else if(r.intrinsicallyIllegal){
+   status='NOT LEGAL';
+   sub='Known minimum FDP '+fmt(r.minimumKnownFDP)+' exceeds maximum permitted FDP '+fmt(r.maxFDPHours)+'.';
+   tone=' red';
+ }
+ else if(!r.assessed){status='LIMIT ONLY';sub='Enter planned FDP in Advanced Options for a legal/not-legal determination';tone=' amber'}
+ else if(!r.legal){status='NOT LEGAL';sub='Planned FDP exceeds the applicable limit';tone=' red'}
+ box.className='card result'+tone;$('#si').textContent=tone?'!':'✓';$('#st').textContent=status;$('#ss').textContent=sub;$('#mf').textContent=fmt(r.maxFDPHours);
  const tz=timezone(),inputReport=state.override?$('#actual').value:$('#report').value,baseStartTime=input.delayed.enabled?minToTime(input.delayed.originalMin):inputReport,startUTC=utcForLocal($('#reportDate').value,baseStartTime,tz);
  if(startUTC&&Number.isFinite(r.maxFDPHours)){
    const d=new Date(startUTC.getTime()+((r.fdpStartDeltaMinutes||0)/60+r.maxFDPHours)*3600000);$('#de').textContent=String(d.getUTCHours()).padStart(2,'0')+':'+String(d.getUTCMinutes()).padStart(2,'0')+' UTC';
