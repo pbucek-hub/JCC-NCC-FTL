@@ -1,0 +1,38 @@
+name: Deploy JCC FTL Beta
+
+on:
+  push:
+    branches:
+      - feature/dual-rules-liquid-glass
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare beta site
+        run: |
+          mkdir -p _site
+          cp JCC_FTL_Peer_Test_v4.html _site/index.html
+          cp PEER_TEST_GUIDE_v4.md _site/PEER_TEST_GUIDE_v4.md
+          cp VALIDATION_v4.md _site/VALIDATION_v4.md
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
